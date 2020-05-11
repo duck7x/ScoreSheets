@@ -2,8 +2,8 @@ var express	= require("express"),
 	router	= express();
 
 router.get("/", function(req, res){
-	res.send("This is where I'd put all my games IF I'D'VE WRITTEN THE CODE FOR IT");
-	// res.render("games/games");
+	// res.send("This is where I'd put all my games IF I'D'VE WRITTEN THE CODE FOR IT");
+	res.render("games/index");
 });
 
 router.get("/new", function(req, res){
