@@ -24,8 +24,15 @@ router.post("/", function(req, res){
 });
 
 router.get("/:game", function(req, res){
-	res.send("So you wanna calculate the score for " + req.params.game + ", eh?!");
-	// res.render("games/show", {game: req.params.game});
+	// res.send("So you wanna calculate the score for " + req.params.game + ", eh?!");
+	Game.findById(req.params.game).exec(function(err, game){
+		if(err){
+			console.log(err);
+			res.redirect("/");
+		} else {
+			res.render("games/show", {game: game});
+		}
+	});
 });
 
 router.get("/:game/edit", function(req, res){
