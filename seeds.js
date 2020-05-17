@@ -84,11 +84,13 @@ function seedDB(){
 					console.log(`couldn't create ${seeed} due to ${err}`);
 					console.log("=====================================");
 				} else {
-					console.log(`Successfully create game ${game}`);
-					console.log("=====================================");
+					// console.log(`Successfully create game ${game}`);
+					// console.log("=====================================");
 				}
 			});
 		});
+		console.log("All sed up!");
+		console.log("=====================================");
 	});
 }
 

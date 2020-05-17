@@ -1,7 +1,21 @@
 <%- include("../partials/header") %>
-	
+
+<div class="container">
 	<p>
-		This is the index page, <em>woohoo!</em>
+		<div class="ui grid">
+			<% games.forEach(function(game){ %>
+				<div class="four wide column">
+					<h1 class="index"><%= game.name %></h1>
+					<!-- <img class="index" src="<%= game.image %>"> -->
+					<div class="img index" id="a<%= game._id  %>">
+						<style>
+							#a<%= game._id  %>{background-image: url("<%= game.image %>");}
+						</style>
+					</div>
+				</div>
+			<% }); %>
+		</div>
 	</p>
+</div>
 
 <%- include("../partials/footer") %>

@@ -1,9 +1,18 @@
 var express	= require("express"),
-	router	= express();
+	router	= express(),
+	Game	= require("../models/game");
 
+// INDEX - show all games
 router.get("/", function(req, res){
-	// res.send("This is where I'd put all my games IF I'D'VE WRITTEN THE CODE FOR IT");
-	res.render("games/index");
+	Game.find({}, function(err, allGames){
+		if(err){
+			console.log(`error ocurred while loading index: ${err}`)
+			// SHOULD REDIRECT TO ERROR PAGE IN THE FUTURE
+			res.respond("An error occured, sorry :(")
+		} else {
+			res.render("games/index", {games: allGames});
+		}
+	});
 });
 
 router.get("/new", function(req, res){

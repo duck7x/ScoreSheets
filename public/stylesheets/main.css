@@ -1,0 +1,43 @@
+body{
+	background: gray;
+}
+
+.header{
+	background-color: #545454;
+	padding: 5px;
+	text-align: center;
+	color: black;
+	border-bottom: 4px solid #303030;
+}
+
+.header a{
+	color: black;
+}
+
+.img.index{
+	background-repeat: no-repeat;
+	background-size: cover;
+	/* background-attachment: fixed; */
+	/* background-size: auto; */
+	width: 100%;
+	padding-top: 100%;
+	border-radius: 50%;
+	transition: 1s;
+	border: 2px solid black;
+}
+
+.img.index:hover{
+	transform: rotate(30deg);
+	cursor: pointer;
+	box-shadow: inset 0 0 300px #fff;
+	
+}
+
+h1.index{
+	text-align: center;
+}
+
+.container{
+	padding-left: 5%;
+	padding-right: 5%;
+}

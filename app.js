@@ -11,13 +11,13 @@ var gamesRoutes	= require("./routes/games"),
 	indexRoutes	= require("./routes/index");
 
 
-mongoose.connect("mongodb://localhost/scoresheets");
+mongoose.connect("mongodb://localhost/scoresheets", { useNewUrlParser: true, useUnifiedTopology:true });
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 
-seedDB();
+// seedDB();
 
 app.use("/", indexRoutes);
 app.use("/games", gamesRoutes);
