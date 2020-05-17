@@ -27,6 +27,7 @@ router.get("/:game", function(req, res){
 	// res.send("So you wanna calculate the score for " + req.params.game + ", eh?!");
 	Game.findById(req.params.game).exec(function(err, game){
 		if(err){
+			// NEED BETTER ERROR HANDLING
 			console.log(err);
 			res.redirect("/");
 		} else {

@@ -1,4 +1,19 @@
 <%- include("../partials/header") %>
 	<h1>This is the show page for <%= game.name %>!</h1>
 	<img src="<%= game.image %>">
+	<p>
+		<% if(game.fields){ %>
+			<% game.fields.forEach(function(field){ %>
+				name is <strong><%= field.name %></strong><br>
+				value is <strong><%= field.value %></strong><br>
+				title is <strong><%= field.title %></strong><br>
+				type is <strong><%= field.type %></strong><br>
+				icon is <strong><%= field.icon %></strong><br>
+				classesDesc is <strong><%= field.classesDesc %></strong><br>
+				classesPlayer is <strong><%= field.classesPlayer %></strong><br>
+			<% }); %>
+		<% } %>
+	</p>
+
+	<script type="text/javascript" src="/js/game.js"></script>
 <%- include("../partials/footer") %>

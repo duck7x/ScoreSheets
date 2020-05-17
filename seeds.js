@@ -20,7 +20,24 @@ var data = [
 	},
 	{
 		name: "Orleans",
-		image: "/media/orleans.png"
+		image: "/media/orleans.png",
+		fields: [{
+			name: "coins",
+			value: 1,
+			title: "coins",
+			type: "resource",
+			icon: "",
+			classesDesc: "desc",
+			classesPlayer: "player"
+		}, {
+			name: "wine",
+			value: 4,
+			title: "wine",
+			type: "resource",
+			icon: "",
+			classesDesc: "desc-wine",
+			classesPlayer: "player-wine"
+		}]
 	},
 	{
 		name: "Tapestry",
@@ -81,7 +98,7 @@ function seedDB(){
 		data.forEach(function(seed){
 			Game.create(seed, function(err, game){
 				if(err){
-					console.log(`couldn't create ${seeed} due to ${err}`);
+					console.log(`couldn't create ${seed} due to ${err}`);
 					console.log("=====================================");
 				} else {
 					// console.log(`Successfully create game ${game}`);
