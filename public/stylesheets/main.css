@@ -14,6 +14,31 @@ body{
 	color: black;
 }
 
+.footer{
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
+.center{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.clickable{
+	cursor: pointer;
+}
+
+.clickable:hover{
+	/* background: black; */
+}
+
+.empty{
+	background: transparent;
+	border-color: transparent;
+}
+
 .img.index{
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -38,6 +63,24 @@ h1.index{
 }
 
 .container{
+	margin-top: 5px;
 	padding-left: 5%;
 	padding-right: 5%;
+}
+
+.img.title{
+	height: 200px;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	display: inline-block;
+	vertical-align: middle;
+
+}
+.img.title h1{
+	color: white;
+	font-size: 4em;
+	font-weight: bold;
+	-webkit-text-stroke: 2px black;
 }

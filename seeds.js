@@ -69,7 +69,68 @@ var data = [
 	},
 	{
 		name: "Wingspan",
-		image: "/media/wingspan.jpg"
+		image: "/media/wingspan.jpg",
+		fields: [{
+			name: "birds",
+			value: 1,
+			title: "birds",
+			type: "number",
+			icon: "",
+			classesDesc: "",
+			classesPlayer: "",
+			calcMethod: "reg",
+			scoreTotal: true
+		}, {
+			name: "bonusCards",
+			value: 1,
+			title: "bonus cards",
+			type: "number",
+			icon: "",
+			classesDesc: "",
+			classesPlayer: "",
+			calcMethod: "reg",
+			scoreTotal: true
+		}, {
+			name: "endOfRoundGoals",
+			value: 1,
+			title: "end of round goals",
+			type: "number",
+			icon: "",
+			classesDesc: "",
+			classesPlayer: "",
+			calcMethod: "reg",
+			scoreTotal: true
+		}, {
+			name: "eggs",
+			value: 1,
+			title: "eggs",
+			type: "number",
+			icon: "",
+			classesDesc: "",
+			classesPlayer: "",
+			calcMethod: "reg",
+			scoreTotal: true
+		}, {
+			name: "foodOnCards",
+			value: 1,
+			title: "food on cards",
+			type: "number",
+			icon: "",
+			classesDesc: "",
+			classesPlayer: "",
+			calcMethod: "reg",
+			scoreTotal: true
+		}, {
+			name: "tuckedCards",
+			value: 1,
+			title: "tucked cards",
+			type: "number",
+			icon: "",
+			classesDesc: "",
+			classesPlayer: "",
+			calcMethod: "reg",
+			scoreTotal: true
+		}]
 	},
 	{
 		name: "7 Wonders Duel",

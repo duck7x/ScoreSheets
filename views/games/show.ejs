@@ -1,19 +1,46 @@
 <%- include("../partials/header") %>
-	<h1>This is the show page for <%= game.name %>!</h1>
-	<img src="<%= game.image %>">
-	<p>
+
+	<div class="container">
+		<!-- <img class="title" src="<%= game.image %>"> -->
+		<div class="img title banner">
+			<style>
+				.banner{
+					background-image: url(<%= game.image %>);
+				}
+			</style>
+			<h1 class="center">This is the show page for <%= game.name %>!</h1>
+		</div>
+	</div>
+
+	<div class="games-container">
 		<% if(game.fields){ %>
-			<% game.fields.forEach(function(field){ %>
-				name is <strong><%= field.name %></strong><br>
-				value is <strong><%= field.value %></strong><br>
-				title is <strong><%= field.title %></strong><br>
-				type is <strong><%= field.type %></strong><br>
-				icon is <strong><%= field.icon %></strong><br>
-				classesDesc is <strong><%= field.classesDesc %></strong><br>
-				classesPlayer is <strong><%= field.classesPlayer %></strong><br>
-			<% }); %>
+			<!-- TEMPLATE TABLE -->
+			<div id="template" class="table">
+				<div class="player table">
+					<ul>
+						<li class="empty"></li>
+						<li class="center" name="playerName"><input type="text" name=""></li>
+						<% game.fields.forEach(function(field){ %>
+							<li class="<%= field.classesPlayer %>" name="<%= field.name %>" value=<%= field.value %>><input type="<%= field.type %>" name=""></li>
+						<% }); %>
+						<li class="total center" name="total"></li>
+						<li class="deletePlayer center clickable" name="delete"><i class="trash alternate icon"></i></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- DESC TABLE -->
+			<div id="desc" class="table">
+				<ul>
+					<li class="empty"><i class="user plus icon"></i></li>
+					<li class="center">Player</li>
+					<% game.fields.forEach(function(field){ %>
+						<li id="<%= field.name %>" class="<%= field.classesDesc %>" alt="<%= field.value %>"><% if(field.icon){ %> <img src="field.icon"> <% } %> <%= field.title %></li>
+					<% }); %>
+				</ul>
+			</div>
 		<% } %>
-	</p>
+	</div>
 
 	<script type="text/javascript" src="/js/game.js"></script>
 <%- include("../partials/footer") %>
