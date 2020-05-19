@@ -8,7 +8,7 @@
 					background-image: url(<%= game.image %>);
 				}
 			</style>
-			<h1 class="center">This is the show page for <%= game.name %>!</h1>
+			<h1 class="center"><%= game.name %> Score Calculator!</h1>
 		</div>
 	</div>
 
@@ -32,7 +32,7 @@
 			<!-- DESC TABLE -->
 			<div id="desc" class="table">
 				<ul>
-					<li class="empty"><i class="user plus icon"></i></li>
+					<li class="empty clickable addPlayer"><i class="user plus icon"></i></li>
 					<li class="center">Player</li>
 					<% game.fields.forEach(function(field){ %>
 						<li id="<%= field.name %>" class="<%= field.classesDesc %>" alt="<%= field.value %>"><% if(field.icon){ %> <img src="field.icon"> <% } %> <%= field.title %></li>

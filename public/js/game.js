@@ -1,8 +1,35 @@
 var test = "TinyLittleThingCalledLuna"
-// var testGame = game
 
+// ==================================
+// FUNCTIONS
 
+// Adding new player to the page when clicking on the plus-person icon
+function addPlayer(){
+	// pure JS 
+	// var newPlayer = document.getElementById("template").firstElementChild;
+	// document.querySelector(".games-container").appendChild(newPlayer);
+	// JQUERY
+	var newPlayer = $(".games-container").append($("#template").html());
+}
 
+// Calculating the score of a specific player (element is the table of a player)
+function scoreCalculator(element){
+	
+}
+
+// ==================================
+// PAGE STARTUP EXECUTIONS
+
+addPlayer();
+
+// ==================================
+// EVENTS
+
+// Adding new player
+document.querySelector(".addPlayer").addEventListener("click", addPlayer);
+
+// ==================================
+// NOTES FOR ME, WILL BE DELETED
 
 // var this_js_script = $('script[src*=somefile]'); // or better regexp to get the file name..
 
