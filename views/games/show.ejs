@@ -21,7 +21,7 @@
 						<li class="empty"></li>
 						<li class="center" name="playerName"><input type="text" name=""></li>
 						<% game.fields.forEach(function(field){ %>
-							<li class="<%= field.classesPlayer %>" name="<%= field.name %>" value=<%= field.value %>><input type="<%= field.type %>" name=""></li>
+							<li class="scoreParamater <%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %>" name="<%= field.name %>" value=<%= field.value %>><input type="<%= field.type %>" name=""></li>
 						<% }); %>
 						<li class="total center" name="total"></li>
 						<li class="deletePlayer center clickable" name="delete"><i class="trash alternate icon"></i></li>
@@ -35,7 +35,7 @@
 					<li class="empty clickable addPlayer"><i class="user plus icon"></i></li>
 					<li class="center">Player</li>
 					<% game.fields.forEach(function(field){ %>
-						<li id="<%= field.name %>" class="<%= field.classesDesc %>" alt="<%= field.value %>"><% if(field.icon){ %> <img src="field.icon"> <% } %> <%= field.title %></li>
+						<li id="<%= field.name %>" class="<%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesDesc %>" alt="<%= field.value %>"><% if(field.icon){ %> <img src="field.icon"> <% } %> <%= field.title %></li>
 					<% }); %>
 				</ul>
 			</div>
