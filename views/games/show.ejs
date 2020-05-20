@@ -12,35 +12,37 @@
 		</div>
 	</div>
 
-	<div class="games-container">
-		<% if(game.fields){ %>
-			<!-- TEMPLATE TABLE -->
-			<div id="template" class="table">
-				<div class="player table">
+	<!-- <div class="container"> -->
+		<div class="games-container">
+			<% if(game.fields){ %>
+				<!-- TEMPLATE TABLE -->
+				<div id="template" class="table">
+					<div class="player table">
+						<ul>
+							<li class="empty"></li>
+							<li class="center" name="playerName"><input type="text" name=""></li>
+							<% game.fields.forEach(function(field){ %>
+								<li class="scoreParamater <%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %>" name="<%= field.name %>" value=<%= field.value %>><input type="<%= field.type %>" name=""></li>
+							<% }); %>
+							<li class="total center" name="total"></li>
+							<li class="deletePlayer center clickable" name="delete"><i class="trash alternate icon"></i></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- DESC TABLE -->
+				<div id="desc" class="table">
 					<ul>
-						<li class="empty"></li>
-						<li class="center" name="playerName"><input type="text" name=""></li>
+						<li class="empty clickable addPlayer"><i class="user plus icon"></i></li>
+						<li class="center">Player</li>
 						<% game.fields.forEach(function(field){ %>
-							<li class="scoreParamater <%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %>" name="<%= field.name %>" value=<%= field.value %>><input type="<%= field.type %>" name=""></li>
+							<li id="<%= field.name %>" class="<%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesDesc %>" alt="<%= field.value %>"><% if(field.icon){ %> <img src="field.icon"> <% } %> <%= field.title %></li>
 						<% }); %>
-						<li class="total center" name="total"></li>
-						<li class="deletePlayer center clickable" name="delete"><i class="trash alternate icon"></i></li>
 					</ul>
 				</div>
-			</div>
-
-			<!-- DESC TABLE -->
-			<div id="desc" class="table">
-				<ul>
-					<li class="empty clickable addPlayer"><i class="user plus icon"></i></li>
-					<li class="center">Player</li>
-					<% game.fields.forEach(function(field){ %>
-						<li id="<%= field.name %>" class="<%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesDesc %>" alt="<%= field.value %>"><% if(field.icon){ %> <img src="field.icon"> <% } %> <%= field.title %></li>
-					<% }); %>
-				</ul>
-			</div>
-		<% } %>
-	</div>
+			<% } %>
+		</div>
+	<!-- </div> -->
 
 	<script type="text/javascript" src="/js/game.js"></script>
 <%- include("../partials/footer") %>
