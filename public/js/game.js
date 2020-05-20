@@ -27,6 +27,12 @@ function scoreCalculator(element){
 	totalHtml.text(totalScore);
 }
 
+// Clear score
+function clearScore(){
+	$(".scoreParameter").children().val("");
+	$(".total").text("");
+}
+
 // ==================================
 // PAGE STARTUP EXECUTIONS
 
@@ -40,13 +46,16 @@ addPlayer();
 // document.querySelector(".addPlayer").addEventListener("click", addPlayer);
 $(".addPlayer").on("click", addPlayer);
 
+// Clear score
+$(".clearScore").on("click", clearScore);
+
 // Delete player
 gamesContainer.on("click", ".deletePlayer", function(){
 	$(this).parent().parent().remove();
 });
 
 // Calculate score on input change
-gamesContainer.on("change", ".scoreParamater>input", scoreCalculator);
+gamesContainer.on("change", ".scoreParameter>input", scoreCalculator);
 
 // ==================================
 // NOTES FOR ME, WILL BE DELETED

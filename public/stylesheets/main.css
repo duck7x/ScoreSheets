@@ -16,7 +16,7 @@ body{
 
 .footer{
 	width: 100%;
-	position: absolute;
+	/* position: absolute; */
 	bottom: 0;
 }
 
@@ -49,12 +49,13 @@ body{
 	border-radius: 50%;
 	transition: 1s;
 	border: 2px solid black;
+	box-shadow: inset 0 0 30px #000;
 }
 
 .img.index:hover{
 	transform: rotate(30deg);
 	cursor: pointer;
-	box-shadow: inset 0 0 300px #fff;
+	box-shadow: inset 0 0 100px #000;
 	
 }
 
