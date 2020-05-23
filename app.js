@@ -11,7 +11,8 @@ var express			= require("express"),
 // requiring routes
 var gamesRoutes	= require("./routes/games"),
 	aboutRoutes	= require("./routes/about"),
-	indexRoutes	= require("./routes/index");
+	indexRoutes	= require("./routes/index"),
+	usersRoutes	= require("./routes/users");
 
 
 mongoose.connect("mongodb://localhost/scoresheets", { useNewUrlParser: true, useUnifiedTopology:true });
@@ -40,6 +41,7 @@ app.use(function(req, res, next){
 // seedDB();
 
 app.use("/", indexRoutes);
+app.use("/users", usersRoutes);
 app.use("/games", gamesRoutes);
 app.use("/about", aboutRoutes);
 

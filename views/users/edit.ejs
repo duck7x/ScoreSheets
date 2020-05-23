@@ -1,0 +1,9 @@
+<%- include("../partials/header") %>
+	<h1>USER EDIT PAGE of <%= user.username %></h1>
+	<form action="/users/<%= user._id %>?_method=PUT" method="POST">
+		<label name="username">Username:</label><input type="text" value="<%= user.username %>" name="username" required><br>	
+		<!-- <label name="password">Password:</label><input type="password" placeholder="Password" name="password" required>	 -->
+		<input type="checkbox" name="admin" <% if(user.auth_level === "admin"){ %> checked <%} %>><label name="admin">Administrator</label><br>
+		<input type="submit" value="update">
+	</form>
+<%- include("../partials/footer") %>

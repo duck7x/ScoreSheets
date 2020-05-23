@@ -7,13 +7,13 @@ router.get("/", function(req, res){
 });
 
 router.get("/register", function(req, res){
-	res.render("register");
+	res.render("users/register");
 });
 
 router.post("/register", function(req, res){
 	var username	= req.body.username,
 		password	= req.body.password
-	User.register(new User({username: username}), password, function(err, user){
+	User.register(new User({username: username, auth_level: "regular"}), password, function(err, user){
 		if(err){
 			console.log(err);
 			res.redirect("/");
@@ -26,7 +26,7 @@ router.post("/register", function(req, res){
 });
 
 router.get("/login", function(req, res){
-	res.render("login");
+	res.render("users/login");
 });
 
 router.post("/login", passport.authenticate("local", {
