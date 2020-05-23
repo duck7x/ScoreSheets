@@ -1,10 +1,11 @@
-var express	= require("express"),
-	router	= express(),
-	User	= require("../models/user");
+var express		= require("express"),
+	router		= express(),
+	User		= require("../models/user"),
+	middleware	= require("../middleware/users");
 
 // INDEX - show all users
 // should be admin protected
-router.get("/", function(req, res){
+router.get("/", middleware.isAdmin, function(req, res){
 	User.find({}, function(err, allUsers){
 		if(err){
 			console.log(`error occurred while loading all users: ${err}`);
@@ -17,7 +18,7 @@ router.get("/", function(req, res){
 });
 
 // EDIT - form for editting a single user
-router.get("/:user/edit", function(req, res){
+router.get("/:user/edit", middleware.isAdmin, function(req, res){
 	User.findById(req.params.user).exec(function(err, user){
 		if(err){
 			// NEED BETTER ERROR HANDLING
@@ -30,13 +31,8 @@ router.get("/:user/edit", function(req, res){
 });
 
 // UPDATE - actually updates the user
-router.put("/:user", function(req, res){
-	// Check if JS can do the X = if Y else Z like python
-	if(req.body.admin === "on"){
-		var auth_level = "admin"
-	} else {
-		var auth_level = "regular"
-	}
+router.put("/:user", middleware.isAdmin, function(req, res){
+	var auth_level = req.body.admin === "on" ? "admin" : "regular"
 	
 	User.findById(req.params.user, function(err, user){
 		if(err){
@@ -55,14 +51,11 @@ router.put("/:user", function(req, res){
 			}
 			res.redirect("/users");
 		});
-
-	})
-	
-	// res.send(`Will updated user ${req.params.user} with username: ${req.body.username}, admin: ${auth_level}`);
+	});
 });
 
 // DESTROY - deletes a user
-router.delete("/:user/delete", function(req, res){
+router.delete("/:user/delete", middleware.isAdmin, function(req, res){
 	User.findByIdAndRemove(req.params.user, function(err){
 		if(err){
 			console.log(err);
