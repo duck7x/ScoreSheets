@@ -12,7 +12,9 @@
 		<div class="header">
 			<h1><a class="main-logo" href="/">BACK HOME</a></h1>
 			<% if(currentUser){ %>
-				<em>Logged in as <strong><%= currentUser.username %></strong></em> <a href="/logout"><strong>logout</strong></a>
+				<em>Logged in as <strong><%= currentUser.username %></strong></em> || 
+				<a href="/logout"><strong>logout</strong></a>
+				<% if(currentUser.auth_level === "admin"){ %> || <a href="/users"><strong>manage users</strong></a><% } %>
 			<% } else { %>
 				<a href="/register">Register</a> || <a href="/login">Login</a>
 			<% } %>
