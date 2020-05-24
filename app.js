@@ -16,7 +16,8 @@ var gamesRoutes	= require("./routes/games"),
 	usersRoutes	= require("./routes/users");
 
 
-mongoose.connect("mongodb://localhost/scoresheets", { useNewUrlParser: true, useUnifiedTopology:true });
+// mongoose.connect("mongodb://localhost/scoresheets", { useNewUrlParser: true, useUnifiedTopology:true });
+mongoose.connect(process.env.MONGOSRV, { useNewUrlParser: true, useUnifiedTopology:true });
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -49,6 +50,14 @@ app.use("/users", usersRoutes);
 app.use("/games", gamesRoutes);
 app.use("/about", aboutRoutes);
 
-app.listen(3000, function(){
-	console.log("ScoreSheets is up!")
-});
+
+// enables the app to work both from heroku and goorm
+if(process.env.MONGOSRV === "mongodb://localhost/scoresheets"){
+	app.listen(3000, function(){	
+		console.log("ScoreSheets is up on Goorm!")
+	});
+} else {
+	app.listen(process.env.PORT, function(){
+		console.log("ScoreSheets is up on heroku!")
+	});
+}
