@@ -7,6 +7,7 @@ module.exports = {
 		}
 		// NEED BETTER ERROR HANDLING
 		console.log("Not logged in!");
+		req.flash("error", "You have the be logged in to do that")
 		res.redirect("/login");
 	},
 	isLoggedOut: function(req, res, next){
@@ -15,7 +16,8 @@ module.exports = {
 		}
 		// NEED BETTER ERROR HANDLING
 		console.log("Not logged out!");
-		res.redirect("/");
+		req.flash("error", "You can't do that when you're logged in")
+		res.redirect("/games");
 	},
 	isAdmin: function(req, res, next){
 		if(req.isAuthenticated()){
@@ -24,10 +26,12 @@ module.exports = {
 			}
 			// NEED BETTER ERROR HANDLING
 			console.log("Not admin!");
-			return res.redirect("/");
+			req.flash("error", "You're not authorised to do that");
+			return res.redirect("/games");
 		}
 		// NEED BETTER ERROR HANDLING
 		console.log("Not logged in!");
+		req.flash("error", "You're not authorised to do that");
 		res.redirect("/login");
 	}
 }

@@ -4,6 +4,12 @@ var User		= require("../models/user"),
 	middleware	= require("../middleware/users")
 
 router.get("/", function(req, res){
+	// if(res.locals.error){
+	// 	req.flash("error", res.locals.error);
+	// }
+	// if(res.locals.success){
+	// 	req.flash("success", res.locals.success);
+	// }
 	res.redirect("/games");
 });
 
@@ -17,10 +23,12 @@ router.post("/register", middleware.isLoggedOut, function(req, res){
 	User.register(new User({username: username, auth_level: "regular"}), password, function(err, user){
 		if(err){
 			console.log(err);
-			res.redirect("/");
+			req.flash("error", "Sorry, an error occurred while registering, please try again");
+			res.redirect("/register");
 		} else {
 			passport.authenticate("local")(req, res, function(){
-				res.redirect("/");
+				req.flash("success", "Registered successfully, welcome to ScoreSheets! :)")
+				res.redirect("/games");
 			});
 		}
 	});
@@ -31,13 +39,14 @@ router.get("/login", middleware.isLoggedOut, function(req, res){
 });
 
 router.post("/login", middleware.isLoggedOut, passport.authenticate("local", {
-	successRedirect: "/",
-	failureRedirect: "/"
+	successRedirect: "/games",
+	failureRedirect: "/login"
 }), function(req, res){});
 
 router.get("/logout", middleware.isLoggedIn, function(req, res){
 	req.logout();
-	res.redirect("/");
+	req.flash("success", "Logged you out, see you soon! :)");
+	res.redirect("/games");
 });
 
 module.exports = router;

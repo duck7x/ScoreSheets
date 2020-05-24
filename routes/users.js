@@ -10,7 +10,8 @@ router.get("/", middleware.isAdmin, function(req, res){
 		if(err){
 			console.log(`error occurred while loading all users: ${err}`);
 			// SHOULD REDIRECT TO ERROR PAGE IN THE FUTURE
-			res.respond("An error occured, sorry :(");
+			req.flash("error", "An error occured, sorry :(");
+			res.redirect("/games");
 		} else {
 			res.render("users/index", {users: allUsers});
 		}
@@ -23,7 +24,8 @@ router.get("/:user/edit", middleware.isAdmin, function(req, res){
 		if(err){
 			// NEED BETTER ERROR HANDLING
 			console.log(err);
-			res.redirect("/");
+			req.flash("error", "Couldn't find the user");
+			res.redirect("/users");
 		} else {
 			res.render("users/edit", {user: user});
 		}
@@ -38,6 +40,7 @@ router.put("/:user", middleware.isAdmin, function(req, res){
 		if(err){
 			// NEED BETTER ERROR HANDLING
 			console.log(err);
+			req.flash("error", "Couldn't find the user");
 			return res.redirect("/users");
 		}
 		user.username = req.body.username;
@@ -47,8 +50,10 @@ router.put("/:user", middleware.isAdmin, function(req, res){
 			if(err){
 				// NEED BETTER ERROR HANDLING
 				console.log(err);
+				req.flash("error", "Edit failed");
 				return res.redirect("/users");
 			}
+			req.flash("success", `User ${user.username} editted successfuly`);
 			res.redirect("/users");
 		});
 	});
@@ -59,8 +64,11 @@ router.delete("/:user/delete", middleware.isAdmin, function(req, res){
 	User.findByIdAndRemove(req.params.user, function(err){
 		if(err){
 			console.log(err);
+			req.flash("error", "Couldn't find or remove the user");
 			res.redirect("/users");
 		} else {
+			// ADD TO THE FLASH MESSAGE WHICH USER WAS REMOVED
+			req.flash("success", "Successfully removed the user");
 			res.redirect("/users");
 		}
 	});

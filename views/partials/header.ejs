@@ -19,3 +19,17 @@
 				<a href="/register">Register</a> || <a href="/login">Login</a>
 			<% } %>
 		</div>
+		
+		<div class="container">
+			<% if(success && success.length> 0){ %>
+				<div class="ui green floating message larage">
+					<%= success %>
+				</div>
+			<% } %>
+			<% if(error && error.length> 0){ %>
+				<div class="ui red floating message larage">
+					<%= error %>
+				</div>
+			<% } %>
+		</div>
+		
