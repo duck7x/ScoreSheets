@@ -50,7 +50,6 @@ app.use("/users", usersRoutes);
 app.use("/games", gamesRoutes);
 app.use("/about", aboutRoutes);
 
-
 // enables the app to work both from heroku and goorm
 if(process.env.MONGOSRV === "mongodb://localhost/scoresheets"){
 	app.listen(3000, function(){	
