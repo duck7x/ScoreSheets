@@ -1,6 +1,7 @@
-var express	= require("express"),
-	router	= express(),
-	Game	= require("../models/game");
+var express		= require("express"),
+	router		= express(),
+	Game		= require("../models/game"),
+	middleware	= require("../middleware/users");
 
 // INDEX - show all games
 router.get("/", function(req, res){
@@ -16,12 +17,12 @@ router.get("/", function(req, res){
 });
 
 // NEW - form to add a new game
-router.get("/new", function(req, res){
-	res.send("Here'll be the add game page! :D");
+router.get("/new", middleware.isAdmin, function(req, res){
+	res.render("games/new");
 });
 
 // CREATE - actually add a new game
-router.post("/", function(req, res){
+router.post("/", middleware.isAdmin, function(req, res){
 	res.send("You've requested to add a game, nice!");
 });
 
@@ -40,17 +41,17 @@ router.get("/:game", function(req, res){
 });
 
 // EDIT - form for editting a game
-router.get("/:game/edit", function(req, res){
+router.get("/:game/edit", middleware.isAdmin, function(req, res){
 	res.send("This will be the edit page of " + req.params.game);
 });
 
 // UPDATE - actually edits the game
-router.put("/:game", function(req, res){
+router.put("/:game", middleware.isAdmin, function(req, res){
 	res.send("You tried editting " + req.params.game + ", good for you!");
 });
 
 // DESTROY - deletes a game
-router.delete("/:game/delete", function(req, res){
+router.delete("/:game/delete", middleware.isAdmin, function(req, res){
 	res.send("You're gonna delete " + req.params.game + "!!!");
 });
 

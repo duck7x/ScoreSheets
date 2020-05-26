@@ -3,6 +3,8 @@ var mongoose = require("mongoose");
 var gameSchema = new mongoose.Schema({
 	name: String,
 	image: String,
+	minPlayers: Number,
+	maxPlayers: Number,
 	fields: { type : Array , "default" : [] }
 	// fields: [{
 	// 	name: String,

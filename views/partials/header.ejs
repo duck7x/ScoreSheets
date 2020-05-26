@@ -14,7 +14,13 @@
 			<% if(currentUser){ %>
 				<em>Logged in as <strong><%= currentUser.username %></strong></em> || 
 				<a href="/logout"><strong>logout</strong></a>
-				<% if(currentUser.auth_level === "admin"){ %> || <a href="/users"><strong>manage users</strong></a><% } %>
+				<% if(currentUser.auth_level === "admin"){ %>
+					<p>
+						<a href="/users" class="clickable"><strong>manage users</strong></a>
+						 || 
+						<a href="/games/new" class="clickable"><strong>add new game</strong></a>
+					</p>
+				<% } %>
 			<% } else { %>
 				<a href="/register">Register</a> || <a href="/login">Login</a>
 			<% } %>
