@@ -1,4 +1,4 @@
-#template{
+#template, #field-template{
 	display: none;
 }
 
@@ -97,4 +97,15 @@ ul:hover .deletePlayer{
 
 .btn:hover{
 	background: #0d0d0d;
+}
+
+div.field{
+	border: 2px solid black;
+	background: rgba(35, 35, 35, 0.5);
+	padding: 5px;
+	margin: 5px;
+}
+
+#fields-container{
+	margin: 10px;
 }

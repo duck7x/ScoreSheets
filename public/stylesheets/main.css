@@ -35,6 +35,10 @@ body{
 	cursor: pointer;
 }
 
+.clickable.white:hover{
+	color: white;
+}
+
 .clickable:hover{
 	/* background: black; */
 }

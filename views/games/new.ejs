@@ -11,26 +11,39 @@
 		<h1>
 			Fields
 		</h1>
-		<span class="clickable add-field"><i class="plus circle icon"></i> Add field</span>
-		<div class="field-template">
-			<!-- DESC: ID // PLAYER: NAME -->
-			<label name="field-name">Name:</label> <input type="text" name="field-name" placeholder="field name"><br>
-			<!-- DESC: alt // PLAYER: value -->
-			<label name="field-value">Value:</label> <input type="number" name="field-value"><br>
-			<!-- DESC: actual text -->
-			<label name="field-title">Title:</label> <input type="text" name="field-title" placeholder="field title"><br>
-			<!-- DESC: displayed icon -->
-			<label name="field-icon">Icon:</label> <input type="text" placeholder="icon url/path" name="field-icon"> <label name="field-upload">Upload?</label> <input type="checkbox" name="field-upload"><br>
-			<!-- DESC: css classes -->
-			<label name="field-desc-classes">Desc classes:</label> <input type="text" name="field-desc-classes" placeholder="field desc classes"><br>
-			<!-- PLAYER: css classes -->
-			<label name="field-player-classes">Player classes:</label> <input type="text" name="field-player-classes" placeholder="field player classes"><br>
-			<!-- DESC: class // PLAYER: class -->
-			<label name="field-calc-method">Calculation Method:</label> SHOULD BE DROPDOWN<br>
-			<!-- DESC: class // PLAYER: class -->
-			<label name="field-score-total">Score total?</label> <input type="checkbox" name="field-score-total">
+		<span class="clickable white add-field"><i class="plus circle icon"></i> Add field</span>
+		<div id="field-template" class="field-template">
+			<div class="five wide column">
+				<div class="center">
+					<span class="remove-field clickable white">REMOVE</span> //
+					<span class="clear-field clickable white">CLEAR</span>
+				</div>
+				<div class="field">
+					<!-- DESC: ID // PLAYER: NAME -->
+					<label name="field-name">Name:</label> <input type="text" name="field-name" placeholder="field name"><br>
+					<!-- DESC: alt // PLAYER: value -->
+					<label name="field-value">Value:</label> <input type="number" name="field-value"><br>
+					<!-- DESC: actual text -->
+					<label name="field-title">Title:</label> <input type="text" name="field-title" placeholder="field title"><br>
+					<!-- DESC: displayed icon -->
+					<label name="field-icon">Icon:</label> <input type="text" placeholder="icon url/path" name="field-icon"> <label name="field-upload">Upload?</label> <input type="checkbox" name="field-upload"><br>
+					<!-- DESC: css classes -->
+					<label name="field-desc-classes">Desc classes:</label> <input type="text" name="field-desc-classes" placeholder="field desc classes"><br>
+					<!-- PLAYER: css classes -->
+					<label name="field-player-classes">Player classes:</label> <input type="text" name="field-player-classes" placeholder="field player classes"><br>
+					<!-- DESC: class // PLAYER: class -->
+					<label name="field-calc-method">Calculation Method:</label> SHOULD BE DROPDOWN<br>
+					<!-- DESC: class // PLAYER: class -->
+					<label name="field-score-total">Score total?</label> <input type="checkbox" name="field-score-total">
+				</div>
+			</div>
+		</div>
+		<div id="fields-container" class="fields-container ui grid">
+			
 		</div>
 		<input type="submit" value="Add game">
 	</form>
 </div>	
+
+	<script type="text/javascript" src="/js/add-game.js"></script>
 <%- include("../partials/footer") %>

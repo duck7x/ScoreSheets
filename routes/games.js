@@ -17,7 +17,8 @@ router.get("/", function(req, res){
 });
 
 // NEW - form to add a new game
-router.get("/new", middleware.isAdmin, function(req, res){
+// router.get("/new", middleware.isAdmin, function(req, res){
+router.get("/new", function(req, res){
 	res.render("games/new");
 });
 
