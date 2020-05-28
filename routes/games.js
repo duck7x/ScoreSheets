@@ -17,13 +17,60 @@ router.get("/", function(req, res){
 });
 
 // NEW - form to add a new game
-// router.get("/new", middleware.isAdmin, function(req, res){
-router.get("/new", function(req, res){
-	res.render("games/new");
+router.get("/new", middleware.isAdmin, function(req, res){
+// router.get("/new", function(req, res){
+	var calcMethods = ["reg"],
+		formTypes	= ["text", "checkbox", "number"];
+	res.render("games/new", {calcMethods: calcMethods, formTypes: formTypes});
 });
 
 // CREATE - actually add a new game
 router.post("/", middleware.isAdmin, function(req, res){
+// router.post("/", function(req, res){
+	var name		= req.body.name,
+		image		= req.body.image,
+		minPlayers	= req.body.minPlayers,
+		maxPlayers	= req.body.maxPlayers,
+		fields		= [],
+		// field		= {},
+		count		= req.body.count;
+		
+	// name: String, fieldName
+	// value: Number, fieldValue
+	// title: String, fieldTitle
+	// type: String, fieldFormType
+	// icon: String, fieldIcon
+	// classesDesc: String, fieldDescClasses
+	// classesPlayer: String, fieldPlayerClasses
+	// calcMethod: String, fieldCalcMethod
+	// scoreTotal: Boolea, fieldScoreTotal
+	
+	for(i = 1; i <= count; i++){
+		let field = {};
+		
+		field.name = eval("req.body.fieldName" + String(i)) ? eval("req.body.fieldName" + String(i)) : "";
+		field.value = eval("req.body.fieldValue" + String(i)) ? Number(eval("req.body.fieldValue" + String(i))) : "";
+		field.title = eval("req.body.fieldTitle" + String(i)) ? eval("req.body.fieldTitle" + String(i)) : "";
+		field.type = eval("req.body.fieldFormType" + String(i)) ? eval("req.body.fieldFormType" + String(i)) : "";
+		field.icon = eval("req.body.fieldIcon" + String(i)) ? eval("req.body.fieldIcon" + String(i)) : "";
+		field.classesDesc = eval("req.body.fieldDescClasses" + String(i)) ? eval("req.body.fieldDescClasses" + String(i)) : "";
+		field.classesPlayer = eval("req.body.fieldPlayerClasses" + String(i)) ? eval("req.body.fieldPlayerClasses" + String(i)) : "";
+		field.calcMethod = eval("req.body.fieldCalcMethod" + String(i)) ? eval("req.body.fieldCalcMethod" + String(i)) : "";
+		field.scoreTotal = eval("req.body.fieldScoreTotal" + String(i)) === "on";
+		
+		fields.push(field);
+	}
+	
+	var newGame = {
+		name: name,
+		image: image,
+		minPlayers: minPlayers,
+		maxPlayers: maxPlayers,
+		fields: fields
+	}
+	
+	console.log(newGame);
+
 	res.send("You've requested to add a game, nice!");
 });
 

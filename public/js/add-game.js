@@ -1,11 +1,20 @@
-var test="Timon's in the kalax - CUTE"
-var fieldsContainer = $(".fields-container");
+var test	= "Timon's in the kalax - CUTE";
+	count	= 0;
+var fieldsContainer = $(".fields-container"),
+	fieldTemplate	= $("#field-template");
 
 // ==================================
 // FUNCTIONS
 // Adding a new field to page when clicking the add field icon
 function addField(){
-	var newField = fieldsContainer.append($("#field-template").html());
+	count++;
+	$("#fields-count").val(count);
+	var newField = fieldsContainer.append(fieldTemplate.html());
+	$(".field").last().children(".field-input, label").each(function(){
+		$(this).attr("name", function(i, val){
+			return val + String(count);
+		});
+	});
 }
 
 // ==================================

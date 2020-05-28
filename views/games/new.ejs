@@ -7,7 +7,7 @@
 	<form action="/games" method="POST">
 		<label name="name">Name:</label> <input type="text" placeholder="name" name="name" required><br>
 		<label name="image">Image:</label> <input type="text" placeholder="image url/path" name="image"> <label name="upload">Upload?</label> <input type="checkbox" name="upload"><br>
-		<label name="min-players">Minimum players: </label> <input type="number" name="min-players"> <label name="max-players">Maximum players: </label> <input type="number" name="max-players"><br>
+		<label name="minPlayers">Minimum players: </label> <input type="number" name="minPlayers"> <label name="maxPlayers">Maximum players: </label> <input type="number" name="maxPlayers"><br>
 		<h1>
 			Fields
 		</h1>
@@ -20,27 +20,42 @@
 				</div>
 				<div class="field">
 					<!-- DESC: ID // PLAYER: NAME -->
-					<label name="field-name">Name:</label> <input type="text" name="field-name" placeholder="field name"><br>
+					<label name="fieldName">Name:</label> <input class="field-input" type="text" name="fieldName" placeholder="field name"><br>
 					<!-- DESC: alt // PLAYER: value -->
-					<label name="field-value">Value:</label> <input type="number" name="field-value"><br>
+					<label name="fieldValue">Value:</label> <input class="field-input" type="number" name="fieldValue"><br>
 					<!-- DESC: actual text -->
-					<label name="field-title">Title:</label> <input type="text" name="field-title" placeholder="field title"><br>
+					<label name="fieldTitle">Title:</label> <input class="field-input" type="text" name="fieldTitle" placeholder="field title"><br>
 					<!-- DESC: displayed icon -->
-					<label name="field-icon">Icon:</label> <input type="text" placeholder="icon url/path" name="field-icon"> <label name="field-upload">Upload?</label> <input type="checkbox" name="field-upload"><br>
+					<label name="fieldIcon">Icon:</label> <input class="field-input" type="text" placeholder="icon url/path" name="fieldIcon"> <label name="fieldUpload">Upload?</label> <input class="field-input" type="checkbox" name="fieldUpload"><br>
 					<!-- DESC: css classes -->
-					<label name="field-desc-classes">Desc classes:</label> <input type="text" name="field-desc-classes" placeholder="field desc classes"><br>
+					<label name="fieldDescClasses">Desc classes:</label> <input class="field-input" type="text" name="fieldDescClasses" placeholder="field desc classes"><br>
 					<!-- PLAYER: css classes -->
-					<label name="field-player-classes">Player classes:</label> <input type="text" name="field-player-classes" placeholder="field player classes"><br>
+					<label name="fieldPlayerClasses">Player classes:</label> <input class="field-input" type="text" name="fieldPlayerClasses" placeholder="field player classes"><br>
 					<!-- DESC: class // PLAYER: class -->
-					<label name="field-calc-method">Calculation Method:</label> SHOULD BE DROPDOWN<br>
+					<label name="fieldCalcMethod">Calculation Method:</label> 
+					<select class="field-input" name="fieldCalcMethod">
+						<% calcMethods.forEach(function(method){ %>
+							<option value="<%= method %>"><%= method %></option>
+						<% }) %>
+					</select>
+					<br>
+					<!-- PLAYER: form type -->
+					<label name="fieldFormType">Form type:</label> 
+					<select class="field-input" name="fieldFormType">
+						<% formTypes.forEach(function(formType){ %>
+							<option value="<%= formType %>"><%= formType %></option>
+						<% }) %>
+					</select>
+					<br>
 					<!-- DESC: class // PLAYER: class -->
-					<label name="field-score-total">Score total?</label> <input type="checkbox" name="field-score-total">
+					<label name="fieldScoreTotal">Score total?</label> <input class="field-input" type="checkbox" name="fieldScoreTotal">
 				</div>
 			</div>
 		</div>
 		<div id="fields-container" class="fields-container ui grid">
 			
 		</div>
+		<input id="fields-count" type=number value="0" class="hidden" name="count">
 		<input type="submit" value="Add game">
 	</form>
 </div>	
