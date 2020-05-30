@@ -1,5 +1,6 @@
 var test	= "Timon's in the kalax - CUTE";
-	count	= 0;
+	count	= 0,
+	skip	= "";
 var fieldsContainer = $(".fields-container"),
 	fieldTemplate	= $("#field-template");
 
@@ -14,6 +15,7 @@ function addField(){
 		$(this).attr("name", function(i, val){
 			return val + String(count);
 		});
+	$(".remove-field").last().val(count);
 	});
 }
 
@@ -39,6 +41,8 @@ fieldsContainer.on("click", ".clear-field", function(){
 
 // Removes field completely
 fieldsContainer.on("click", ".remove-field", function(){
+	skip += `,${$(this).val()}`;
+	$("#fields-skip").val(skip);
 	$(this).parent().parent().remove();
 });
 

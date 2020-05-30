@@ -33,7 +33,8 @@ router.post("/", middleware.isAdmin, function(req, res){
 		maxPlayers	= req.body.maxPlayers,
 		fields		= [],
 		// field		= {},
-		count		= req.body.count;
+		count		= req.body.count,
+		skip		= req.body.skip;
 		
 	// name: String, fieldName
 	// value: Number, fieldValue
@@ -46,6 +47,10 @@ router.post("/", middleware.isAdmin, function(req, res){
 	// scoreTotal: Boolea, fieldScoreTotal
 	
 	for(i = 1; i <= count; i++){
+		if(skip.includes(String(i))){
+			continue;
+		}
+		
 		let field = {};
 		
 		field.name = eval("req.body.fieldName" + String(i)) ? eval("req.body.fieldName" + String(i)) : "";
@@ -68,10 +73,19 @@ router.post("/", middleware.isAdmin, function(req, res){
 		maxPlayers: maxPlayers,
 		fields: fields
 	}
-	
-	console.log(newGame);
 
-	res.send("You've requested to add a game, nice!");
+	Game.create(newGame, function(err, newlyCreated){
+		if(err){
+			console.log(err);
+			req.flash("error", `Could not add ${newGame.name} due to an error: ${err}`);
+			res.redirect("back");
+		} else {
+			console.log(newlyCreated);
+			res.redirect(`/games/${newlyCreated._id}`);
+		}
+	});
+
+	// res.send("You've requested to add a game, nice!");
 });
 
 // SHOW - display each individual game
