@@ -109,12 +109,24 @@ router.get("/:game/edit", middleware.isAdmin, function(req, res){
 
 // UPDATE - actually edits the game
 router.put("/:game", middleware.isAdmin, function(req, res){
-	res.send("You tried editting " + req.params.game + ", good for you!");
+	res.render("games/edit");
+	// res.send("You tried editting " + req.params.game + ", good for you!");
 });
 
 // DESTROY - deletes a game
 router.delete("/:game/delete", middleware.isAdmin, function(req, res){
-	res.send("You're gonna delete " + req.params.game + "!!!");
+	Game.findByIdAndRemove(req.params.game, function(err){
+		if(err){
+			console.log(err);
+			req.flash("error", "Couldn't find or remove the game");
+			res.redirect("/games");
+		} else {
+			// ADD TO THE FLASH MESSAGE WHICH GAME WAS REMOVED
+			req.flash("success", "Successfully removed the game");
+			res.redirect("/games");
+		}
+	})
+	// res.send("You're gonna delete " + req.params.game + "!!!");
 });
 
 module.exports = router;
