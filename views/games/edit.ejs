@@ -1,0 +1,16 @@
+<%- include("../partials/header") %>
+	<h1>
+		THIS IS THE EDIT PAGE OF <%= game.name %>, YAY!
+	</h1>
+
+<div class="container">
+	<form action="/games/<%= game._id %>?_method=PUT" method="POST">
+		<label name="name">Name:</label> <input type="text" placeholder="name" name="name" <% if(game.name){ %> value="<%= game.name %>" <% } %> required><br>
+		<label name="image">Image:</label> <input type="text" placeholder="image url/path" name="image" <% if(game.image){ %> value="<%= game.image %>" <% } %> > <label name="upload">Upload?</label> <input type="checkbox" name="upload"><br>
+		<label name="minPlayers">Minimum players:</label> <input type="number" name="minPlayers" <% if(game.minPlayers){ %> value="<%= game.minPlayers %>" <% } %> > <label name="maxPlayers">Maximum players:</label> <input type="number" namme="maxPlayers" <% if(game.maxPlayers){ %> value="<%= game.maxPlayers %>" <% } %> ><br>
+		<h1>Fields</h1>
+		
+		<input type="submit" value="Edit game">
+	</form>
+</div>
+<%- include("../partials/footer") %>

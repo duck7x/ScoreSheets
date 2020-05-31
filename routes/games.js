@@ -104,12 +104,20 @@ router.get("/:game", function(req, res){
 
 // EDIT - form for editting a game
 router.get("/:game/edit", middleware.isAdmin, function(req, res){
-	res.send("This will be the edit page of " + req.params.game);
+	Game.findById(req.params.game, function(err, game){
+		if(err){
+			// NEED BETTER ERROR HANDLING
+			console.log(err);
+			req.flash("error", "Couldn't find the game");
+			return res.redirect("/games");
+		}
+		res.render("games/edit", {game: game});
+	});
 });
 
 // UPDATE - actually edits the game
 router.put("/:game", middleware.isAdmin, function(req, res){
-	res.render("games/edit");
+	res.send("You tried editting a game, good for you!");
 	// res.send("You tried editting " + req.params.game + ", good for you!");
 });
 
