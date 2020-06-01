@@ -1,5 +1,5 @@
 var test	= "Timon's in the kalax - CUTE";
-	count	= 0,
+	count	= $("#fields-count").val(),
 	skip	= "";
 var fieldsContainer = $(".fields-container"),
 	fieldTemplate	= $("#field-template");
@@ -15,13 +15,16 @@ function addField(){
 		$(this).attr("name", function(i, val){
 			return val + String(count);
 		});
-	$(".remove-field").last().val(count);
+	// $(".remove-field").last().val(count);
+	$(".remove-field").last().attr("value", count);
 	});
 }
 
 // ==================================
 // PAGE STARTUP EXECUTIONS
-addField();
+if($(".initialize").length > 0){
+	addField();	
+}
 
 // ==================================
 // EVENTS
@@ -41,7 +44,8 @@ fieldsContainer.on("click", ".clear-field", function(){
 
 // Removes field completely
 fieldsContainer.on("click", ".remove-field", function(){
-	skip += `,${$(this).val()}`;
+	// skip += `,${$(this).val()}`;
+	skip += `,${$(this).attr("value")}`;
 	$("#fields-skip").val(skip);
 	$(this).parent().parent().remove();
 });

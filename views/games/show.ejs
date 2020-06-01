@@ -10,7 +10,18 @@
 			</style>
 			<h1 class="center"><%= game.name %> Score Calculator!</h1>
 		</div>
+		
+		<% if(currentUser && currentUser.auth_level === "admin"){ %>
+			<div class="center">
+				<form action="/games/<%= game._id %>/delete?_method=DELETE" method="POST">
+					<button class="clickable white delete-game"><i class="x icon"></i><strong>REMOVE GAME</strong></button>
+					<a href="/games/<%= game._id %>/edit" class="clickable white edit-game"><i class="pencil alternate icon "></i><strong>EDIT GAME</strong></a>
+				</form>
+			</div>
+		<% } %>
 	</div>
+
+
 
 	<!-- <div class="container"> -->
 		<div class="games-container">

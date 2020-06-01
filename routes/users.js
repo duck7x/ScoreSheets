@@ -50,7 +50,7 @@ router.put("/:user", middleware.isAdmin, function(req, res){
 			if(err){
 				// NEED BETTER ERROR HANDLING
 				console.log(err);
-				req.flash("error", "Edit failed");
+				req.flash("error", "Edit user failed");
 				return res.redirect("/users");
 			}
 			req.flash("success", `User ${user.username} editted successfuly`);

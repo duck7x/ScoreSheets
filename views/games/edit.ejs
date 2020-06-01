@@ -9,8 +9,100 @@
 		<label name="image">Image:</label> <input type="text" placeholder="image url/path" name="image" <% if(game.image){ %> value="<%= game.image %>" <% } %> > <label name="upload">Upload?</label> <input type="checkbox" name="upload"><br>
 		<label name="minPlayers">Minimum players:</label> <input type="number" name="minPlayers" <% if(game.minPlayers){ %> value="<%= game.minPlayers %>" <% } %> > <label name="maxPlayers">Maximum players:</label> <input type="number" namme="maxPlayers" <% if(game.maxPlayers){ %> value="<%= game.maxPlayers %>" <% } %> ><br>
 		<h1>Fields</h1>
+		<span class="clickable white add-field"><i class="plus circle icon"></i> Add field</span>
+		<div id="field-template" class="field-template">
+			<div class="five wide column">
+				<div class="center">
+					<span class="remove-field clickable white" value="0">REMOVE</span> //
+					<span class="clear-field clickable white">CLEAR</span>
+				</div>
+				<div class="field">
+					<!-- DESC: ID // PLAYER: NAME -->
+					<label name="fieldName">Name:</label> <input class="field-input" type="text" name="fieldName" placeholder="field name"><br>
+					<!-- DESC: alt // PLAYER: value -->
+					<label name="fieldValue">Value:</label> <input class="field-input" type="number" name="fieldValue"><br>
+					<!-- DESC: actual text -->
+					<label name="fieldTitle">Title:</label> <input class="field-input" type="text" name="fieldTitle" placeholder="field title"><br>
+					<!-- DESC: displayed icon -->
+					<label name="fieldIcon">Icon:</label> <input class="field-input" type="text" placeholder="icon url/path" name="fieldIcon"> <label name="fieldUpload">Upload?</label> <input class="field-input" type="checkbox" name="fieldUpload"><br>
+					<!-- DESC: css classes -->
+					<label name="fieldDescClasses">Desc classes:</label> <input class="field-input" type="text" name="fieldDescClasses" placeholder="field desc classes"><br>
+					<!-- PLAYER: css classes -->
+					<label name="fieldPlayerClasses">Player classes:</label> <input class="field-input" type="text" name="fieldPlayerClasses" placeholder="field player classes"><br>
+					<!-- DESC: class // PLAYER: class -->
+					<label name="fieldCalcMethod">Calculation Method:</label> 
+					<select class="field-input" name="fieldCalcMethod">
+						<% calcMethods.forEach(function(method){ %>
+							<option value="<%= method %>"><%= method %></option>
+						<% }) %>
+					</select>
+					<br>
+					<!-- PLAYER: form type -->
+					<label name="fieldFormType">Form type:</label> 
+					<select class="field-input" name="fieldFormType">
+						<% formTypes.forEach(function(formType){ %>
+							<option value="<%= formType %>"><%= formType %></option>
+						<% }) %>
+					</select>
+					<br>
+					<!-- DESC: class // PLAYER: class -->
+					<label name="fieldScoreTotal">Score total?</label> <input class="field-input" type="checkbox" name="fieldScoreTotal">
+				</div>
+			</div>
+		</div>
+		
+		<div id="fields-container" class="fields-container ui grid">
+			<% var count = 0; %>
+			<% game.fields.forEach(function(field){ %>
+				<% count++; %>
+				<div class="five wide column">
+				<div class="center">
+					<span class="remove-field clickable white" value="<%= count %>">REMOVE</span> //
+					<span class="clear-field clickable white">CLEAR</span>
+				</div>
+
+				<div class="field">
+					<!-- DESC: ID // PLAYER: NAME // field.name -->
+					<label name="fieldName<%= count %>">Name:</label> <input class="field-input" type="text" name="fieldName<%= count %>" placeholder="field name" <% if(field.name){ %> value="<%= field.name %>" <% } %> ><br>
+					<!-- DESC: alt // PLAYER: value // field.value -->
+					<label name="fieldValue<%= count %>">Value:</label> <input class="field-input" type="number" name="fieldValue<%= count %>" <% if(field.value){ %> value="<%= field.value %>" <% } %> ><br>
+					<!-- DESC: actual text // field.title -->
+					<label name="fieldTitle<%= count %>">Title:</label> <input class="field-input" type="text" name="fieldTitle<%= count %>" placeholder="field title" <% if(field.title){ %> value="<%= field.title %>" <% } %> ><br>
+					<!-- DESC: displayed icon // field.icon -->
+					<label name="fieldIcon<%= count %>">Icon:</label> <input class="field-input" type="text" placeholder="icon url/path" name="fieldIcon<%= count %>" <% if(field.icon){ %> value="<%= field.icon %>" <% } %> > <label name="fieldUpload<%= count %>">Upload?</label> <input class="field-input" type="checkbox" name="fieldUpload<%= count %>"><br>
+					<!-- DESC: css classes // field.classesDesc -->
+					<label name="fieldDescClasses<%= count %>">Desc classes:</label> <input class="field-input" type="text" name="fieldDescClasses<%= count %>" placeholder="field desc classes" <% if(field.classesDesc){ %> value="<%= field.classesDesc %>" <% } %> ><br>
+					<!-- PLAYER: css classes // field.classesPlayer -->
+					<label name="fieldPlayerClasses<%= count %>">Player classes:</label> <input class="field-input" type="text" name="fieldPlayerClasses<%= count %>" placeholder="field player classes" <% if(field.classesPlayer){ %> value="<%= field.classesPlayer %>" <% } %> ><br>
+					<!-- DESC: class // PLAYER: class // field.calcMethod -->
+					<label name="fieldCalcMethod<%= count %>">Calculation Method:</label> 
+					<select class="field-input" name="fieldCalcMethod<%= count %>">
+						<% calcMethods.forEach(function(method){ %>
+							<option value="<%= method %>" <% if(field.calcMethod && field.calcMethod === method){ %> selected="selected" <% } %> ><%= method %></option>
+						<% }) %>
+					</select>
+					<br>
+					<!-- PLAYER: form type // field.type -->
+					<label name="fieldFormType<%= count %>">Form type:</label> 
+					<select class="field-input" name="fieldFormType<%= count %>">
+						<% formTypes.forEach(function(formType){ %>
+							<option value="<%= formType %>" <% if(field.type && field.type === formType){ %> selected="selected" <% } %> ><%= formType %></option>
+						<% }) %>
+					</select>
+					<br>
+					<!-- DESC: class // PLAYER: class // field.scoreTotal -->
+					<label name="fieldScoreTotal<%= count %>">Score total?</label> <input class="field-input" type="checkbox" name="fieldScoreTotal<%= count %>" <% if(field.scoreTotal){ %> checked <% } %> >
+				</div>
+			</div>
+			<% }) %>
+		</div>
+		
+		<input id="fields-count" type="number" value="<%= count %>" class="hidden" name="count">
+		<input id="fields-skip" type="text" value="" class="hidden" name="skip">
 		
 		<input type="submit" value="Edit game">
 	</form>
 </div>
+
+	<script type="text/javascript" src="/js/add-game.js"></script>
 <%- include("../partials/footer") %>
