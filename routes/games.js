@@ -1,10 +1,12 @@
 var express		= require("express"),
 	router		= express(),
+	exec		= require("child_process").exec,
 	Game		= require("../models/game"),
 	middleware	= require("../middleware/users");
 
 var calcMethods = ["reg"],
-	formTypes	= ["text", "checkbox", "number"];
+	// formTypes	= ["text", "checkbox", "number"];
+	formTypes	= ["number"];
 
 // INDEX - show all games
 router.get("/", function(req, res){
@@ -46,6 +48,19 @@ router.post("/", middleware.isAdmin, function(req, res){
 	// classesPlayer: String, fieldPlayerClasses
 	// calcMethod: String, fieldCalcMethod
 	// scoreTotal: Boolea, fieldScoreTotal
+	
+	if(req.body.upload){
+		var imageName = name.toLowerCase().replace(/ /g, "-"),
+			imageType = image.split(".").slice(-1);
+		exec(`wget ${image} -O public/media/${imageName}.${imageType}`, function(err, stdout, stderr){
+			if(err){
+				// NEED BETTER ERROR HANDLING
+				req.flash("error", "failed to upload game image");
+				console.log(err);
+			}
+		});
+		image = `/media/${imageName}.${imageType}`;
+	}
 	
 	for(i = 1; i <= count; i++){
 		if(skip.includes(String(i))){
@@ -128,6 +143,9 @@ router.put("/:game", middleware.isAdmin, function(req, res){
 		count		= req.body.count,
 		skip		= req.body.skip;
 	
+	var uploadDone = false,
+		fieldsDone = false;
+	
 	// name: String, fieldName
 	// value: Number, fieldValue
 	// title: String, fieldTitle
@@ -137,6 +155,19 @@ router.put("/:game", middleware.isAdmin, function(req, res){
 	// classesPlayer: String, fieldPlayerClasses
 	// calcMethod: String, fieldCalcMethod
 	// scoreTotal: Boolea, fieldScoreTotal;
+	
+	if(req.body.upload){
+		var imageName = name.toLowerCase().replace(/ /g, "-"),
+			imageType = image.split(".").slice(-1);
+		exec(`wget ${image} -O public/media/${imageName}.${imageType}`, function(err, stdout, stderr){
+			if(err){
+				// NEED BETTER ERROR HANDLING
+				req.flash("error", "failed to upload game image");
+				console.log(err);
+			}
+		});
+		image = `/media/${imageName}.${imageType}`;
+	}
 	
 	for (i = 1; i <= count; i++){
 		if(skip.includes(String(i))){
@@ -156,6 +187,7 @@ router.put("/:game", middleware.isAdmin, function(req, res){
 		field.scoreTotal = eval("req.body.fieldScoreTotal" + String(i)) === "on";
 		
 		fields.push(field);
+		
 	}
 	
 	// var newGame = {
