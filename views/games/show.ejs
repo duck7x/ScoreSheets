@@ -1,4 +1,13 @@
 <%- include("../partials/header") %>
+	<!-- REMOVE POPUP -->
+	<div class="popup-container">
+		<div class="popup-window">
+			<form action="/games/<%= game._id %>/delete?_method=DELETE" method="POST">
+				<h1>Are you sure you want to delete <%= game.name %>?</h1>
+				<button class="ui red button confirm-delete-button">Delete</button> <span class="close-popup ui gray button">Cancel</span>
+			</form>
+		</div>
+	</div>
 
 	<div class="container">
 		<!-- <img class="title" src="<%= game.image %>"> -->
@@ -13,10 +22,8 @@
 		
 		<% if(currentUser && currentUser.auth_level === "admin"){ %>
 			<div class="center">
-				<form action="/games/<%= game._id %>/delete?_method=DELETE" method="POST">
-					<button class="clickable white delete-game"><i class="x icon"></i><strong>REMOVE GAME</strong></button>
-					<a href="/games/<%= game._id %>/edit" class="clickable white edit-game"><i class="pencil alternate icon "></i><strong>EDIT GAME</strong></a>
-				</form>
+				<span class="clickable white delete-button"><i class="x icon"></i><strong>REMOVE GAME</strong></span>  
+				<a href="/games/<%= game._id %>/edit" class="clickable white edit-game"><i class="pencil alternate icon "></i><strong>EDIT GAME</strong></a>
 			</div>
 		<% } %>
 	</div>

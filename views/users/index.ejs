@@ -1,4 +1,13 @@
 <%- include("../partials/header") %>
+	<div class="popup-container">
+		<div class="popup-window">
+			<form class="delete-form" action="/users" method="POST">
+				<h1>Are you sure you want to delete <span class="delete-object-name"></span></h1>
+				<button class="ui red button confirm-delete-button">Delete</button> <span class="close-popup ui gray button">Cancel</span>
+			</form>
+		</div>
+	</div>
+
 	<h1>This is the users page :)</h1>
 	<div class="container ui grid center">
 		<% users.forEach(function(user){ %>
@@ -6,10 +15,8 @@
 				<strong>username: </strong> <%= user.username %><br>
 				<strong>auth level:</strong> <%= user.auth_level %><br>
 				
-				<form action="/users/<%= user._id %>/delete?_method=DELETE" method="POST">
-					<a href="/users/<%= user._id %>/edit"><i class="pencil alternate icon clickable edit-user"></i></a>
-					<button><i class="x icon clickable delete-user"></i></button>
-				</form>
+				<a href="/users/<%= user._id %>/edit"><i class="pencil alternate icon clickable edit-user"></i></a>
+				<span class="clickable delete-button" object-action="/users/<%= user._id %>/delete?_method=DELETE" object-name="<%= user.username %>"><i class="x icon"></i></span>
 			</div>	
 		<% }); %>
 	</div>

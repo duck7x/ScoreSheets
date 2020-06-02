@@ -1,6 +1,6 @@
 var test = "TinyLittleThingCalledLuna"
-var gamesContainer = $(".games-container");
-
+var gamesContainer	= $(".games-container");
+	
 // ==================================
 // FUNCTIONS
 
@@ -56,6 +56,7 @@ gamesContainer.on("click", ".deletePlayer", function(){
 
 // Calculate score on input change
 gamesContainer.on("change", ".scoreParameter>input", scoreCalculator);
+
 
 // ==================================
 // NOTES FOR ME, WILL BE DELETED
