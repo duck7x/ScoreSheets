@@ -1,7 +1,7 @@
 var User		= require("../models/user"),
 	express		= require("express"),
 	router		= express(),
-	middleware	= require("../middleware/users")
+	middleware	= require("../functions/users")
 
 router.get("/", function(req, res){
 	// if(res.locals.error){

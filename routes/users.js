@@ -1,7 +1,7 @@
 var express		= require("express"),
 	router		= express(),
 	User		= require("../models/user"),
-	middleware	= require("../middleware/users");
+	middleware	= require("../functions/users");
 
 // INDEX - show all users
 // should be admin protected
