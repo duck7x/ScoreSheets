@@ -18,12 +18,12 @@ allGames.forEach(function(game){
 	})
 });
 
-// Shows popup window for deleting game from show page
+// Shows popup window for deleting game/user
 $(".delete-button").on("click", function(){
-	if($(this).attr("object-name")){
-		$(".delete-form").attr("action", $(this).attr("object-action"));
-		$(".delete-object-name").text($(this).attr("object-name"));
-	}
+	// if($(this).attr("object-name")){
+	$(".delete-form").attr("action", $(this).attr("object-action"));
+	$(".delete-object-name").text($(this).attr("object-name"));
+	// }
 	popupContainer.css("display", "flex");
 });
 
