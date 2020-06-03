@@ -3,7 +3,8 @@ var test	= "Timon's in the kalax - CUTE";
 	skip	= "";
 var fieldsContainer = $(".fields-container"),
 	fieldTemplate	= $("#field-template"),
-	mainContainer	= $(".container");
+	mainContainer	= $(".container"),
+	popupImagePrev	= $(".popup-container.image-preview");
 
 // ==================================
 // FUNCTIONS
@@ -62,6 +63,16 @@ mainContainer.on("mouseleave", ".question-mark", function(){
 	let name = $(this).attr("name");
 	$(`.explanation[name="${name}"]`).css("display", "none");
 });
+
+// Shows image preview popup window
+$(".open-popup").on("click", function(){
+	let image = $(`input[name=${$(this).attr("name")}]`).val();
+	popupImagePrev.children().last().css("background-image", `url(${image})`);
+	popupImagePrev.css("display", "flex");
+});
+
+// Closes image preview popup window
+
 
 // ==================================
 // NOTES FOR ME, WILL BE DELETED

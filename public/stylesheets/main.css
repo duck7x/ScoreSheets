@@ -146,3 +146,13 @@ h1.index{
 	margin-top: -23px;
 	margin-left: 20px;
 }
+
+.popup-window.image-preview{
+	background-size: cover;
+	background-position: center;
+}
+
+.popup-window.image-preview>.close-popup{
+	margin-bottom: 40%;
+    margin-left: 85%;
+}
