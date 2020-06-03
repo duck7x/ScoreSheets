@@ -19,9 +19,14 @@ function scoreCalculator(element){
 	var totalHtml = column.children(".total").last();
 	var totalScore = 0;
 	var regScoreTotal = column.children(".scoreTotal.reg");
+	var setsScoreTotal = column.children(".scoreTotal.sets");
 	
 	regScoreTotal.each(function(){
 		totalScore += ($(this).val() * $(this).children().val());
+	});
+	
+	setsScoreTotal.each(function(){
+		totalScore += ($(this).val() * Math.floor($(this).children().val() / $(this).attr("setsValue")));
 	});
 	
 	totalHtml.text(totalScore);
@@ -45,6 +50,8 @@ addPlayer();
 // pure JS
 // document.querySelector(".addPlayer").addEventListener("click", addPlayer);
 $(".addPlayer").on("click", addPlayer);
+
+// Changing from sets calcMethod
 
 // Clear score
 $(".clearScore").on("click", clearScore);

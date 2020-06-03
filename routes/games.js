@@ -5,7 +5,7 @@ var express			= require("express"),
 	middleware		= require("../functions/users"),
 	gameFunctions	= require("../functions/games");
 
-var calcMethods = ["reg"],
+var calcMethods = ["reg", "sets"],
 	// formTypes	= ["text", "checkbox", "number"];
 	formTypes	= ["number"];
 

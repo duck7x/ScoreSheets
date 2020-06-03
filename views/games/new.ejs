@@ -12,12 +12,66 @@
 	<div class="container">
 
 		<form action="/games" method="POST">
-			<span class="question-mark" name="name"><i class="question icon"></i></span><span class="explanation" name="name">The game's name, will appear in title</span> <label name="name">Name:</label> <input type="text" placeholder="name" name="name" required><br>
-			<span class="question-mark" name="image"><i class="question icon"></i></span><span class="explanation" name="image">Image for game, can be URL or path</span> <label name="image">Image:</label> <input type="text" placeholder="image url/path" name="image"> <span class="question-mark" name="upload"><i class="question icon"></i></span><span class="explanation" name="upload">If the image is URL, check this to upload the image to the server</span> <label name="upload">Upload?</label> <input type="checkbox" name="upload"> <span class="open-popup mini compact circular ui black button" name="image">Preview</span><br>
-			<span class="question-mark" name="minPlayers"><i class="question icon"></i></span><span class="explanation" name="minPlayers">Minimum amount of players for the game</span> <label name="minPlayers">Minimum players:</label> <input type="number" name="minPlayers"> <span class="question-mark" name="maxPlayers"><i class="question icon"></i></span><span class="explanation" name="maxPlayers">Maximum amount of players for the game</span> <label name="maxPlayers">Maximum players:</label> <input type="number" name="maxPlayers"><br>
+			<span class="name-container">
+				<span class="question-mark" name="name">
+					<i class="question icon"></i>
+				</span>
+				<span class="explanation" name="name">
+					The game's name, will appear in title
+				</span> 
+				<label name="name">Name:</label> 
+				<input type="text" placeholder="name" name="name" required>
+			</span>
+			<br>
+			<span class="image-container">
+				<span class="question-mark" name="image">
+					<i class="question icon"></i>
+				</span>
+				<span class="explanation" name="image">
+					Image for game, can be URL or path
+				</span> 
+				<label name="image">Image:</label> 
+				<input type="text" placeholder="image url/path" name="image">
+			</span>
+			<span class="upload-container">
+				<span class="question-mark" name="upload">
+					<i class="question icon"></i>
+				</span>
+				<span class="explanation" name="upload">
+					If the image is URL, check this to upload the image to the server
+				</span> 
+				<label name="upload">Upload?</label> 
+				<input type="checkbox" name="upload"> 
+				<span class="open-popup mini compact circular ui black button" name="image">
+					Preview
+				</span>
+			</span>
+			<br>
+			<span class="minPlayers-container">
+				<span class="question-mark" name="minPlayers">
+					<i class="question icon"></i>
+				</span>
+				<span class="explanation" name="minPlayers">
+					Minimum amount of players for the game
+				</span> 
+				<label name="minPlayers">Minimum players:</label> 
+				<input type="number" name="minPlayers"> 
+			</span>
+			<span class="maxPlayers-container">
+				<span class="question-mark" name="maxPlayers">
+					<i class="question icon"></i>
+				</span>
+				<span class="explanation" name="maxPlayers">
+					Maximum amount of players for the game
+				</span> 
+				<label name="maxPlayers">Maximum players:</label> 
+				<input type="number" name="maxPlayers">
+			</span>
+			<br>
+			
 			<h1>Fields</h1>
 			<span class="clickable white add-field"><i class="plus circle icon"></i> Add field</span>
-			<div id="field-template" class="field-template">
+			<div id="field-template" class="field-template template">
 				<div class="five wide column">
 					<div class="center">
 						<span class="remove-field clickable white" value="0">REMOVE</span> //
@@ -25,38 +79,156 @@
 					</div>
 					<div class="field">
 						<!-- DESC: ID // PLAYER: NAME -->
-						<span class="question-mark" name="fieldName"><i class="question icon"></i></span><span class="explanation" name="fieldName">ID of desc cell and name of players cell</span> <label name="fieldName">Name:</label> <input class="field-input" type="text" name="fieldName" placeholder="field name"><br>
+						<span class="fieldName-container">
+							<span class="question-mark" name="fieldName">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldName">
+								ID of desc cell and name of players cell
+							</span> 
+							<label name="fieldName">Name:</label> 
+							<input class="field-input" type="text" name="fieldName" placeholder="field name">
+						</span>
+						<br>
+						
 						<!-- DESC: alt // PLAYER: value -->
-						<span class="question-mark" name="fieldValue"><i class="question icon"></i></span><span class="explanation" name="fieldValue">For calculation, this will be multiplied by the input</span> <label name="fieldValue">Value:</label> <input class="field-input" type="number" name="fieldValue"><br>
+						<span class="fieldValue-container">
+							<span class="question-mark" name="fieldValue">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldValue">
+								For calculation, this will be multiplied by the input
+							</span> 
+							<label name="fieldValue">Value:</label> 
+							<input class="field-input" type="number" name="fieldValue">
+						</span>
+						<br>
+						
 						<!-- DESC: actual text -->
-						<span class="question-mark" name="fieldTitle"><i class="question icon"></i></span><span class="explanation" name="fieldTitle">Will appear in desc cell</span> <label name="fieldTitle">Title:</label> <input class="field-input" type="text" name="fieldTitle" placeholder="field title"><br>
+						<span class="fieldTitle-container">
+							<span class="question-mark" name="fieldTitle">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldTitle">
+								Will appear in desc cell
+							</span> 
+							<label name="fieldTitle">Title:</label> 
+							<input class="field-input" type="text" name="fieldTitle" placeholder="field title">
+						</span>
+						<br>
+						
 						<!-- DESC: displayed icon -->
-						<span class="question-mark" name="fieldIcon"><i class="question icon"></i></span><span class="explanation" name="fieldIcon">Icon to display in desc cell, can be URL or path</span> <label name="fieldIcon">Icon:</label> <input class="field-input" type="text" placeholder="icon url/path" name="fieldIcon"> <span class="question-mark" name="fieldUpload"><i class="question icon"></i></span><span class="explanation" name="fieldUpload">If the icon is from URL, you can check this to upload it to the server</span> <label name="fieldUpload">Upload?</label> <input class="field-input" type="checkbox" name="fieldUpload"><br>
+						<span class="fieldIcon-container">
+							<span class="question-mark" name="fieldIcon">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldIcon">
+								Icon to display in desc cell, can be URL or path
+							</span> <label name="fieldIcon">Icon:</label> 
+							<input class="field-input" type="text" placeholder="icon url/path" name="fieldIcon">
+						</span>
+						<span class="fieldUpload-container">
+							 <span class="question-mark" name="fieldUpload">
+								 <i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldUpload">
+								If the icon is from URL, you can check this to upload it to the server
+							</span> 
+							<label name="fieldUpload">Upload?</label> 
+							<input class="field-input" type="checkbox" name="fieldUpload">
+						</span>
+						<br>
+						
 						<!-- DESC: css classes -->
-						<span class="question-mark" name="fieldDescClasses"><i class="question icon"></i></span><span class="explanation" name="fieldDescClasses">css classes to add to desc cell</span> <label name="fieldDescClasses">Desc classes:</label> <input class="field-input" type="text" name="fieldDescClasses" placeholder="field desc classes"><br>
+						<span class="fieldDescClasses-container">
+							<span class="question-mark" name="fieldDescClasses">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldDescClasses">
+								css classes to add to desc cell
+							</span> 
+							<label name="fieldDescClasses">Desc classes:</label> 
+							<input class="field-input" type="text" name="fieldDescClasses" placeholder="field desc classes">
+						</span>
+						<br>
+						
 						<!-- PLAYER: css classes -->
-						<span class="question-mark" name="fieldPlayerClasses"><i class="question icon"></i></span><span class="explanation" name="fieldPlayerClasses">css classes to add to players cells</span> <label name="fieldPlayerClasses">Player classes:</label> <input class="field-input" type="text" name="fieldPlayerClasses" placeholder="field player classes"><br>
-						<!-- DESC: class // PLAYER: class -->
-						<span class="question-mark" name="fieldCalcMethod"><i class="question icon"></i></span><span class="explanation" name="fieldCalcMethod">Calculation type, reg is simple multiply of value * input</span> <label name="fieldCalcMethod">Calculation Method:</label> 
-						<select class="field-input" name="fieldCalcMethod">
-							<% calcMethods.forEach(function(method){ %>
-								<option value="<%= method %>"><%= method %></option>
-							<% }) %>
-						</select>
+						<span class="fieldPlayerClasses-container">
+							<span class="question-mark" name="fieldPlayerClasses">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldPlayerClasses">
+								css classes to add to players cells
+							</span> 
+							<label name="fieldPlayerClasses">Player classes:</label> 
+							<input class="field-input" type="text" name="fieldPlayerClasses" placeholder="field player classes">
+						</span>
 						<br>
+						
+						<!-- DESC: class // PLAYER: class -->
+						<span class="fieldCalcMethod-container">
+							<span class="question-mark" name="fieldCalcMethod">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldCalcMethod">
+								Calculation type, reg is simple multiply of value * input
+							</span> 
+							<label name="fieldCalcMethod">Calculation Method:</label> 
+							<select class="field-input fieldCalcMethod" name="fieldCalcMethod">
+								<% calcMethods.forEach(function(method){ %>
+									<option value="<%= method %>"><%= method %></option>
+								<% }) %>
+							</select>
+						</span>
+						<br>
+						
 						<!-- PLAYER: form type -->
-						<span class="question-mark" name="fieldFormType"><i class="question icon"></i></span><span class="explanation" name="fieldFormType">Input type of the cell</span> <label name="fieldFormType">Form type:</label> 
-						<select class="field-input" name="fieldFormType">
-							<% formTypes.forEach(function(formType){ %>
-								<option value="<%= formType %>"><%= formType %></option>
-							<% }) %>
-						</select>
+						<span class="fieldFormType-container">
+							<span class="question-mark" name="fieldFormType">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldFormType">
+								Input type of the cell
+							</span> 
+							<label name="fieldFormType">Form type:</label> 
+							<select class="field-input" name="fieldFormType">
+								<% formTypes.forEach(function(formType){ %>
+									<option value="<%= formType %>"><%= formType %></option>
+								<% }) %>
+							</select>
+						</span>
 						<br>
+						
 						<!-- DESC: class // PLAYER: class -->
-						<span class="question-mark" name="fieldScoreTotal"><i class="question icon"></i></span><span class="explanation" name="fieldScoreTotal">If checked, this cell will be added to the total score of the player</span> <label name="fieldScoreTotal">Score total?</label> <input class="field-input" type="checkbox" name="fieldScoreTotal">
+						<span class="fieldScoreTotal-container">
+							<span class="question-mark" name="fieldScoreTotal">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldScoreTotal">
+								If checked, this cell will be added to the total score of the player
+							</span> 
+							<label name="fieldScoreTotal">Score total?</label> 
+							<input class="field-input" type="checkbox" name="fieldScoreTotal">
+						</span>
 					</div>
 				</div>
 			</div>
+			
+			<div id="sets-template" class="template">
+				<!-- DESC: alt // PLAYER: sets value -->
+				<span class="fieldSetsValue-container">
+					<br>
+					<span class="question-mark" name="fieldSetsValue">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldSetsValue">
+						For calculation, this will be multiplied by the input/value
+					</span> 
+					<label name="fieldSetsValue">Sets Value:</label> 
+					<input class="field-input" type="number" name="fieldSetsValue">
+				</span>
+			</div>
+			
 			<div id="fields-container" class="fields-container ui grid initialize">
 
 			</div>

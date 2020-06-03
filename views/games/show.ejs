@@ -24,13 +24,13 @@
 		<div class="games-container">
 			<% if(game.fields){ %>
 				<!-- TEMPLATE TABLE -->
-				<div id="template" class="table">
+				<div id="template" class="table template">
 					<div class="player table">
 						<ul>
 							<li class="empty"></li>
 							<li class="center" name="playerName"><input type="text" name=""></li>
 							<% game.fields.forEach(function(field){ %>
-								<li class="scoreParameter <%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %>" name="<%= field.name %>" value=<%= field.value %>><input type="<%= field.type %>" name=""></li>
+								<li class="scoreParameter <%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %>" name="<%= field.name %>" value="<%= field.value %>" setsValue="<%= field.setsValue %>"><input type="<%= field.type %>" name=""></li>
 							<% }); %>
 							<li class="total center" name="total"></li>
 							<li class="deletePlayer center clickable" name="delete"><i class="trash alternate icon"></i></li>

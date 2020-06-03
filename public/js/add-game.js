@@ -1,10 +1,11 @@
 var test	= "Timon's in the kalax - CUTE";
 	count	= $("#fields-count").val(),
 	skip	= "";
-var fieldsContainer = $(".fields-container"),
-	fieldTemplate	= $("#field-template"),
-	mainContainer	= $(".container"),
-	popupImagePrev	= $(".popup-container.image-preview");
+var fieldsContainer 	= $(".fields-container"),
+	fieldTemplate		= $("#field-template"),
+	setsValueTemplate	= $("#sets-template"),
+	mainContainer		= $(".container"),
+	popupImagePrev		= $(".popup-container.image-preview");
 
 // ==================================
 // FUNCTIONS
@@ -13,7 +14,8 @@ function addField(){
 	count++;
 	$("#fields-count").val(count);
 	var newField = fieldsContainer.append(fieldTemplate.html());
-	$(".field").last().children(".field-input, label, .question-mark, .explanation").each(function(){
+	// FIX NAME CHANGING DUE TO NEW SPAN CONTAINER THINGIE
+	$(".field").last().children().children(".field-input, label, .question-mark, .explanation").each(function(){
 		$(this).attr("name", function(i, val){
 			return val + String(count);
 		});
@@ -21,6 +23,11 @@ function addField(){
 	$(".remove-field").last().attr("value", count);
 	});
 }
+
+// Adding setsValue
+// function addSetsValue(element){
+	
+// }
 
 // ==================================
 // PAGE STARTUP EXECUTIONS
@@ -71,7 +78,21 @@ $(".open-popup").on("click", function(){
 	popupImagePrev.css("display", "flex");
 });
 
-// Closes image preview popup window
+// Changing to sets calcMethod
+mainContainer.on("change", ".fieldCalcMethod", function(){
+	let valueContainer = $(this).parent().siblings(".fieldValue-container");
+	let fieldNum = $(this).attr("name").substr(-1);
+	if($(this).val() === "sets"){
+		valueContainer.after(setsValueTemplate.html());
+		valueContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
+	} else {
+		$(this).parent().siblings(".fieldSetsValue-container").remove();
+	}
+});
 
 
 // ==================================
