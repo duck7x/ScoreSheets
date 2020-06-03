@@ -31,3 +31,4 @@ $(".delete-button").on("click", function(){
 $(".close-popup").on("click", function(){
 	popupContainer.hide();
 });
+

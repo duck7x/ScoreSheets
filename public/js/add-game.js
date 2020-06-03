@@ -2,7 +2,8 @@ var test	= "Timon's in the kalax - CUTE";
 	count	= $("#fields-count").val(),
 	skip	= "";
 var fieldsContainer = $(".fields-container"),
-	fieldTemplate	= $("#field-template");
+	fieldTemplate	= $("#field-template"),
+	mainContainer	= $(".container");
 
 // ==================================
 // FUNCTIONS
@@ -11,7 +12,7 @@ function addField(){
 	count++;
 	$("#fields-count").val(count);
 	var newField = fieldsContainer.append(fieldTemplate.html());
-	$(".field").last().children(".field-input, label").each(function(){
+	$(".field").last().children(".field-input, label, .question-mark, .explanation").each(function(){
 		$(this).attr("name", function(i, val){
 			return val + String(count);
 		});
@@ -48,6 +49,18 @@ fieldsContainer.on("click", ".remove-field", function(){
 	skip += `,${$(this).attr("value")}`;
 	$("#fields-skip").val(skip);
 	$(this).parent().parent().remove();
+});
+
+// Displays explanation when hovering question mark
+mainContainer.on("mouseenter", ".question-mark", function(){
+	let name = $(this).attr("name");
+	$(`.explanation[name="${name}"]`).css("display", "flex");
+});
+
+// Removes explanation when unhovering question mark
+mainContainer.on("mouseleave", ".question-mark", function(){
+	let name = $(this).attr("name");
+	$(`.explanation[name="${name}"]`).css("display", "none");
 });
 
 // ==================================
