@@ -20,6 +20,7 @@ function scoreCalculator(element){
 	var totalScore = 0;
 	var regScoreTotal = column.children(".scoreTotal.reg");
 	var setsScoreTotal = column.children(".scoreTotal.sets");
+	var squareScoreTotal = column.children(".scoreTotal.square");
 	
 	regScoreTotal.each(function(){
 		totalScore += ($(this).val() * $(this).children().val());
@@ -27,6 +28,10 @@ function scoreCalculator(element){
 	
 	setsScoreTotal.each(function(){
 		totalScore += ($(this).val() * Math.floor($(this).children().val() / $(this).attr("setsValue")));
+	});
+	
+	squareScoreTotal.each(function(){
+		totalScore += ($(this).children().val() * $(this).children().val());
 	});
 	
 	totalHtml.text(totalScore);
