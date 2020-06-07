@@ -76,8 +76,6 @@ gamesContainer.on("click", ".deletePlayer", function(){
 });
 
 // Unchecks everything else when a single-checkbox is checked
-// NEEDS MORE WORK
-// AT THE MOMENT IT UNMARKS BUT DOESN'T RECALCULATE
 gamesContainer.on("change", ".single-checkbox>input", function(){
 	if($(this).prop("checked")){
 		let name = $(this).parent().attr("name");
