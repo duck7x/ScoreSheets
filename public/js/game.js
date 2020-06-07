@@ -14,13 +14,14 @@ function addPlayer(){
 }
 
 // Calculating the score of a specific player (element is the table of a player)
-function scoreCalculator(element){
-	var column = $(this).parent().parent();
-	var totalHtml = column.children(".total").last();
-	var totalScore = 0;
-	var regScoreTotal = column.children(".scoreTotal.reg");
-	var setsScoreTotal = column.children(".scoreTotal.sets");
-	var squareScoreTotal = column.children(".scoreTotal.square");
+function scoreCalculator(element, calcField){
+	var column 						= calcField ? calcField.parent().parent() : $(this).parent().parent(),
+		totalScore 					= 0,
+		totalHtml 					= column.children(".total").last(),
+		regScoreTotal 				= column.children(".scoreTotal.reg"),
+		setsScoreTotal 				= column.children(".scoreTotal.sets"),
+		squareScoreTotal 			= column.children(".scoreTotal.square"),
+		singleCheckboxScoreTotal	= column.children(".scoreTotal.single-checkbox");
 	
 	regScoreTotal.each(function(){
 		totalScore += ($(this).val() * $(this).children().val());
@@ -34,8 +35,16 @@ function scoreCalculator(element){
 		totalScore += ($(this).children().val() * $(this).children().val());
 	});
 	
+	singleCheckboxScoreTotal.each(function(){
+		totalScore += $(this).children().prop("checked") ? $(this).val() : 0;
+	});
+	
 	totalHtml.text(totalScore);
+	console.log("column is");
+	console.log(column);
 }
+
+// 
 
 // Clear score
 function clearScore(){
@@ -64,6 +73,24 @@ $(".clearScore").on("click", clearScore);
 // Delete player
 gamesContainer.on("click", ".deletePlayer", function(){
 	$(this).parent().parent().remove();
+});
+
+// Unchecks everything else when a single-checkbox is checked
+// NEEDS MORE WORK
+// AT THE MOMENT IT UNMARKS BUT DOESN'T RECALCULATE
+gamesContainer.on("change", ".single-checkbox>input", function(){
+	if($(this).prop("checked")){
+		let name = $(this).parent().attr("name");
+		$(`[name=${name}]`).each(function(){
+			$(this).children().prop("checked", false);
+			scoreCalculator($(this), $(this).children());
+			// $(".scoreTotal.single-checkbox").last().children().prop("checked", false)
+			// console.log($(this).children());
+		});
+		$(this).prop("checked", true);
+		// console.log($(this));
+	}
+	// console.log($(this).children());
 });
 
 // Calculate score on input change

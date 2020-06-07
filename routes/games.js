@@ -5,9 +5,9 @@ var express			= require("express"),
 	middleware		= require("../functions/users"),
 	gameFunctions	= require("../functions/games");
 
-var calcMethods = ["reg", "sets", "square"],
+var calcMethods = ["reg", "sets", "square", "single-checkbox"],
 	// formTypes	= ["text", "checkbox", "number"];
-	formTypes	= ["number"];
+	formTypes	= ["number", "checkbox"];
 
 // INDEX - show all games
 router.get("/", function(req, res){
