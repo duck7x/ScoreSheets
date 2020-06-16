@@ -20,7 +20,7 @@ function addField(){
 			return val + String(count);
 		});
 	// $(".remove-field").last().val(count);
-	$(".remove-field").last().attr("value", count);
+		$(".remove-field").last().attr("value", count);
 	});
 }
 

@@ -1,0 +1,14 @@
+<%- include("../partials/header") %>
+
+	<h1>This is the media page :)</h1>
+
+	<h3><a class="clickable white" href="/media/new">ADD NEW FILES</a></h3>
+
+	<% mediaFiles.split(/\r?\n/).forEach(function(game){ %>
+		<% if(game != ""){ %>
+			Game: <%= game %>
+			<br>
+		<% } %>
+	<% }); %>
+
+<%- include("../partials/footer") %>

@@ -13,7 +13,8 @@ var express			= require("express"),
 var gamesRoutes	= require("./routes/games"),
 	aboutRoutes	= require("./routes/about"),
 	indexRoutes	= require("./routes/index"),
-	usersRoutes	= require("./routes/users");
+	usersRoutes	= require("./routes/users"),
+	mediaRoutes	= require("./routes/media");
 
 
 // mongoose.connect("mongodb://localhost/scoresheets", { useNewUrlParser: true, useUnifiedTopology:true });
@@ -49,6 +50,7 @@ app.use("/", indexRoutes);
 app.use("/users", usersRoutes);
 app.use("/games", gamesRoutes);
 app.use("/about", aboutRoutes);
+app.use("/media", mediaRoutes);
 
 // enables the app to work both from heroku and goorm
 if(process.env.MONGOSRV === "mongodb://localhost/scoresheets"){

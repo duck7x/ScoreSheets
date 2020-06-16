@@ -1,0 +1,37 @@
+<%- include("../partials/header") %>
+
+	<h1>This is the add media page :)</h1>
+
+<div id="images-template" class="table template">
+	<div class="six wide column">
+		<div class="center">
+			<span class="remove-image clickable white" value="0">REMOVE</span> //
+			<span class="clear-image clickable white">CLEAR</span>
+		</div>
+		<div class="image-field field">
+			<label name="imagePath">Image Path:</label> 
+			<input class="" type="text" name="imagePath" placeholder="image path on server">
+			<br>
+			<label name="imageUrl">Image URL:</label> 
+			<input class="" type="text" name="imageUrl" placeholder="image url">
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<span class="clickable white add-image"><i class="plus circle icon"></i> Add image</span>
+
+	<form action="/media" method="POST">
+
+		<div class="images-container ui grid">
+
+		</div>
+
+		<input id="images-count" type="number" value="0" class="hidden" name="count">
+		<input id="images-skip" type="text" value="" class="hidden" name="count">
+		<input type="submit" value="Add images">
+	</form>
+</div>
+
+	<script type="text/javascript" src="/js/add-image.js"></script>
+<%- include("../partials/footer") %>

@@ -1,5 +1,5 @@
-var allGames		= document.querySelectorAll(".img.index"),
-	popupContainer	= $(".popup-container");
+var allGames		= document.querySelectorAll(".img.index");
+var	popupContainer	= $(".popup-container");
 
 // ==================================
 // FUNCTIONS
