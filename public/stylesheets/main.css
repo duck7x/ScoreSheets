@@ -156,3 +156,10 @@ h1.index{
 	margin-bottom: 40%;
     margin-left: 85%;
 }
+
+/* Media management section */
+/* Might need to move to a different file */
+img.mediaManagement{
+	height: 20em;
+	width: 20em;
+}

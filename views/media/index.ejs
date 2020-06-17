@@ -4,11 +4,15 @@
 
 	<h3><a class="clickable white" href="/media/new">ADD NEW FILES</a></h3>
 
+<div class="container ui grid">
 	<% mediaFiles.split(/\r?\n/).forEach(function(game){ %>
 		<% if(game != ""){ %>
-			Game: <%= game %>
-			<br>
+			<div class="four wide column">
+				<h2><%= game.split(".")[0] %></h2>
+				<img class="mediaManagement" src="/media/<%= game %>">
+			</div>
 		<% } %>
 	<% }); %>
+</div>
 
 <%- include("../partials/footer") %>
