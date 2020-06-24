@@ -8,6 +8,7 @@
 				}
 			</style>
 			<h1 class="center"><%= game.name %> Score Calculator!</h1>
+			<h3 class="center"><%= game.minPlayers %> to <%= game.maxPlayers %> players</h3>
 		</div>
 		
 		<% if(currentUser && currentUser.auth_level === "admin"){ %>
@@ -51,6 +52,10 @@
 			<% } %>
 		</div>
 	<!-- </div> -->
+
+	<!-- variables for js -->
+<span id="minPlayers" type="number" class="hidden" name="minPlayers"><%= game.minPlayers %></span>
+<span id="maxPlayers" type="text" class="hidden" name="maxPlayers"><%= game.maxPlayers %></span>
 
 	<script type="text/javascript" src="/js/game.js"></script>
 <%- include("../partials/footer") %>

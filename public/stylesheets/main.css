@@ -128,6 +128,13 @@ h1.index{
 	-webkit-text-stroke: 2px black;
 }
 
+.img.title h3{
+	color: white;
+	font-size: 3em;
+	font-weight: bold;
+	-webkit-text-stroke: 2px black;
+}
+
 .question-mark{
 	color: darkgray;
 }

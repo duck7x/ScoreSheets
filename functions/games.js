@@ -17,10 +17,34 @@ module.exports = {
 		return image;
 	},
 	buildFields: function(req, res, count, skip, fields){
+		
+		var calcToType = {
+			"reg": "number",
+			"sets": "number",
+			"square": "number",
+			"single-checkbox": "checkbox"
+		}
+		
+		// var calcToType = {
+		// 	"number": ["reg", "sets", "square"],
+		// 	"checkbox": ["single-checkbox"]
+		// };
+		
+		// function calcToTypeFunc(calc){
+		// 	Object.entries(calcToType).forEach(function(array){
+		// 		console.log(calc);
+		// 		console.log(array);
+		// 		console.log(array[1].includes(calc));
+		// 		if(array[1].includes(calc)){return array[0]}
+		// 	});
+		// }
+		
 		for(i = 1; i <= count; i++){
 			if(skip.includes(String(i))){
 				continue;
 			}
+			
+			
 
 			let field = {};
 
@@ -28,11 +52,11 @@ module.exports = {
 			field.value = eval("req.body.fieldValue" + String(i)) ? Number(eval("req.body.fieldValue" + String(i))) : "";
 			field.setsValue = eval("req.body.fieldSetsValue" + String(i)) ? Number(eval("req.body.fieldSetsValue" + String(i))) : "";
 			field.title = eval("req.body.fieldTitle" + String(i)) ? eval("req.body.fieldTitle" + String(i)) : "";
-			field.type = eval("req.body.fieldFormType" + String(i)) ? eval("req.body.fieldFormType" + String(i)) : "";
 			field.icon = eval("req.body.fieldIcon" + String(i)) ? eval("req.body.fieldIcon" + String(i)) : "";
 			field.classesDesc = eval("req.body.fieldDescClasses" + String(i)) ? eval("req.body.fieldDescClasses" + String(i)) : "";
 			field.classesPlayer = eval("req.body.fieldPlayerClasses" + String(i)) ? eval("req.body.fieldPlayerClasses" + String(i)) : "";
 			field.calcMethod = eval("req.body.fieldCalcMethod" + String(i)) ? eval("req.body.fieldCalcMethod" + String(i)) : "";
+			field.type = calcToType[eval("req.body.fieldCalcMethod" + String(i))];
 			field.scoreTotal = eval("req.body.fieldScoreTotal" + String(i)) === "on";
 
 			fields.push(field);

@@ -1,5 +1,16 @@
 var test = "TinyLittleThingCalledLuna"
 var gamesContainer	= $(".games-container");
+var minPlayers	= Number($("#minPlayers").html()),
+	maxPlayers	= Number($("#maxPlayers").html());
+
+console.log(`minPlayers is: ${minPlayers}`);
+console.log(`maxPlayers is: ${maxPlayers}`);
+
+minPlayers = minPlayers <= 0 ? 1 : minPlayers;
+maxPlayers = maxPlayers < minPlayers ? minPlayers : maxPlayers;
+
+console.log(`minPlayers is: ${minPlayers}`);
+console.log(`maxPlayers is: ${maxPlayers}`);
 	
 // ==================================
 // FUNCTIONS
@@ -55,7 +66,9 @@ function clearScore(){
 // ==================================
 // PAGE STARTUP EXECUTIONS
 
-addPlayer();
+for(i = 0; i < minPlayers; i++){
+	addPlayer();
+}
 
 // ==================================
 // EVENTS
@@ -63,7 +76,11 @@ addPlayer();
 // Adding new player
 // pure JS
 // document.querySelector(".addPlayer").addEventListener("click", addPlayer);
-$(".addPlayer").on("click", addPlayer);
+$(".addPlayer").on("click", function(){
+	if($(".player.table").length - 1 < maxPlayers){
+		addPlayer();
+	}
+});
 
 // Changing from sets calcMethod
 
@@ -72,7 +89,9 @@ $(".clearScore").on("click", clearScore);
 
 // Delete player
 gamesContainer.on("click", ".deletePlayer", function(){
-	$(this).parent().parent().remove();
+	if($(".player.table").length - 1 > minPlayers){
+		$(this).parent().parent().remove();
+	}
 });
 
 // Unchecks everything else when a single-checkbox is checked
