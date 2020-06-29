@@ -4,6 +4,10 @@ var	popupContainer	= $(".popup-container");
 // ==================================
 // FUNCTIONS
 
+function closePopup(){
+	popupContainer.hide();
+}
+
 // ==================================
 // PAGE STARTUP EXECUTIONS
 
@@ -27,8 +31,12 @@ $(".delete-button").on("click", function(){
 	popupContainer.css("display", "flex");
 });
 
-// Hides popup window
-$(".close-popup").on("click", function(){
-	popupContainer.hide();
+// Hides popup window when clicking on "cancel" button
+$(".close-popup").on("click", closePopup);
+
+// Hides popup window when clicking on outside the popup window
+popupContainer.on("click", closePopup);
+$(".popup-window").on("click", function(e){
+	e.stopPropagation();
 });
 
