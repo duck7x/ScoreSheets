@@ -41,21 +41,23 @@ router.put("/:user", middleware.isAdmin, function(req, res){
 			// NEED BETTER ERROR HANDLING
 			console.log(err);
 			req.flash("error", "Couldn't find the user");
-			return res.redirect("/users");
-		}
-		user.username = req.body.username;
-		user.auth_level = auth_level;
-		
-		user.save(function(err){
-			if(err){
-				// NEED BETTER ERROR HANDLING
-				console.log(err);
-				req.flash("error", "Edit user failed");
-				return res.redirect("/users");
-			}
-			req.flash("success", `User ${user.username} editted successfuly`);
 			res.redirect("/users");
-		});
+		} else {
+			user.username = req.body.username;
+			user.auth_level = auth_level;
+			user.save(function(err){
+				if(err){
+					// NEED BETTER ERROR HANDLING
+					console.log(err);
+					req.flash("error", "Edit user failed");
+					res.redirect("/users");
+				} else {
+					req.flash("success", `User ${user.username} edited successfuly`);
+					res.redirect("/users");
+				}
+			});
+		}
+		
 	});
 });
 

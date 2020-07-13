@@ -76,6 +76,10 @@ body{
 	color: white;
 }
 
+.text-white{
+	color: white;
+}
+
 .clickable:hover{
 	/* background: black; */
 }
@@ -137,6 +141,11 @@ h1.index{
 	font-size: 3em;
 	font-weight: bold;
 	-webkit-text-stroke: 2px black;
+}
+
+.img.title.banner{
+	border: white solid 4px;
+	box-shadow: 6px 6px;
 }
 
 .question-mark{

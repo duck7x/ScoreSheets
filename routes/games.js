@@ -83,9 +83,10 @@ router.get("/:game/edit", middleware.isAdmin, function(req, res){
 			// NEED BETTER ERROR HANDLING
 			console.log(err);
 			req.flash("error", "Couldn't find the game");
-			return res.redirect("/games");
+			res.redirect("/games");
+		} else {
+			res.render("games/edit", {game: game, calcMethods: calcMethods, formTypes: formTypes});
 		}
-		res.render("games/edit", {game: game, calcMethods: calcMethods, formTypes: formTypes});
 	});
 });
 
@@ -107,25 +108,26 @@ router.put("/:game", middleware.isAdmin, function(req, res){
 			// NEED BETTER ERROR HANDLING
 			console.log(err);
 			req.flash("error", "Couldn't find the game");
-			return res.redirect("/games");
+			res.redirect("/games");
+		} else {
+			game.name = name;
+			game.image = image;
+			game.minPlayers = minPlayers;
+			game.maxPlayers = maxPlayers;
+			game.fields = fields;
+
+			game.save(function(err){
+				if(err){
+					// NEED BETTER ERROR HANDLING
+					console.log(err);
+					req.flash("error", "Game edit failed");
+					res.redirect("/games");
+				} else {
+					req.flash("success", `Game ${game.name} editted successfuly`);
+					res.redirect(`/games/${game._id}`);
+				}
+			});
 		}
-		
-		game.name = name;
-		game.image = image;
-		game.minPlayers = minPlayers;
-		game.maxPlayers = maxPlayers;
-		game.fields = fields;
-		
-		game.save(function(err){
-			if(err){
-				// NEED BETTER ERROR HANDLING
-				console.log(err);
-				req.flash("error", "Game edit failed");
-				return res.redirect("/games");
-			}
-			req.flash("success", `Game ${game.name} editted successfuly`);
-			res.redirect(`/games/${game._id}`);
-		});
 	});
 });
 
