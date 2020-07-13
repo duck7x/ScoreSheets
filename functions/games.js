@@ -28,7 +28,7 @@ module.exports = {
 		skip += ","
 		
 		for(i = 1; i <= count; i++){
-			if(skip.includes(`,String(i),`)){
+			if(skip.includes(`,${String(i)},`)){
 				continue;
 			}
 
