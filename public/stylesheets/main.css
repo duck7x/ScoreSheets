@@ -64,6 +64,10 @@ body{
 	text-align: center;
 }
 
+.text-left{
+	text-align: left;
+}
+
 .clickable{
 	cursor: pointer;
 }
@@ -169,4 +173,40 @@ h1.index{
 img.mediaManagement{
 	height: 20em;
 	width: 20em;
+}
+
+.gray-container {
+	padding: 10px;
+	border: white 2px solid;
+	background: #3d3d3d;
+	color: white;
+	width: 50em;
+}
+
+.gray-container.about {
+	font-size: 1.1em;
+}
+
+.text-box{
+	/* height: 20rem;
+	width: 40rem; */
+	/* float: left; */
+	border: white 1px solid;
+	background: #3d3d3d;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	/* margin: 0 auto; */
+	/* box-shadow: 2px 2px, inset 5px 5px 10px rgba(255, 255, 255, 0.2); */
+	box-shadow: 2px 2px;
+	padding: 5px;
+	/* margin-right: 5px; */
+	margin-right: 5px;
+	margin-bottom: 10px;
+	/* margin-top: -12px;
+	margin-left: -12px; */
+}
+
+.text-box:hover{
+	background: #0d0d0d;
 }

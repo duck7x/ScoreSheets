@@ -2,8 +2,8 @@ var express	= require("express"),
 	router	= express();
 
 router.get("/", function(req, res){
-	// res.render("about/index");
-	res.send("This will be the about page!");
+	res.render("about/index");
+	// res.send("This will be the about page!");
 });
 
 router.get("/edit", function(req, res){

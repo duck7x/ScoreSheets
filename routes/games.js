@@ -31,58 +31,6 @@ router.get("/new", middleware.isAdmin, function(req, res){
 // CREATE - actually add a new game
 router.post("/", middleware.isAdmin, function(req, res){
 // router.post("/", function(req, res){
-	// ADDING EXTERNAL FUNCTIONS INSTEAD OF THIS:
-	// var name		= req.body.name,
-	// 	image		= req.body.image,
-	// 	minPlayers	= req.body.minPlayers,
-	// 	maxPlayers	= req.body.maxPlayers,
-	// 	fields		= [],
-	// 	// field		= {},
-	// 	count		= req.body.count,
-	// 	skip		= req.body.skip;
-		
-	// // name: String, fieldName
-	// // value: Number, fieldValue
-	// // title: String, fieldTitle
-	// // type: String, fieldFormType
-	// // icon: String, fieldIcon
-	// // classesDesc: String, fieldDescClasses
-	// // classesPlayer: String, fieldPlayerClasses
-	// // calcMethod: String, fieldCalcMethod
-	// // scoreTotal: Boolea, fieldScoreTotal
-	
-	// if(req.body.upload){
-	// 	var imageName = name.toLowerCase().replace(/ /g, "-"),
-	// 		imageType = image.split(".").slice(-1);
-	// 	exec(`wget ${image} -O public/media/${imageName}.${imageType}`, function(err, stdout, stderr){
-	// 		if(err){
-	// 			// NEED BETTER ERROR HANDLING
-	// 			req.flash("error", "failed to upload game image");
-	// 			console.log(err);
-	// 		}
-	// 	});
-	// 	image = `/media/${imageName}.${imageType}`;
-	// }
-	
-	// for(i = 1; i <= count; i++){
-	// 	if(skip.includes(String(i))){
-	// 		continue;
-	// 	}
-		
-	// 	let field = {};
-		
-	// 	field.name = eval("req.body.fieldName" + String(i)) ? eval("req.body.fieldName" + String(i)) : "";
-	// 	field.value = eval("req.body.fieldValue" + String(i)) ? Number(eval("req.body.fieldValue" + String(i))) : "";
-	// 	field.title = eval("req.body.fieldTitle" + String(i)) ? eval("req.body.fieldTitle" + String(i)) : "";
-	// 	field.type = eval("req.body.fieldFormType" + String(i)) ? eval("req.body.fieldFormType" + String(i)) : "";
-	// 	field.icon = eval("req.body.fieldIcon" + String(i)) ? eval("req.body.fieldIcon" + String(i)) : "";
-	// 	field.classesDesc = eval("req.body.fieldDescClasses" + String(i)) ? eval("req.body.fieldDescClasses" + String(i)) : "";
-	// 	field.classesPlayer = eval("req.body.fieldPlayerClasses" + String(i)) ? eval("req.body.fieldPlayerClasses" + String(i)) : "";
-	// 	field.calcMethod = eval("req.body.fieldCalcMethod" + String(i)) ? eval("req.body.fieldCalcMethod" + String(i)) : "";
-	// 	field.scoreTotal = eval("req.body.fieldScoreTotal" + String(i)) === "on";
-		
-	// 	fields.push(field);
-	// }
 	
 	var name		= req.body.name,
 		image		= req.body.image,
@@ -113,12 +61,10 @@ router.post("/", middleware.isAdmin, function(req, res){
 		}
 	});
 
-	// res.send("You've requested to add a game, nice!");
 });
 
 // SHOW - display each individual game
 router.get("/:game", function(req, res){
-	// res.send("So you wanna calculate the score for " + req.params.game + ", eh?!");
 	Game.findById(req.params.game).exec(function(err, game){
 		if(err){
 			// NEED BETTER ERROR HANDLING
@@ -145,7 +91,6 @@ router.get("/:game/edit", middleware.isAdmin, function(req, res){
 
 // UPDATE - actually edits the game
 router.put("/:game", middleware.isAdmin, function(req, res){
-	// res.send("You tried editting a game, good for you!");
 	
 	var name		= req.body.name,
 		image		= req.body.image,
@@ -156,58 +101,6 @@ router.put("/:game", middleware.isAdmin, function(req, res){
 		skip		= req.body.skip;
 	image = gameFunctions.uploadImage(req, res, name, image);
 	fields = gameFunctions.buildFields(req, res, count, skip, fields);
-	
-	// name: String, fieldName
-	// value: Number, fieldValue
-	// title: String, fieldTitle
-	// type: String, fieldFormType
-	// icon: String, fieldIcon
-	// classesDesc: String, fieldDescClasses
-	// classesPlayer: String, fieldPlayerClasses
-	// calcMethod: String, fieldCalcMethod
-	// scoreTotal: Boolea, fieldScoreTotal;
-	
-	// if(req.body.upload){
-	// 	var imageName = name.toLowerCase().replace(/ /g, "-"),
-	// 		imageType = image.split(".").slice(-1);
-	// 	exec(`wget ${image} -O public/media/${imageName}.${imageType}`, function(err, stdout, stderr){
-	// 		if(err){
-	// 			// NEED BETTER ERROR HANDLING
-	// 			req.flash("error", "failed to upload game image");
-	// 			console.log(err);
-	// 		}
-	// 	});
-	// 	image = `/media/${imageName}.${imageType}`;
-	// }
-	
-	// for (i = 1; i <= count; i++){
-	// 	if(skip.includes(String(i))){
-	// 		continue;
-	// 	}
-		
-	// 	let field = {};
-		
-	// 	field.name = eval("req.body.fieldName" + String(i)) ? eval("req.body.fieldName" + String(i)) : "";
-	// 	field.value = eval("req.body.fieldValue" + String(i)) ? Number(eval("req.body.fieldValue" + String(i))) : "";
-	// 	field.title = eval("req.body.fieldTitle" + String(i)) ? eval("req.body.fieldTitle" + String(i)) : "";
-	// 	field.type = eval("req.body.fieldFormType" + String(i)) ? eval("req.body.fieldFormType" + String(i)) : "";
-	// 	field.icon = eval("req.body.fieldIcon" + String(i)) ? eval("req.body.fieldIcon" + String(i)) : "";
-	// 	field.classesDesc = eval("req.body.fieldDescClasses" + String(i)) ? eval("req.body.fieldDescClasses" + String(i)) : "";
-	// 	field.classesPlayer = eval("req.body.fieldPlayerClasses" + String(i)) ? eval("req.body.fieldPlayerClasses" + String(i)) : "";
-	// 	field.calcMethod = eval("req.body.fieldCalcMethod" + String(i)) ? eval("req.body.fieldCalcMethod" + String(i)) : "";
-	// 	field.scoreTotal = eval("req.body.fieldScoreTotal" + String(i)) === "on";
-		
-	// 	fields.push(field);
-		
-	// }
-	
-	// var newGame = {
-	// 	name: name,
-	// 	image: image,
-	// 	minPlayers: minPlayers,
-	// 	maxPlayers: maxPlayers,
-	// 	fields: fields
-	// }
 	
 	Game.findById(req.params.game, function(err, game){
 		if(err){
@@ -249,7 +142,6 @@ router.delete("/:game/delete", middleware.isAdmin, function(req, res){
 			res.redirect("/games");
 		}
 	})
-	// res.send("You're gonna delete " + req.params.game + "!!!");
 });
 
 module.exports = router;

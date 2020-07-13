@@ -25,26 +25,12 @@ module.exports = {
 			"single-checkbox": "checkbox"
 		}
 		
-		// var calcToType = {
-		// 	"number": ["reg", "sets", "square"],
-		// 	"checkbox": ["single-checkbox"]
-		// };
-		
-		// function calcToTypeFunc(calc){
-		// 	Object.entries(calcToType).forEach(function(array){
-		// 		console.log(calc);
-		// 		console.log(array);
-		// 		console.log(array[1].includes(calc));
-		// 		if(array[1].includes(calc)){return array[0]}
-		// 	});
-		// }
+		skip += ","
 		
 		for(i = 1; i <= count; i++){
-			if(skip.includes(String(i))){
+			if(skip.includes(`,String(i),`)){
 				continue;
 			}
-			
-			
 
 			let field = {};
 

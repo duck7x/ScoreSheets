@@ -1,0 +1,92 @@
+<%- include("../partials/header") %>
+
+<div class="main-container container">
+
+	
+	<h2 class="text-center">About the Project</h2>
+	<div class="center">
+		<div class="gray-container text-left about">
+			ScoreSheets improve the experience of board games. It saves time and paper. <br>
+			With a simple and intuitive interface, you can easily and quickly calculate the score at the end of a game. <br>
+			
+		</div>
+	</div>
+	<!-- <i class="trash alternate icon"></i><span class="clickable addPlayer btn center"><i class="user plus icon"></i></span> -->
+	<h2 class="center">How to Use</h2>
+	<div class="center">
+		<div class="gray-container text-left about">
+			<p>
+				To use ScoreSheets you don't need to sign up or anything. Simply go to the <a href="/" class="clickable white"><strong>home page</strong></a> and 
+				select the game you've just played (or the one you're about to play).
+			</p>
+			<p>
+				 Once you've selected your game, you'll be redirected to that game's page. You'll see a table, where the left column is a list of all parameters required to calculate the game's score. Each other column 
+				represents a player.
+			</p>
+			<p>
+				Each game has a minimum and maximum amount of players, as written on the game box. By default, the table will consist enough columns for the <em>minimum</em> amount of players required to play the game.
+			</p>
+			<p>
+				If you need to add any more players, simply click on the <i class="user plus icon"></i>
+				icon on the left (above the left-most column). For each click, a new column will be added to the table.
+			</p>
+			<p>
+				<em>* Please note that you cannot add more players than the maximum of players allowed for the game</em>
+			</p>
+			<p>
+				In case you ever want to remove a column, simply hover over it. Once you do, on the bottom of the column will appear the 
+				<i class="trash alternate icon"></i> icon with a red background. Clicking on that will <strong>immedietly</strong> 
+				remove the column.
+			</p>
+			<p>
+				Once you have all your players set, simply fill the table with all the paramaters. The app will take care of the rest and 
+				calculate your final score as you type everything in.
+			</p>
+		</div>
+	</div>
+	
+	<h2 class="center">The Backend</h2>
+	<div class="center">
+		<div class="gray-container text-left about">
+			<p>
+				A big part of this application, is the administrative backend. It's a bit of a shame that no one but me gets to see and use it, 
+				but it was very important to me to create a simple interface which will allow me to add new games in the quickest, most efficient way.
+			</p>
+			<p>
+				The admin interface allows administrative users to add, delete and edit games - all through the web app. It also allows us to easily manage 
+				other users.
+			</p>
+		</div>
+	</div>
+	
+	<h2 class="center">Behind the Scenes</h2>
+	<div class="container center">
+		<span class="text-box">CSS</span> 
+		<span class="text-box">HTML</span> 
+		<span class="text-box">MongoDB</span> 
+		<span class="text-box">JavaScript</span> 
+		<span class="text-box">JQuery</span> 
+		<span class="text-box">NodeJS</span> 
+		<span class="text-box">Express</span> 
+		<span class="text-box">Passport</span> 
+		<span class="text-box">Semantic UI</span> 
+		<span class="text-box">Goorm</span> 
+		<span class="text-box">Heroku</span> 
+		<span class="text-box">MongoDB Atlas</span> 
+	</div>
+	<div class="center">
+		<div class="gray-container text-left about">
+			<p>
+				ScoreSheets is a web application, written in html and JavaScript. Since this is not a production application, it uses <em>awesome</em> free tools
+				such as <strong>Goorm</strong> for developing enviroment and <strong>Heroku</strong> and <strong>MongoDB Atlas</strong> for running the application.
+			</p>
+			<p>
+				The server-side is a NodeJS app, built on the Express module. We also use the Passport module for the users architecture.
+			</p>
+			<p>
+				Most of the CSS used in the app is original, but we do use Semantic UI for better design and flexibility.
+			</p>
+		</div>
+	</div>
+
+<%- include("../partials/footer") %>
