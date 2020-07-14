@@ -1,5 +1,6 @@
 body{
-	background: gray;
+	/* background: gray; */
+	background: #65ad7b;
 }
 
 .popup-container{
@@ -28,8 +29,10 @@ body{
 }
 
 .header{
-	background-color: #545454;
+	/* background-color: #545454; */
+	background-color: #2f633f;
 	padding: 5px;
+	padding-top: 10px;
 	text-align: center;
 	color: black;
 	border-bottom: 4px solid #303030;
@@ -146,6 +149,7 @@ h1.index{
 .img.title.banner{
 	border: white solid 4px;
 	box-shadow: 6px 6px;
+	margin-bottom: 10px;
 }
 
 .question-mark{
