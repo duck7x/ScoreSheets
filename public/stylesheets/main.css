@@ -171,6 +171,33 @@ h1.index{
 	margin-left: 20px;
 }
 
+.explanation.show-page{
+	background-color: #9c9c9c;
+	border: white 2px solid;
+	color: black;
+	font-weight: bold;
+	/* width: fit-content; */
+	height: fit-content;
+	/* font-size: 0.9rem; */
+	padding: 0.3em;
+	display: none;
+	position: absolute;
+	margin-top: 0px;
+	margin-left: -155px;
+	/* margin-right: -130px; */
+	/* transform: translateX(-50px); */
+	/* max-width: 150px; */
+	width: 150px;
+	text-align: center;
+}
+
+.align-left{
+	display: flex;
+	align-content: right;
+	align-items: right;
+	text-align: right;
+}
+
 .popup-window.image-preview{
 	background-size: cover;
 	background-position: center;

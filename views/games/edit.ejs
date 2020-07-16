@@ -140,6 +140,19 @@
 						</span>
 						 <br>
 						
+						<!-- DESC: hover content -->
+						<span class="fieldDescription-container">
+							<span class="question-mark" name="fieldDescription">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldDescription">
+								Description that will be displayed when hovering over the field
+							</span> 
+							<label name="fieldDescription">Field description:</label> 
+							<input class="field-input" type="text" name="fieldDescription" placeholder="field description">
+						</span>
+						<br>
+						
 						<!-- DESC: css classes -->
 						<span class="fieldDescClasses-container">
 							<span class="question-mark" name="fieldDescClasses">
@@ -314,6 +327,19 @@
 							</span> 
 							<label name="fieldUpload<%= count %>">Upload?</label> 
 							<input class="field-input" type="checkbox" name="fieldUpload<%= count %>">
+						</span>
+						<br>
+						
+						<!-- DESC: hover content -->
+						<span class="fieldDescription-container">
+							<span class="question-mark" name="fieldDescription<%= count %>">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldDescription<%= count %>">
+								Description that will be displayed when hovering over the field
+							</span> 
+							<label name="fieldDescription<%= count %>">Field description:</label> 
+							<input class="field-input" type="text" name="fieldDescription<%= count %>" placeholder="field description" <% if(field.description){ %> value="<%= field.description %>" <% } %>>
 						</span>
 						<br>
 						

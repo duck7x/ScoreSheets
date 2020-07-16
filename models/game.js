@@ -12,10 +12,11 @@ var gameSchema = new mongoose.Schema({
 	// 	title: String,
 	// 	type: String,
 	// 	icon: String,
+	// 	description: String,
 	// 	classesDesc: String,
 	// 	classesPlayer: String,
-	// calcMethod: String,
-	// scoreTotal: Boolean
+	// 	calcMethod: String,
+	// 	scoreTotal: Boolean
 	// }]
 });
 

@@ -39,6 +39,7 @@ module.exports = {
 			field.setsValue = eval("req.body.fieldSetsValue" + String(i)) ? Number(eval("req.body.fieldSetsValue" + String(i))) : "";
 			field.title = eval("req.body.fieldTitle" + String(i)) ? eval("req.body.fieldTitle" + String(i)) : "";
 			field.icon = eval("req.body.fieldIcon" + String(i)) ? eval("req.body.fieldIcon" + String(i)) : "";
+			field.description = eval("req.body.fieldDescription" + String(i)) ? eval("req.body.fieldDescription" + String(i)) : "";
 			field.classesDesc = eval("req.body.fieldDescClasses" + String(i)) ? eval("req.body.fieldDescClasses" + String(i)) : "";
 			field.classesPlayer = eval("req.body.fieldPlayerClasses" + String(i)) ? eval("req.body.fieldPlayerClasses" + String(i)) : "";
 			field.calcMethod = eval("req.body.fieldCalcMethod" + String(i)) ? eval("req.body.fieldCalcMethod" + String(i)) : "";

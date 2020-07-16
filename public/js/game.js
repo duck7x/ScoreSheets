@@ -113,6 +113,18 @@ gamesContainer.on("change", ".single-checkbox>input", function(){
 // Calculate score on input change
 gamesContainer.on("change", ".scoreParameter>input", scoreCalculator);
 
+// Displays explanation when hovering a field
+gamesContainer.on("mouseenter", ".field-cell", function(){
+	let name = $(this).attr("id");
+	$(`.explanation[name="${name}"]`).css("display", "flex");
+});
+
+// Removes explanation when unhovering a field
+gamesContainer.on("mouseleave", ".field-cell", function(){
+	let name = $(this).attr("id");
+	$(`.explanation[name="${name}"]`).css("display", "none");
+});
+
 
 // ==================================
 // NOTES FOR ME, WILL BE DELETED
