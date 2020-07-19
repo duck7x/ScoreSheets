@@ -1,7 +1,9 @@
 <%- include("../partials/header") %>
-	<form action="/register" method="POST">
-		<label name="username">Username:</label><input type="text" placeholder="Username" name="username" required>	
-		<label name="password">Password:</label><input type="password" placeholder="Password" name="password" required>	
-		<input type="submit" value="register">
-	</form>
+	<div class="users-container center">
+		<form action="/register" method="POST">
+			<label name="username">Username:</label><input class="padding" type="text" placeholder="Username" name="username" required><br>
+			<label name="password">Password:</label><input class="padding" type="password" placeholder="Password" name="password" required><br>
+			<input class="ui black tiny button margin-center" type="submit" value="register">
+		</form>
+	</div>
 <%- include("../partials/footer") %>

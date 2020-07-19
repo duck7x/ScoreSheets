@@ -15,3 +15,16 @@ button{
 	background: transparent;
 	border-color: transparent;
 }
+
+.users-container{
+	padding: 10px;
+}
+
+input.padding{
+	margin: 3px;
+}
+
+.margin-center, .ui.button.margin-center{
+	display: block;
+	margin: auto;
+}
