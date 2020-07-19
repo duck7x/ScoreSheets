@@ -1,5 +1,9 @@
 var test = "TinyLittleThingCalledLuna"
-var gamesContainer	= $(".games-container");
+var gamesContainer				= $(".games-container"),
+	popupContainer				= $(".popup-container"),
+	popupText					= $(".popup-content>h1"),
+	popupDeleteButtons			= $(".delete-popup-buttons"),
+	popupNotificationButtons	= $(".notification-popup-buttons");
 var minPlayers	= Number($("#minPlayers").html()),
 	maxPlayers	= Number($("#maxPlayers").html());
 
@@ -63,6 +67,24 @@ function clearScore(){
 	$(".total").text("");
 }
 
+// Edits popup window
+function popupWindowEdit(text){
+	if(!popupDeleteButtons.hasClass("hidden")){
+		popupDeleteButtons.addClass("hidden");
+	}
+	popupNotificationButtons.removeClass("hidden");
+	popupText.text(text);
+	// $(".delete-form").attr("action", $(this).attr("object-action"));
+	// $(".delete-object-name").text($(this).attr("object-name"));
+	// }
+	
+};
+
+// Shows popup window
+function popupWindowDisplay(){
+	popupContainer.css("display", "flex");
+}
+
 // ==================================
 // PAGE STARTUP EXECUTIONS
 
@@ -79,6 +101,9 @@ for(i = 0; i < minPlayers; i++){
 $(".addPlayer").on("click", function(){
 	if($(".player.table").length - 1 < maxPlayers){
 		addPlayer();
+	} else {
+		popupWindowDisplay();
+		popupWindowEdit(`This game cannot be played with more than ${maxPlayers} players`);
 	}
 });
 
@@ -91,6 +116,9 @@ $(".clearScore").on("click", clearScore);
 gamesContainer.on("click", ".deletePlayer", function(){
 	if($(".player.table").length - 1 > minPlayers){
 		$(this).parent().parent().remove();
+	} else {
+		popupWindowDisplay();
+		popupWindowEdit(`This game requires at least ${minPlayers} players`);
 	}
 });
 

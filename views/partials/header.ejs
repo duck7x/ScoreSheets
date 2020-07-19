@@ -45,10 +45,17 @@
 		
 		<div class="popup-container">
 			<div class="popup-window">
-				<form class="delete-form" action="/users" method="POST">
+				<div class="popup-content">
 					<h1>Are you sure you want to delete <span class="delete-object-name"></span>?</h1>
-					<button class="ui red button confirm-delete-button">Delete</button> <span class="close-popup ui gray button">Cancel</span>
-				</form>
+					<div class="delete-popup-buttons">
+							<form class="delete-form" action="/users" method="POST">
+								<button class="ui red button confirm-delete-button">Delete</button> <span class="close-popup ui gray button">Cancel</span>
+							</form>
+					</div>
+					<div class="notification-popup-buttons hidden">
+							<button class="big ui green button confirm-delete-button close-popup">Okay</button>
+					</div>
+				</div>
 			</div>
 		</div>
 		
