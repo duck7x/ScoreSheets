@@ -7,14 +7,8 @@ var gamesContainer				= $(".games-container"),
 var minPlayers	= Number($("#minPlayers").html()),
 	maxPlayers	= Number($("#maxPlayers").html());
 
-console.log(`minPlayers is: ${minPlayers}`);
-console.log(`maxPlayers is: ${maxPlayers}`);
-
 minPlayers = minPlayers <= 0 ? 1 : minPlayers;
 maxPlayers = maxPlayers < minPlayers ? minPlayers : maxPlayers;
-
-console.log(`minPlayers is: ${minPlayers}`);
-console.log(`maxPlayers is: ${maxPlayers}`);
 	
 // ==================================
 // FUNCTIONS
@@ -55,8 +49,6 @@ function scoreCalculator(element, calcField){
 	});
 	
 	totalHtml.text(totalScore);
-	console.log("column is");
-	console.log(column);
 }
 
 // 
@@ -64,6 +56,7 @@ function scoreCalculator(element, calcField){
 // Clear score
 function clearScore(){
 	$(".scoreParameter").children().val("");
+	$(".scoreParameter").children("[type=checkbox]").prop("checked", false);
 	$(".total").text("");
 }
 
