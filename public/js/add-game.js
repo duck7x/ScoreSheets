@@ -7,7 +7,7 @@ var fieldsContainer 			= $(".fields-container"),
 	generalCheckboxTemplate		= $("#generalCheckbox-template"),
 	AddClassTemplate			= $("#addClass-template"),
 	multipleFieldsTemplate		= $("#multipleFields-template"),
-	multipleFieldsSetsTemplate	= $("#multipleFieldsSets-template"),
+	multipleFieldsSetsTemplate	= $("#fieldMultipleFieldsSets-template"),
 	mainContainer				= $(".container"),
 	popupImagePrev				= $(".popup-container.image-preview");
 
