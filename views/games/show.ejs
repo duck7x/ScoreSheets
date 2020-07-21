@@ -19,37 +19,66 @@
 		<% } %>
 	</div>
 
-
-
 	<!-- <div class="container"> -->
 		<div class="games-container">
+			
+			<div class="aboveTable-container container center">
+				<span class="clickable addPlayer btn center"><i class="user plus icon"></i></span>
+				<span class="clickable clearScore btn center">clear</span>
+				<% game.fields.forEach(function(field){ %>
+				<% if(field.calcMethod === "general-checkbox"){ %>
+					<span id="<%= field.name %>" class="aboveTable field-cell general-checkbox <%= field.generalCheckboxFunctionality %> <%= field.classesDesc %>" name="<%= field.name %>">
+						<%= field.title %> 
+						<% if(field.description){ %>
+							<span class="explanation show-page" name="<%= field.name %>">
+								<%= field.description %>
+							</span> 
+						<% } %>
+						<input type="<%= field.type %>">
+						<% if(field.removeClass){ %>
+							<span class="remove-class hidden" name="<% field.name %>"><%= field.removeClass %></span>
+						<% } %>
+						<% if(field.addClass){ %>
+							<span class="add-class hidden" name="<% field.name %>"><%= field.addClass %></span>
+						<% } %>
+						<% if(field.addFields){ %>
+							<span class="add-fields hidden" name="<% field.name %>"><%= field.addFields %></span>
+						<% } %>
+					</span>
+
+				<% } %>
+				<% }); %>
+			</div>
+			
 			<% if(game.fields){ %>
 				<!-- TEMPLATE TABLE -->
 				<div id="template" class="table template">
 					<div class="player table">
 						<ul>
-							<li class="empty"></li>
+							<!-- <li class="empty"></li> -->
 							<li class="center" name="playerName"><input type="text" name=""></li>
 							<% game.fields.forEach(function(field){ %>
-								<li class="scoreParameter <%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %>" name="<%= field.name %>" value="<%= field.value %>" setsValue="<%= field.setsValue %>"><input type="<%= field.type %>" name=""></li>
+								<% if(field.calcMethod === "general-checkbox"){ return; } %>
+								<li class="scoreParameter <%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %>" name="<%= field.name %>" value="<%= field.value %>" setsValue="<%= field.setsValue %>"><input type="<%= field.type %>" name=""<% if(field.calcMethod === "multiple-fields"){ %> disabled<% } %>><span class="hidden"><% field.multipleFieldsRelevantFields %></span></li>
 							<% }); %>
 							<li class="total center" name="total"></li>
 							<li class="deletePlayer center clickable" name="delete"><i class="trash alternate icon"></i></li>
 						</ul>
 					</div>
 				</div>
-
+			
 				<!-- DESC TABLE -->
 				<div id="desc" class="table">
 					<ul>
-						<li class="empty"><span class="clickable addPlayer btn center"><i class="user plus icon"></i></span><span class="clickable clearScore btn center">clear</span></li>
+						<!-- <li class="empty"><span class="clickable addPlayer btn center"><i class="user plus icon"></i></span><span class="clickable clearScore btn center">clear</span></li> -->
 						<li class="center">Player</li>
 						<% game.fields.forEach(function(field){ %>
-								<% if(field.description){ %>
-									<span class="explanation show-page" name="<%= field.name %>">
-										<%= field.description %>
-									</span> 
-								<% } %>
+							<% if(field.calcMethod === "general-checkbox"){ return; } %>
+							<% if(field.description){ %>
+								<span class="explanation show-page" name="<%= field.name %>">
+									<%= field.description %>
+								</span> 
+							<% } %>
 							<li id="<%= field.name %>" class="field-cell <%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesDesc %>" alt="<%= field.value %>"><% if(field.icon){ %> <img src="field.icon"> <% } %> <%= field.title %></li>
 						<% }); %>
 					</ul>

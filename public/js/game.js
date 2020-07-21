@@ -51,6 +51,13 @@ function scoreCalculator(element, calcField){
 	totalHtml.text(totalScore);
 }
 
+function scoreCalculatorAll(){
+	let players = $(".player.table").slice(1);
+	players.each(function(){
+		scoreCalculator($(this), $(this).children().children().children());
+	});
+}
+
 // 
 
 // Clear score
@@ -76,6 +83,20 @@ function popupWindowEdit(text){
 // Shows popup window
 function popupWindowDisplay(){
 	popupContainer.css("display", "flex");
+}
+
+// general-checkbox addClass type functionality
+function generaclCheckboxAddClass(check, add, remove, fields){
+	if(check === "unchecked"){
+		[add, remove] = [remove, add];
+	}
+	fields.forEach(function(field){
+		let selectedField = $(`li[name='${field}'],li#${field}`);
+		selectedField.addClass(add);
+		selectedField.removeClass(remove);
+	})
+	
+	scoreCalculatorAll();
 }
 
 // ==================================
@@ -146,6 +167,15 @@ gamesContainer.on("mouseleave", ".field-cell", function(){
 	$(`.explanation[name="${name}"]`).css("display", "none");
 });
 
+// Triggers general-checkbox effects with add-class functionality
+gamesContainer.on("change", ".general-checkbox.add-class>input", function(){
+	let check	= $(this).prop("checked") ? "checked" : "unchecked",
+		add		= $(this).nextAll(".add-class").text(),
+		remove	= $(this).nextAll(".remove-class").text(), 
+		fields	= $(this).nextAll(".add-fields").text().split(" ");
+	
+	generaclCheckboxAddClass(check, add, remove, fields);
+});
 
 // ==================================
 // NOTES FOR ME, WILL BE DELETED

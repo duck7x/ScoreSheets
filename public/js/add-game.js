@@ -1,11 +1,15 @@
-var test	= "Timon's in the kalax - CUTE";
+var test	= "Timon's in the kalax - CUTE",
 	count	= $("#fields-count").val(),
 	skip	= "";
-var fieldsContainer 	= $(".fields-container"),
-	fieldTemplate		= $("#field-template"),
-	setsValueTemplate	= $("#sets-template"),
-	mainContainer		= $(".container"),
-	popupImagePrev		= $(".popup-container.image-preview");
+var fieldsContainer 			= $(".fields-container"),
+	fieldTemplate				= $("#field-template"),
+	setsValueTemplate			= $("#sets-template"),
+	generalCheckboxTemplate		= $("#generalCheckbox-template"),
+	AddClassTemplate			= $("#addClass-template"),
+	multipleFieldsTemplate		= $("#multipleFields-template"),
+	multipleFieldsSetsTemplate	= $("#multipleFieldsSets-template"),
+	mainContainer				= $(".container"),
+	popupImagePrev				= $(".popup-container.image-preview");
 
 // ==================================
 // FUNCTIONS
@@ -22,6 +26,16 @@ function addField(){
 	// $(".remove-field").last().val(count);
 		$(".remove-field").last().attr("value", count);
 	});
+}
+
+function removeSpecialCalcFields(element){
+	element.parent().siblings(".fieldSetsValue-container").remove();
+	element.parent().siblings(".fieldGeneralCheckbox-container").remove();
+	element.parent().siblings(".fieldRemoveClass-container").remove();
+	element.parent().siblings(".fieldAddClass-container").remove();
+	element.parent().siblings(".fieldAddFields-container").remove();
+	element.parent().siblings(".fieldMultipleFieldsMethod-container").remove();
+	element.parent().siblings(".fieldMultipleFieldsRelevantFields-container").remove();
 }
 
 // Adding setsValue
@@ -78,10 +92,11 @@ $(".open-popup").on("click", function(){
 	popupImagePrev.css("display", "flex");
 });
 
-// Changing to sets calcMethod
+// Changing to sets, general-checkbox or multiple-fields calcMethod
 mainContainer.on("change", ".fieldCalcMethod", function(){
 	let valueContainer = $(this).parent().siblings(".fieldValue-container");
 	let fieldNum = $(this).attr("name").substr(-1);
+	removeSpecialCalcFields($(this));
 	if($(this).val() === "sets"){
 		valueContainer.after(setsValueTemplate.html());
 		valueContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
@@ -89,8 +104,33 @@ mainContainer.on("change", ".fieldCalcMethod", function(){
 				return val + fieldNum;
 			});
 		});
+	} else if($(this).val() === "general-checkbox"){
+		// At the moment there's only one functionality to general-checkbox, when there'll be multiple options this will be changed
+		valueContainer.after(AddClassTemplate.html());
+		valueContainer.after(generalCheckboxTemplate.html());
+		valueContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
+	} else if($(this).val() === "multiple-fields"){
+		valueContainer.after(multipleFieldsTemplate.html());
+	}
+});
+
+// Changing the multiple-fields calcMethod to setsValueTemplate
+mainContainer.on("change", ".fieldMultipleFieldsMethod", function(){
+	let valueContainer = $(this).parent().siblings(".fieldValue-container");
+	let fieldNum = $(this).attr("name").substr(-1);
+	if($(this).val() === "sets"){
+		valueContainer.after(multipleFieldsSetsTemplate.html());
+		valueContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
 	} else {
-		$(this).parent().siblings(".fieldSetsValue-container").remove();
+		$(this).parent().siblings(".fieldMultipleFieldsSets-container").remove();
 	}
 });
 

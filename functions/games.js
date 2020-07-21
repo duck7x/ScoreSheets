@@ -22,7 +22,9 @@ module.exports = {
 			"reg": "number",
 			"sets": "number",
 			"square": "number",
-			"single-checkbox": "checkbox"
+			"single-checkbox": "checkbox",
+			"general-checkbox": "checkbox",
+			"multiple-fields": "disabled"
 		}
 		
 		skip += ","
@@ -37,6 +39,13 @@ module.exports = {
 			field.name = eval("req.body.fieldName" + String(i)) ? eval("req.body.fieldName" + String(i)) : "";
 			field.value = eval("req.body.fieldValue" + String(i)) ? Number(eval("req.body.fieldValue" + String(i))) : "";
 			field.setsValue = eval("req.body.fieldSetsValue" + String(i)) ? Number(eval("req.body.fieldSetsValue" + String(i))) : "";
+			field.removeClass = eval("req.body.fieldRemoveClass" + String(i)) ? eval("req.body.fieldRemoveClass" + String(i)) : "";
+			field.addClass = eval("req.body.fieldAddClass" + String(i)) ? eval("req.body.fieldAddClass" + String(i)) : "";
+			field.addFields = eval("req.body.fieldAddFields" + String(i)) ? eval("req.body.fieldAddFields" + String(i)) : "";
+			field.generalCheckboxFunctionality = eval("req.body.fieldGeneralCheckboxFunctionality" + String(i)) ? eval("req.body.fieldGeneralCheckboxFunctionality" + String(i)) : "";
+			field.multipleFieldsMethod = eval("req.body.fieldMultipleFieldsMethod" + String(i)) ? eval("req.body.fieldMultipleFieldsMethod" + String(i)) : "";
+			field.multipleFieldsSets = eval("req.body.fieldMultipleFieldsSets" + String(i)) ? eval("req.body.fieldMultipleFieldsSets" + String(i)) : "";
+			field.multipleFieldsRelevantFields = eval("req.body.fieldMultipleFieldsRelevantFields" + String(i)) ? eval("req.body.fieldMultipleFieldsRelevantFields" + String(i)) : "";
 			field.title = eval("req.body.fieldTitle" + String(i)) ? eval("req.body.fieldTitle" + String(i)) : "";
 			field.icon = eval("req.body.fieldIcon" + String(i)) ? eval("req.body.fieldIcon" + String(i)) : "";
 			field.description = eval("req.body.fieldDescription" + String(i)) ? eval("req.body.fieldDescription" + String(i)) : "";

@@ -250,3 +250,7 @@ img.mediaManagement{
 .text-box:hover{
 	background: #0d0d0d;
 }
+
+.aboveTable-container{
+	margin-top: 20px;
+}

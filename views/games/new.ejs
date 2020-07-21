@@ -242,6 +242,115 @@
 				</span>
 			</div>
 			
+			<div id="generalCheckbox-template" class="template">
+				<!-- A checkbox will appear above players table -->
+				<span class="fieldGeneralCheckbox-container">
+					<br>
+					<span class="question-mark" name="fieldGeneralCheckbox">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldGeneralCheckbox">
+						The functionality of the general checkbox
+					</span> 
+					<label name="fieldgeneralCheckbox">Functionality:</label> 
+					<select class="field-input generalCheckboxFunctionality" name="fieldGeneralCheckboxFunctionality">
+						<% generalCheckboxFunctionalities.forEach(function(functionality){ %>
+							<option value="<%= functionality %>"><%= functionality %></option>
+						<% }) %>
+					</select>
+				</span>
+			</div>
+			
+			<div id="addClass-template" class="template">
+				<!-- Classes to be removed to playes cells -->
+				<span class="fieldRemoveClass-container">
+					<br>
+					<span class="question-mark" name="fieldRemoveClass">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldRemoveClass">
+						Removes a class(es) to specific field(s). If you want to add more than one class, separate it with a space.
+					</span> 
+					<label name="fieldRemoveClass">Class(es) to remove:</label> 
+					<input class="field-input" type="text" name="fieldRemoveClass">
+				</span>
+				<!-- Classes to be added to playes cells -->
+				<span class="fieldAddClass-container">
+					<br>
+					<span class="question-mark" name="fieldAddClass">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldAddClass">
+						Adds a class(es) to specific field(s). If you want to add more than one class, separate it with a space.
+					</span> 
+					<label name="fieldAddClass">Class(es) to add:</label> 
+					<input class="field-input" type="text" name="fieldAddClass">
+				</span>
+				<!-- Fields to which the classes will be added -->
+				<span class="fieldAddFields-container">
+					<br>
+					<span class="question-mark" name="fieldAddFields">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldAddFields">
+						Adds a class(es) to specific field(s). If you want the class(es) to more than one field, separate it with a space.
+					</span> 
+					<label name="fieldAddFields">Field(s) to add:</label> 
+					<input class="field-input" type="text" name="fieldAddFields">
+				</span>
+			</div>
+			
+			<div id="multipleFields-template" class="template">
+				<!-- DESC: class // PLAYER: class -->
+				<span class="fieldMultipleFieldsMethod-container">
+					<br>
+					<span class="question-mark" name="fieldMultipleFieldsMethod">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldMultipleFieldsMethod">
+						Calculates value based on other fields
+					</span> 
+					<label name="fieldMultipleFieldsMethod">Multiple calc method:</label> 
+					<select class="field-input fieldMultipleFieldsMethod" name="fieldMultipleFieldsMethod">
+					<% calcMethods.forEach(function(method){ %>
+						<% if(method == "general-checkbox" || method === "multiple-fields"){ %>
+							<% return %>
+						<% } else { %>
+							<option value="<%= method %>"><%= method %></option>
+						<% } %>
+					<% }) %>
+					</select>
+				</span>
+				
+				<!-- Fields relevant to calculation -->
+				<span class="fieldMultipleFieldsRelevantFields-container">
+					<br>
+					<span class="question-mark" name="fieldMultipleFieldsRelevantFields">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldMultipleFieldsRelevantFields">
+						All fields which should be added together for calculation, seperated by space.
+					</span> 
+					<label name="fieldMultipleFieldsRelevantFields">Fields to add:</label> 
+					<input class="field-input" type="text" name="fieldMultipleFieldsRelevantFields">
+				</span>
+			</div>
+
+			<div id="fieldMultipleFieldsSets-template" class="template">
+				<!-- DESC: alt // PLAYER: sets value -->
+				<span class="fieldMultipleFieldsSets-container">
+					<br>
+					<span class="question-mark" name="fieldMultipleFieldsSets">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldMultipleFieldsSets">
+						For calculation, this will be multiplied by the input/value
+					</span> 
+					<label name="fieldMultipleFieldsSets">Sets Value:</label> 
+					<input class="field-input" type="number" name="fieldMultipleFieldsSets">
+				</span>
+			</div>
+			
 			<div id="fields-container" class="fields-container ui grid initialize">
 
 			</div>
