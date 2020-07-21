@@ -59,7 +59,8 @@
 							<li class="center" name="playerName"><input type="text" name=""></li>
 							<% game.fields.forEach(function(field){ %>
 								<% if(field.calcMethod === "general-checkbox"){ return; } %>
-								<li class="scoreParameter <%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %>" name="<%= field.name %>" value="<%= field.value %>" setsValue="<%= field.setsValue %>"><input type="<%= field.type %>" name=""<% if(field.calcMethod === "multiple-fields"){ %> disabled<% } %>><span class="hidden"><% field.multipleFieldsRelevantFields %></span></li>
+								<li class="scoreParameter <%= field.calcMethod %> <%= field.multipleFieldsMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %>" name="<%= field.name %>" value="<%= field.value %>" setsValue="<%= field.setsValue %>"><input type="<%= field.type %>" name=""<% if(field.calcMethod === "multiple-fields"){ %> disabled relevant-fields="<%= field.multipleFieldsRelevantFields %>"<% } %>>
+									
 							<% }); %>
 							<li class="total center" name="total"></li>
 							<li class="deletePlayer center clickable" name="delete"><i class="trash alternate icon"></i></li>

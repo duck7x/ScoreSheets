@@ -30,7 +30,18 @@ function scoreCalculator(element, calcField){
 		regScoreTotal 				= column.children(".scoreTotal.reg"),
 		setsScoreTotal 				= column.children(".scoreTotal.sets"),
 		squareScoreTotal 			= column.children(".scoreTotal.square"),
-		singleCheckboxScoreTotal	= column.children(".scoreTotal.single-checkbox");
+		singleCheckboxScoreTotal	= column.children(".scoreTotal.single-checkbox"),
+		multipleFieldsScoreTotal	= column.children(".scoreTotal.multiple-fields");
+	
+	multipleFieldsScoreTotal.each(function(){
+		let relFields	= $(this).children().attr("relevant-fields").split(" "),
+			currField	= $(this),
+			currSum		= 0;
+		relFields.forEach(function(field){
+			currSum += Number(currField.siblings(`[name=${field}]`).children().val());
+		});
+		$(this).children().val(currSum);
+	});
 	
 	regScoreTotal.each(function(){
 		totalScore += ($(this).val() * $(this).children().val());
