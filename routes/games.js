@@ -12,7 +12,7 @@ var calcMethods = ["reg", "sets", "square", "single-checkbox", "general-checkbox
 
 // INDEX - show all games
 router.get("/", function(req, res){
-	Game.find({}, function(err, allGames){
+	Game.find({}, null, {sort: {name: 1}}, function(err, allGames){
 		if(err){
 			console.log(`error occurred while loading index: ${err}`);
 			// SHOULD REDIRECT TO ERROR PAGE IN THE FUTURE
