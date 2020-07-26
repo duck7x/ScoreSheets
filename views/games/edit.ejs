@@ -320,6 +320,7 @@
 							<option value="<%= method %>"><%= method %></option>
 						<% } %>
 					<% }) %>
+						<option value="multiply">multiply</option>
 					</select>
 				</span>
 				
@@ -489,6 +490,7 @@
 										<option value="<%= method %>" <% if(field.multipleFieldsMethod && field.multipleFieldsMethod === method){ %> selected="selected" <% } %> ><%= method %></option>
 									<% } %>
 								<% }) %>
+									<option value="multiply" <% if(field.multipleFieldsMethod && field.multipleFieldsMethod === "multiply"){ %> selected="selected" <% } %>  >multiply</option>
 								</select>
 								<br>
 							</span>

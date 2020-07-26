@@ -31,15 +31,24 @@ function scoreCalculator(element, calcField){
 		setsScoreTotal 				= column.children(".scoreTotal.sets"),
 		squareScoreTotal 			= column.children(".scoreTotal.square"),
 		singleCheckboxScoreTotal	= column.children(".scoreTotal.single-checkbox"),
-		multipleFieldsScoreTotal	= column.children(".scoreTotal.multiple-fields");
+		multipleFieldsScoreTotal	= column.children(".multiple-fields"),
+		multiplyFieldsScoreTotal	= column.children(".scoreTotal.multiply");
+		// multipleFieldsScoreTotal	= column.children(".scoreTotal.multiple-fields");
 	
 	multipleFieldsScoreTotal.each(function(){
 		let relFields	= $(this).children().attr("relevant-fields").split(" "),
 			currField	= $(this),
 			currSum		= 0;
-		relFields.forEach(function(field){
-			currSum += Number(currField.siblings(`[name=${field}]`).children().val());
-		});
+		if($(this).hasClass("multiply")){
+			currSum = 1;
+			relFields.forEach(function(field){
+				currSum *= Number(currField.siblings(`[name=${field}]`).children().val());
+			})
+		} else {
+			relFields.forEach(function(field){
+				currSum += Number(currField.siblings(`[name=${field}]`).children().val());
+			});
+		}
 		$(this).children().val(currSum);
 	});
 	
@@ -57,6 +66,10 @@ function scoreCalculator(element, calcField){
 	
 	singleCheckboxScoreTotal.each(function(){
 		totalScore += $(this).children().prop("checked") ? $(this).val() : 0;
+	});
+	
+	multiplyFieldsScoreTotal.each(function(){
+		totalScore += Number($(this).children().val());
 	});
 	
 	totalHtml.text(totalScore);
@@ -97,7 +110,7 @@ function popupWindowDisplay(){
 }
 
 // general-checkbox addClass type functionality
-function generaclCheckboxAddClass(check, add, remove, fields){
+function generalCheckboxAddClass(check, add, remove, fields){
 	if(check === "unchecked"){
 		[add, remove] = [remove, add];
 	}
@@ -185,7 +198,7 @@ gamesContainer.on("change", ".general-checkbox.add-class>input", function(){
 		remove	= $(this).nextAll(".remove-class").text(), 
 		fields	= $(this).nextAll(".add-fields").text().split(" ");
 	
-	generaclCheckboxAddClass(check, add, remove, fields);
+	generalCheckboxAddClass(check, add, remove, fields);
 });
 
 // ==================================
