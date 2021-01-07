@@ -112,6 +112,13 @@ body{
 	
 }
 
+.heart.favourite{
+	color: red;
+	text-align: right;
+	width: 100%;
+	font-size: 1.5em;
+}
+
 h1.index{
 	text-align: center;
 }
