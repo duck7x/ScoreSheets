@@ -5,7 +5,8 @@ var express		= require("express"),
 
 // INDEX - show all users
 // should be admin protected
-router.get("/", middleware.isAdmin, function(req, res){
+router.get("/", function(req, res){
+// router.get("/", middleware.isAdmin, function(req, res){
 	User.find({}, function(err, allUsers){
 		if(err){
 			console.log(`error occurred while loading all users: ${err}`);
@@ -19,7 +20,8 @@ router.get("/", middleware.isAdmin, function(req, res){
 });
 
 // EDIT - form for editting a single user
-router.get("/:user/edit", middleware.isAdmin, function(req, res){
+router.get("/:user/edit", function(req, res){
+// router.get("/:user/edit", middleware.isAdmin, function(req, res){
 	User.findById(req.params.user).exec(function(err, user){
 		if(err){
 			// NEED BETTER ERROR HANDLING
@@ -33,7 +35,8 @@ router.get("/:user/edit", middleware.isAdmin, function(req, res){
 });
 
 // UPDATE - actually updates the user
-router.put("/:user", middleware.isAdmin, function(req, res){
+// router.put("/:user", middleware.isAdmin, function(req, res){
+router.put("/:user", function(req, res){
 	var auth_level = req.body.admin === "on" ? "admin" : "regular"
 	
 	User.findById(req.params.user, function(err, user){
