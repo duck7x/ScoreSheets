@@ -50,6 +50,10 @@ li{
 	outline: none;
 }
 
+div.player.table{
+	width: 100px;
+}
+
 .table{
 	float: left;
 }
