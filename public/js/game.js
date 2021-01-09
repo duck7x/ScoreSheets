@@ -75,6 +75,38 @@ function scoreCalculator(element, calcField){
 	});
 	
 	totalHtml.text(totalScore);
+	checkWinner();
+}
+
+// Marks a player as winner
+function winner(player){
+	player.find(".winner-crown").addClass("winner");
+}
+
+// Makes sure a player is not marked as winner
+function unwinner(player){
+	player.find(".winner-crown").removeClass("winner");
+}
+
+// Checks who's the current winner(s) and shows it
+function checkWinner(){
+	let players	= $(".player.table").slice(1),
+		totals	= $(".total").slice(1),
+		scores	= [],
+		maxScore;
+	totals.each(function(){
+		scores.push(Number($(this).html()));
+	});
+	maxScore = Math.max(...scores);
+	
+	players.each(function(){
+		let score = Number($(this).find(".total").html());
+		if (score === maxScore){
+			winner($(this));
+		} else {
+			unwinner($(this));
+		}
+	});
 }
 
 function scoreCalculatorAll(){
