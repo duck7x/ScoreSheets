@@ -123,6 +123,7 @@ function clearScore(){
 	$(".scoreParameter").children().val("");
 	$(".scoreParameter").children("[type=checkbox]").prop("checked", false);
 	$(".total").text("");
+	$(".winner-crown").removeClass("winner");
 }
 
 // Edits popup window
