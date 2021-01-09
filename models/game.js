@@ -5,6 +5,8 @@ var gameSchema = new mongoose.Schema({
 	image: String,
 	minPlayers: Number,
 	maxPlayers: Number,
+	winCondition: String,
+	tieBreaker: String,
 	fields: { type : Array , "default" : [] }
 	// fields: [{
 	// 	name: String,

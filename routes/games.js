@@ -8,7 +8,8 @@ var express			= require("express"),
 var calcMethods = ["reg", "sets", "square", "single-checkbox", "general-checkbox", "multiple-fields"],
 	// formTypes	= ["text", "checkbox", "number"];
 	formTypes	= ["number", "checkbox"],
-	generalCheckboxFunctionalities = ["add-class"];
+	generalCheckboxFunctionalities = ["add-class"],
+	winConditions = ["highest-score"];
 
 // INDEX - show all games
 router.get("/", function(req, res){
@@ -26,20 +27,22 @@ router.get("/", function(req, res){
 // NEW - form to add a new game
 router.get("/new", middleware.isAdmin, function(req, res){
 // router.get("/new", function(req, res){
-	res.render("games/new", {calcMethods: calcMethods, formTypes: formTypes, generalCheckboxFunctionalities: generalCheckboxFunctionalities});
+	res.render("games/new", {calcMethods: calcMethods, formTypes: formTypes, generalCheckboxFunctionalities: generalCheckboxFunctionalities, winConditions: winConditions});
 });
 
 // CREATE - actually add a new game
 router.post("/", middleware.isAdmin, function(req, res){
 // router.post("/", function(req, res){
 	
-	var name		= req.body.name,
-		image		= req.body.image,
-		minPlayers	= req.body.minPlayers,
-		maxPlayers	= req.body.maxPlayers,
-		fields		= [],
-		count		= req.body.count,
-		skip		= req.body.skip;
+	var name			= req.body.name,
+		image			= req.body.image,
+		minPlayers		= req.body.minPlayers,
+		maxPlayers		= req.body.maxPlayers,
+		winCondition	= req.body.winCondition,
+		tieBreaker		= req.body.tieBreaker,
+		fields			= [],
+		count			= req.body.count,
+		skip			= req.body.skip;
 	image = gameFunctions.uploadImage(req, res, name, image);
 	fields = gameFunctions.buildFields(req, res, count, skip, fields);
 	
@@ -48,6 +51,8 @@ router.post("/", middleware.isAdmin, function(req, res){
 		image: image,
 		minPlayers: minPlayers,
 		maxPlayers: maxPlayers,
+		winCondition: winCondition,
+		tieBreaker: tieBreaker,
 		fields: fields
 	}
 
@@ -86,7 +91,7 @@ router.get("/:game/edit", middleware.isAdmin, function(req, res){
 			req.flash("error", "Couldn't find the game");
 			res.redirect("/games");
 		} else {
-			res.render("games/edit", {game: game, calcMethods: calcMethods, formTypes: formTypes, generalCheckboxFunctionalities: generalCheckboxFunctionalities});
+			res.render("games/edit", {game: game, calcMethods: calcMethods, formTypes: formTypes, generalCheckboxFunctionalities: generalCheckboxFunctionalities, winConditions: winConditions});
 		}
 	});
 });
@@ -94,13 +99,15 @@ router.get("/:game/edit", middleware.isAdmin, function(req, res){
 // UPDATE - actually edits the game
 router.put("/:game", middleware.isAdmin, function(req, res){
 	
-	var name		= req.body.name,
-		image		= req.body.image,
-		minPlayers	= req.body.minPlayers,
-		maxPlayers	= req.body.maxPlayers,
-		fields		= [],
-		count		= req.body.count,
-		skip		= req.body.skip;
+	var name			= req.body.name,
+		image			= req.body.image,
+		minPlayers		= req.body.minPlayers,
+		maxPlayers		= req.body.maxPlayers,
+		winCondition	= req.body.winCondition,
+		tieBreaker		= req.body.tieBreaker,
+		fields			= [],
+		count			= req.body.count,
+		skip			= req.body.skip;
 	image = gameFunctions.uploadImage(req, res, name, image);
 	fields = gameFunctions.buildFields(req, res, count, skip, fields);
 	
@@ -115,6 +122,8 @@ router.put("/:game", middleware.isAdmin, function(req, res){
 			game.image = image;
 			game.minPlayers = minPlayers;
 			game.maxPlayers = maxPlayers;
+			game.winCondition = winCondition;
+			game.tieBreaker = tieBreaker;
 			game.fields = fields;
 
 			game.save(function(err){

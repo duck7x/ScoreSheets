@@ -68,6 +68,32 @@
 				<input type="number" name="maxPlayers">
 			</span>
 			<br>
+			<span class="winCondition-container">
+				<span class="question-mark" name="winCondition">
+					<i class="question icon"></i>
+				</span>
+				<span class="explanation" name="winCondition">
+					The game's win condition
+				</span> 
+				<label name="winCondition">Win condition:</label>
+				<select class="" name="winCondition">
+					<% winConditions.forEach(function(condition){ %>
+						<option value="<%= condition %>"><%= condition %></option>
+					<% }) %>
+				</select>
+			</span>
+			<br>
+			<span class="tieBreaker-container">
+				<span class="question-mark" name="tieBreaker">
+					<i class="question icon"></i>
+				</span>
+				<span class="explanation" name="tieBreaker">
+					The game's tie breaker
+				</span> 
+				<label name="tieBreaker">Tie breaker:</label> 
+				<input type="text" placeholder="tie breaker" name="tieBreaker" required>
+			</span>
+			<br>
 			
 			<h1>Fields</h1>
 			<span class="clickable white add-field"><i class="plus circle icon"></i> Add field</span>
