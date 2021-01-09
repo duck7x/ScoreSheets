@@ -130,3 +130,13 @@ div.field{
 	margin-top: -12px;
 	margin-left: -12px;
 }
+
+.winner-crown{
+	color: transparent;
+	font-size: 1.5em;
+	transform: rotate(-25deg);
+}
+
+.winner-crown.winner{
+	color: white;
+}

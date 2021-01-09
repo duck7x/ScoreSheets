@@ -4,8 +4,10 @@ var gamesContainer				= $(".games-container"),
 	popupText					= $(".popup-content>h1"),
 	popupDeleteButtons			= $(".delete-popup-buttons"),
 	popupNotificationButtons	= $(".notification-popup-buttons");
-var minPlayers	= Number($("#minPlayers").html()),
-	maxPlayers	= Number($("#maxPlayers").html());
+var minPlayers		= Number($("#minPlayers").html()),
+	maxPlayers		= Number($("#maxPlayers").html()),
+	winCondition	= $("#winCondition").html(),
+	tieBreaker		= $("#tieBreaker").html();
 
 minPlayers = minPlayers <= 0 ? 1 : minPlayers;
 maxPlayers = maxPlayers < minPlayers ? minPlayers : maxPlayers;

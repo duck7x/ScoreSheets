@@ -56,6 +56,7 @@
 					<div class="player table">
 						<ul>
 							<!-- <li class="empty"></li> -->
+							<li class="winner-crown empty"><i class="fas fa-crown"></i></li>
 							<li class="center" name="playerName"><input type="text" name=""></li>
 							<% game.fields.forEach(function(field){ %>
 								<% if(field.calcMethod === "general-checkbox"){ return; } %>
@@ -72,6 +73,7 @@
 				<div id="desc" class="table">
 					<ul>
 						<!-- <li class="empty"><span class="clickable addPlayer btn center"><i class="user plus icon"></i></span><span class="clickable clearScore btn center">clear</span></li> -->
+						<li class="empty"></li>
 						<li class="center">Player</li>
 						<% game.fields.forEach(function(field){ %>
 							<% if(field.calcMethod === "general-checkbox"){ return; } %>
@@ -91,6 +93,8 @@
 	<!-- variables for js -->
 <span id="minPlayers" type="number" class="hidden" name="minPlayers"><%= game.minPlayers %></span>
 <span id="maxPlayers" type="text" class="hidden" name="maxPlayers"><%= game.maxPlayers %></span>
+<span id="winCondition" type="text" class="hidden" name="winCondition"><%= game.winCondition %></span>
+<span id="tieBreaker" type="text" class="hidden" name="tieBreaker"><%= game.tieBreaker %></span>
 
 	<script type="text/javascript" src="/js/game.js"></script>
 <%- include("../partials/footer") %>
