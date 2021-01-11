@@ -1,9 +1,14 @@
 var test = "TinyLittleThingCalledLuna"
+// objects
 var gamesContainer				= $(".games-container"),
 	popupContainer				= $(".popup-container"),
 	popupText					= $(".popup-content>h1"),
 	popupDeleteButtons			= $(".delete-popup-buttons"),
-	popupNotificationButtons	= $(".notification-popup-buttons");
+	popupNotificationButtons	= $(".notification-popup-buttons"),
+	autoCalcStatus				= $(".autoCalc-status"),
+	calcButton					= $(".calculate.btn"),
+	autoCalcButton				= $(".autoCalc.btn");
+// values
 var minPlayers		= Number($("#minPlayers").html()),
 	maxPlayers		= Number($("#maxPlayers").html()),
 	winCondition	= $("#winCondition").html(),
@@ -158,6 +163,63 @@ function generalCheckboxAddClass(check, add, remove, fields){
 	scoreCalculatorAll();
 }
 
+// Enables a button
+function enableButton(button){
+	button.addClass("clickable");
+	button.removeClass("disabled")
+}
+
+// Disables a button
+function disableButton(button){
+	button.addClass("disabled");
+	button.removeClass("clickable")
+}
+
+// hides results and winner(s)
+function hideResults(){
+	$(".total").addClass("invisible");
+	$(".winner-crown").addClass("invisible");
+}
+
+// makes results and winner(s) visible
+function showResults(){
+	$(".total").removeClass("invisible");
+	$(".winner-crown").removeClass("invisible");
+}
+
+// toggles autoCalc
+// should toggle between ON and OFF
+// if switches to ON - should disable (and change text of) calc button and make results visible
+// if switchs to OFF - should enable calc button and hide results (and winners)
+function toggleAutoCalc(){
+	status = autoCalcStatus.html();
+	autoCalcButton.toggleClass("clicked");
+	if (status === "ON"){
+		autoCalcStatus.html("OFF");
+		enableButton(calcButton);
+		hideResults();
+	} else if(status === "OFF"){
+		autoCalcStatus.html("ON");
+		disableButton(calcButton);
+		calcButton.html("Calculate");
+		showResults();
+	} else {
+// 		ERROR
+	}
+}
+
+// toggles calculate button
+// should hide/show results (and winners) and change button text
+function toggleCalculate(){
+	if(calcButton.html() === "Calculate"){
+		calcButton.html("Hide Scores");
+		showResults();
+	} else if(calcButton.html() === "Hide Scores"){
+		calcButton.html("Calculate");
+		hideResults();
+	}
+}
+
 // ==================================
 // PAGE STARTUP EXECUTIONS
 
@@ -235,6 +297,12 @@ gamesContainer.on("change", ".general-checkbox.add-class>input", function(){
 	
 	generalCheckboxAddClass(check, add, remove, fields);
 });
+
+// Enable/disables auto-calc (if needed)
+gamesContainer.on("click", ".autoCalc", toggleAutoCalc);
+
+// calc/hides score (if needed)
+gamesContainer.on("click", ".calculate.clickable", toggleCalculate);
 
 // ==================================
 // NOTES FOR ME, WILL BE DELETED

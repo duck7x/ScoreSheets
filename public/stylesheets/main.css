@@ -261,3 +261,41 @@ img.mediaManagement{
 .aboveTable-container{
 	margin-top: 20px;
 }
+
+.btn{
+	height: 30px;
+	width: 60px;
+	float: left;
+	border: white 1px solid;
+	background: #3d3d3d;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	margin: 0 auto;
+	box-shadow: 2px 2px, inset 5px 5px 10px rgba(255, 255, 255, 0.2);
+	margin-right: 20px;
+	margin-top: -12px;
+	margin-left: -12px;
+}
+
+.btn:hover{
+	background: #0d0d0d;
+}
+
+.btn.disabled {
+	color: gray;
+	background: black;
+	cursor: not-allowed;
+}
+
+.btn.disable:hover {
+	background: black;
+}
+
+.btn.clicked{
+	box-shadow: 2px 2px, inset 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.invisible{
+	color: transparent !important;
+}

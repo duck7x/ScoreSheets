@@ -45,9 +45,13 @@
 							<span class="add-fields hidden" name="<% field.name %>"><%= field.addFields %></span>
 						<% } %>
 					</span>
-
 				<% } %>
 				<% }); %>
+			</div>
+			
+			<div class="aboveTable-container calc-container container center">
+				<span class="clickable autoCalc btn center empty">Auto calc <span class="autoCalc-status">ON</span></span>
+				<span class="disabled calculate btn center">Calculate</span>
 			</div>
 			
 			<% if(game.fields){ %>

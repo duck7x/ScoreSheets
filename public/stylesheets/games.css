@@ -27,6 +27,11 @@ li{
 	border-color: transparent;
 }
 
+empty{
+	background: transparent;
+	border-color: transparent;
+}
+
 .player.table input{
 	background: transparent;
 	width: 100%;
@@ -84,26 +89,6 @@ ul:hover .deletePlayer{
 	opacity: 1.0;
 }
 
-.btn{
-	height: 30px;
-	width: 60px;
-	float: left;
-	border: white 1px solid;
-	background: #3d3d3d;
-	color: white;
-	text-align: center;
-	font-weight: bold;
-	margin: 0 auto;
-	box-shadow: 2px 2px, inset 5px 5px 10px rgba(255, 255, 255, 0.2);
-	margin-right: 20px;
-	margin-top: -12px;
-	margin-left: -12px;
-}
-
-.btn:hover{
-	background: #0d0d0d;
-}
-
 div.field{
 	border: 2px solid black;
 	background: rgba(35, 35, 35, 0.5);
@@ -139,4 +124,8 @@ div.field{
 
 .winner-crown.winner{
 	color: white;
+}
+
+.calc-container .btn {
+    width: 8em;
 }
