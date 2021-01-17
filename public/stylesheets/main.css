@@ -282,7 +282,7 @@ img.mediaManagement{
 	background: #0d0d0d;
 }
 
-.btn.disabled {
+.btn.disabled{
 	color: gray;
 	background: black;
 	cursor: not-allowed;
@@ -298,4 +298,12 @@ img.mediaManagement{
 
 .invisible{
 	color: transparent !important;
+}
+
+.led.green{
+	color: green;
+}
+
+.led.red{
+	color: red;
 }

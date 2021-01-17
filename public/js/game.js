@@ -12,7 +12,8 @@ var gamesContainer				= $(".games-container"),
 var minPlayers		= Number($("#minPlayers").html()),
 	maxPlayers		= Number($("#maxPlayers").html()),
 	winCondition	= $("#winCondition").html(),
-	tieBreaker		= $("#tieBreaker").html();
+	tieBreaker		= $("#tieBreaker").html(),
+	autoCalc		= true;
 
 minPlayers = minPlayers <= 0 ? 1 : minPlayers;
 maxPlayers = maxPlayers < minPlayers ? minPlayers : maxPlayers;
@@ -175,6 +176,11 @@ function disableButton(button){
 	button.removeClass("clickable")
 }
 
+// Toggle a button
+function toggleButton(button){
+	button.toggleClass("clickable disabled");
+}
+
 // hides results and winner(s)
 function hideResults(){
 	$(".total").addClass("invisible");
@@ -192,20 +198,16 @@ function showResults(){
 // if switches to ON - should disable (and change text of) calc button and make results visible
 // if switchs to OFF - should enable calc button and hide results (and winners)
 function toggleAutoCalc(){
-	status = autoCalcStatus.html();
 	autoCalcButton.toggleClass("clicked");
-	if (status === "ON"){
-		autoCalcStatus.html("OFF");
-		enableButton(calcButton);
+	if (autoCalc){
 		hideResults();
-	} else if(status === "OFF"){
-		autoCalcStatus.html("ON");
-		disableButton(calcButton);
+	} else {
 		calcButton.html("Calculate");
 		showResults();
-	} else {
-// 		ERROR
 	}
+	toggleButton(calcButton);
+	autoCalc = !autoCalc;
+	autoCalcStatus.toggleClass("red green");
 }
 
 // toggles calculate button
