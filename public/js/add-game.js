@@ -8,6 +8,7 @@ var fieldsContainer 			= $(".fields-container"),
 	AddClassTemplate			= $("#addClass-template"),
 	multipleFieldsTemplate		= $("#multipleFields-template"),
 	multipleFieldsSetsTemplate	= $("#fieldMultipleFieldsSets-template"),
+	selectTemplate				= $("#fieldSelect-template"),
 	mainContainer				= $(".container"),
 	popupImagePrev				= $(".popup-container.image-preview");
 
@@ -36,6 +37,7 @@ function removeSpecialCalcFields(element){
 	element.parent().siblings(".fieldAddFields-container").remove();
 	element.parent().siblings(".fieldMultipleFieldsMethod-container").remove();
 	element.parent().siblings(".fieldMultipleFieldsRelevantFields-container").remove();
+	element.parent().siblings(".fieldSelect-container").remove();
 }
 
 // Adding setsValue
@@ -92,7 +94,7 @@ $(".open-popup").on("click", function(){
 	popupImagePrev.css("display", "flex");
 });
 
-// Changing to sets, general-checkbox or multiple-fields calcMethod
+// Changing to sets, general-checkbox, multiple-fields or general-select calcMethod
 mainContainer.on("change", ".fieldCalcMethod", function(){
 	let valueContainer = $(this).parent().siblings(".fieldValue-container");
 	let fieldNum = $(this).attr("name").substr(-1);
@@ -115,6 +117,18 @@ mainContainer.on("change", ".fieldCalcMethod", function(){
 		});
 	} else if($(this).val() === "multiple-fields"){
 		valueContainer.after(multipleFieldsTemplate.html());
+		valueContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
+	} else if($(this).val() === "general-select"){
+		valueContainer.after(selectTemplate.html());
+		valueContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
 	}
 });
 

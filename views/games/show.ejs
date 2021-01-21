@@ -22,9 +22,19 @@
 	<!-- <div class="container"> -->
 		<div class="games-container">
 			
-			<div class="aboveTable-container container center">
+			<!-- <div class="aboveTable-container calc-container container center">
+				<span class="clickable autoCalc btn center empty"><span class="autoCalc-status led green"><i class="power off icon"></i></span> Auto calc</span>
+				<span class="disabled calculate btn center">Calculate</span>
+			</div> -->
+			
+			<div class="aboveTable-container calc-container container center">
 				<span class="clickable addPlayer btn center"><i class="user plus icon"></i></span>
 				<span class="clickable clearScore btn center">clear</span>
+				<span class="clickable autoCalc btn center empty"><span class="autoCalc-status led green"><i class="power off icon"></i></span> Auto calc</span>
+				<span class="disabled calculate btn center">Calculate</span>
+			</div>
+			
+			<div class="aboveTable-container container center">
 				<% game.fields.forEach(function(field){ %>
 				<% if(field.calcMethod === "general-checkbox"){ %>
 					<span id="<%= field.name %>" class="aboveTable field-cell general-checkbox <%= field.generalCheckboxFunctionality %> <%= field.classesDesc %>" name="<%= field.name %>">
@@ -45,14 +55,24 @@
 							<span class="add-fields hidden" name="<% field.name %>"><%= field.addFields %></span>
 						<% } %>
 					</span>
+				<% } else if(field.calcMethod === "general-select"){ %>
+					<span id="<%= field.name %>" class="aboveTable field-cell general-select <%= field.classesDesc %>" name="<%= field.name %>">
+						<%= field.title %>
+						<% if(field.description){ %>
+							<span class="explanation show-page" name="<%= field.name %>">
+								<%= field.description %>
+							</span> 
+						<% } %>
+						<select class="" name="<%= field.name %>">
+							<% field.selectOptions.split(" ").forEach(function(option){ %>
+								<option value="<%= option %>"><%= option %></option>
+							<% }) %>
+						</select>								
+					</span>
 				<% } %>
 				<% }); %>
 			</div>
 			
-			<div class="aboveTable-container calc-container container center">
-				<span class="clickable autoCalc btn center empty"><span class="autoCalc-status led green"><i class="power off icon"></i></span> Auto calc</span>
-				<span class="disabled calculate btn center">Calculate</span>
-			</div>
 			
 			<% if(game.fields){ %>
 				<!-- TEMPLATE TABLE -->
@@ -63,7 +83,7 @@
 							<li class="winner-crown empty"><i class="fas fa-crown"></i></li>
 							<li class="center" name="playerName"><input type="text" name=""></li>
 							<% game.fields.forEach(function(field){ %>
-								<% if(field.calcMethod === "general-checkbox"){ return; } %>
+								<% if(field.calcMethod === "general-checkbox" || field.calcMethod === "general-select" ){ return; } %>
 								<li class="scoreParameter <%= field.calcMethod %> <%= field.multipleFieldsMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %>" name="<%= field.name %>" value="<%= field.value %>" setsValue="<%= field.setsValue %>"><input type="<%= field.type %>" name=""<% if(field.calcMethod === "multiple-fields"){ %> disabled relevant-fields="<%= field.multipleFieldsRelevantFields %>"<% } %>>
 									
 							<% }); %>
@@ -80,7 +100,7 @@
 						<li class="empty"></li>
 						<li class="center">Player</li>
 						<% game.fields.forEach(function(field){ %>
-							<% if(field.calcMethod === "general-checkbox"){ return; } %>
+							<% if(field.calcMethod === "general-checkbox" || field.calcMethod === "general-select" ){ return; } %>
 							<% if(field.description){ %>
 								<span class="explanation show-page" name="<%= field.name %>">
 									<%= field.description %>

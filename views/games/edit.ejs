@@ -378,6 +378,22 @@
 					<input class="field-input" type="number" name="fieldMultipleFieldsSets">
 				</span>
 			</div>
+			
+			<!-- select template -->
+			<div id="fieldSelect-template" class="template">
+				<!-- DESC:  // PLAYER: Enables selection form values  -->
+				<span class="fieldSelect-container">
+					<br>
+					<span class="question-mark" name="fieldSelect">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldSelect">
+						Display selection field, separate values by a space.
+					</span> 
+					<label name="fieldSelect">Select options:</label> 
+					<input class="field-input" type="text" name="fieldSelect">
+				</span>
+			</div>
 
 			<div id="fields-container" class="fields-container ui grid">
 				<% var count = 0; %>
@@ -532,6 +548,19 @@
 								</span> 
 								<label name="fieldMultipleFieldsRelevantFields<%= count %>">Fields to add:</label> 
 								<input class="field-input" type="text" name="fieldMultipleFieldsRelevantFields<%= count %>" <% if(field.multipleFieldsRelevantFields){ %> value="<%= field.multipleFieldsRelevantFields %>" <% } %>>
+							</span>
+						<% } else if(field.calcMethod && field.calcMethod === "general-select"){ %>
+							<!-- DESC:  // PLAYER: Enables selection form values  -->
+							<span class="fieldSelect-container">
+								<br>
+								<span class="question-mark" name="fieldSelect<%= count %>">
+									<i class="question icon"></i>
+								</span>
+								<span class="explanation" name="fieldSelect<%= count %>">
+									Display selection field, separate values by a space.
+								</span> 
+								<label name="fieldSelect<%= count %>">Select options:</label> 
+								<input class="field-input" type="text" name="fieldSelect<%= count %>" <% if(field.selectOptions){ %> value="<%= field.selectOptions %>" <% } %> >
 							</span>
 						<% } %>
 						

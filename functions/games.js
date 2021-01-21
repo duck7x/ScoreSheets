@@ -24,7 +24,8 @@ module.exports = {
 			"square": "number",
 			"single-checkbox": "checkbox",
 			"general-checkbox": "checkbox",
-			"multiple-fields": "disabled"
+			"multiple-fields": "disabled",
+			"general-select": "select"
 		}
 		
 		skip += ","
@@ -46,6 +47,7 @@ module.exports = {
 			field.multipleFieldsMethod = eval("req.body.fieldMultipleFieldsMethod" + String(i)) ? eval("req.body.fieldMultipleFieldsMethod" + String(i)) : "";
 			field.setsValue = eval("req.body.fieldMultipleFieldsSets" + String(i)) ? eval("req.body.fieldMultipleFieldsSets" + String(i)) : field.setsValue;
 			field.multipleFieldsRelevantFields = eval("req.body.fieldMultipleFieldsRelevantFields" + String(i)) ? eval("req.body.fieldMultipleFieldsRelevantFields" + String(i)) : "";
+			field.selectOptions = eval("req.body.fieldSelect" + String(i)) ? eval("req.body.fieldSelect" + String(i)) : field.selectOptions;
 			field.title = eval("req.body.fieldTitle" + String(i)) ? eval("req.body.fieldTitle" + String(i)) : "";
 			field.icon = eval("req.body.fieldIcon" + String(i)) ? eval("req.body.fieldIcon" + String(i)) : "";
 			field.description = eval("req.body.fieldDescription" + String(i)) ? eval("req.body.fieldDescription" + String(i)) : "";
