@@ -250,6 +250,30 @@
 							<label name="fieldScoreTotal">Score total?</label> 
 							<input class="field-input" type="checkbox" name="fieldScoreTotal" checked>
 						</span>
+						
+						<!-- DESC: class // PLAYER: class -->
+						<span class="fieldHidden-container">
+							<span class="question-mark" name="fieldHidden">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldHidden">
+								If checked, this cell will be hidden
+							</span> 
+							<label name="fieldHidden">Hidden?</label> 
+							<input class="field-input" type="checkbox" name="fieldHidden">
+						</span>
+						
+						<!-- DESC: // PLAYER: class -->
+						<span class="fieldDisabled-container">
+							<span class="question-mark" name="fieldDisabled">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldDisabled">
+								If checked, this cell will be disabled
+							</span> 
+							<label name="fieldDisabled">Disabled?</label> 
+							<input class="field-input" type="checkbox" name="fieldDisabled">
+						</span>
 					</div>
 				</div>
 			</div>
@@ -683,6 +707,30 @@
 							</span> 
 							<label name="fieldScoreTotal<%= count %>">Score total?</label> 
 							<input class="field-input" type="checkbox" name="fieldScoreTotal<%= count %>" <% if(field.scoreTotal){ %> checked <% } %> >
+						</span>
+						
+						<!-- DESC: class // PLAYER: class -->
+						<span class="fieldHidden-container">
+							<span class="question-mark" name="fieldHidden<%= count %>">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldHidden<%= count %>">
+								If checked, this cell will be hidden
+							</span> 
+							<label name="fieldHidden<%= count %>">Hidden?</label> 
+							<input class="field-input" type="checkbox" name="fieldHidden<%= count %>" <% if(field.hidden){ %> checked <% } %> >
+						</span>
+						
+						<!-- DESC: // PLAYER: class -->
+						<span class="fieldDisabled-container">
+							<span class="question-mark" name="fieldDisabled<%= count %>">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldDisabled<%= count %>">
+								If checked, this cell will be disabled
+							</span> 
+							<label name="fieldDisabled<%= count %>">Disabled?</label> 
+							<input class="field-input" type="checkbox" name="fieldDisabled<%= count %>" <% if(field.disabled){ %> checked <% } %> >
 						</span>
 					</div>
 				</div>

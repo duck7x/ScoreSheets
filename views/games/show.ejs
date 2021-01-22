@@ -56,7 +56,7 @@
 						<% } %>
 					</span>
 				<% } else if(field.calcMethod === "general-select"){ %>
-					<span id="<%= field.name %>" class="aboveTable field-cell general-select <%= field.classesDesc %>" name="<%= field.name %>">
+					<span id="<%= field.name %>" class="aboveTable field-cell general-select <%= field.classesDesc %> <% if(field.hidden){ %> hidden <% } %>" name="<%= field.name %>">
 						<%= field.title %>
 						<% if(field.description){ %>
 							<span class="explanation show-page" name="<%= field.name %>">
@@ -84,7 +84,7 @@
 							<li class="center" name="playerName"><input type="text" name=""></li>
 							<% game.fields.forEach(function(field){ %>
 								<% if(field.calcMethod === "general-checkbox" || field.calcMethod === "general-select" ){ return; } %>
-								<li class="scoreParameter <%= field.calcMethod %> <%= field.multipleFieldsMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %>" name="<%= field.name %>" value="<%= field.value %>" setsValue="<%= field.setsValue %>"><input type="<%= field.type %>" name=""<% if(field.calcMethod === "multiple-fields"){ %> disabled relevant-fields="<%= field.multipleFieldsRelevantFields %>"<% } %>>
+								<li class="scoreParameter <%= field.calcMethod %> <%= field.multipleFieldsMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %> <% if(field.hidden){ %> hidden <% } %>" name="<%= field.name %>" value="<%= field.value %>" setsValue="<%= field.setsValue %>"><input type="<%= field.type %>" name=""<% if(field.disabled){ %> disabled <% } %><% if(field.calcMethod === "multiple-fields"){ %> disabled relevant-fields="<%= field.multipleFieldsRelevantFields %>"<% } %>>
 									
 							<% }); %>
 							<li class="total center" name="total"></li>
@@ -106,7 +106,7 @@
 									<%= field.description %>
 								</span> 
 							<% } %>
-							<li id="<%= field.name %>" class="field-cell <%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesDesc %>" alt="<%= field.value %>"><% if(field.icon){ %> <img src="field.icon"> <% } %> <%= field.title %></li>
+							<li id="<%= field.name %>" class="field-cell <%= field.calcMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesDesc %> <% if(field.hidden){ %> hidden <% } %>" alt="<%= field.value %>"><% if(field.icon){ %> <img src="field.icon"> <% } %> <%= field.title %></li>
 						<% }); %>
 					</ul>
 				</div>

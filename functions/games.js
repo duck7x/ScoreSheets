@@ -56,6 +56,8 @@ module.exports = {
 			field.calcMethod = eval("req.body.fieldCalcMethod" + String(i)) ? eval("req.body.fieldCalcMethod" + String(i)) : "";
 			field.type = calcToType[eval("req.body.fieldCalcMethod" + String(i))];
 			field.scoreTotal = eval("req.body.fieldScoreTotal" + String(i)) === "on";
+			field.hidden = eval("req.body.fieldHidden" + String(i)) === "on";
+			field.disabled = eval("req.body.fieldDisabled" + String(i)) === "on";
 
 			fields.push(field);
 		}

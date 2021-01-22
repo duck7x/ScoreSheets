@@ -18,7 +18,9 @@ var gameSchema = new mongoose.Schema({
 	// 	classesDesc: String,
 	// 	classesPlayer: String,
 	// 	calcMethod: String,
-	// 	scoreTotal: Boolean
+	// 	scoreTotal: Boolean,
+	//  hidden: Boolean,
+	//	disable: Boolean
 	// }]
 });
 
