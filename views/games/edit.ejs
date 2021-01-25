@@ -418,6 +418,38 @@
 					<input class="field-input" type="text" name="fieldSelect">
 				</span>
 			</div>
+			
+			<!-- reach target template -->
+			<div id="reachTarget-template" class="template">
+				<!-- DESC:  // PLAYER:  -->
+				<span class="fieldReachTargetRange-container">
+					<br>
+					<span class="question-mark" name="fieldReachTargetRange">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldReachTargetRange">
+						The ranges of target points, and their value. write like [target:value], separate ranges by a space
+					</span> 
+					<label name="fieldReachTargetRange">Reach target ranges:</label> 
+					<input class="field-input" type="text" name="fieldReachTargetRange">
+				</span>
+				<!-- DESC:  // PLAYER:  -->
+				<span class="fieldReachTargetMethod-container">
+					<br>
+					<span class="question-mark" name="fieldReachTargetMethod">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldReachTargetMethod">
+						The method of checking the target
+					</span> 
+					<label name="fieldReachTargetMethod">Method:</label> 
+					<select class="field-input reachTargetMethod" name="fieldReachTargetMethod">
+						<% reachTargetMethods.forEach(function(method){ %>
+							<option value="<%= method %>"><%= method %></option>
+						<% }) %>
+					</select>
+				</span>
+			</div>
 
 			<div id="fields-container" class="fields-container ui grid">
 				<% var count = 0; %>
@@ -586,6 +618,35 @@
 								<label name="fieldSelect<%= count %>">Select options:</label> 
 								<input class="field-input" type="text" name="fieldSelect<%= count %>" <% if(field.selectOptions){ %> value="<%= field.selectOptions %>" <% } %> >
 							</span>
+						<% } else if(field.calcMethod && field.calcMethod === "reach-target"){ %>
+								<!-- DESC:  // PLAYER:  -->
+								<span class="fieldReachTargetRange-container">
+									<br>
+									<span class="question-mark" name="fieldReachTargetRange<%= count %>">
+										<i class="question icon"></i>
+									</span>
+									<span class="explanation" name="fieldReachTargetRange<%= count %>">
+										The ranges of target points, and their value. write like [target:value], separate ranges by a space
+									</span> 
+									<label name="fieldReachTargetRange<%= count %>">Reach target ranges:</label> 
+									<input class="field-input" type="text" name="fieldReachTargetRange<%= count %>" <% if(field.reachTargetRange){ %> value="<%= field.reachTargetRange %>" <% } %>>
+								</span>
+								<!-- DESC:  // PLAYER:  -->
+								<span class="fieldReachTargetMethod-container">
+									<br>
+									<span class="question-mark" name="fieldReachTargetMethod<%= count %>">
+										<i class="question icon"></i>
+									</span>
+									<span class="explanation" name="fieldReachTargetMethod<%= count %>">
+										The method of checking the target
+									</span> 
+									<label name="fieldReachTargetMethod<%= count %>">Method:</label> 
+									<select class="field-input reachTargetMethod" name="fieldReachTargetMethod<%= count %>">
+										<% reachTargetMethods.forEach(function(method){ %>
+											<option value="<%= method %>"<% if(field.reachTargetMethod === method){ %> selected="selected"<% } %>><%= method %></option>
+										<% }) %>
+									</select>
+								</span>
 						<% } %>
 						
 						<!-- DESC: actual text // field.title -->

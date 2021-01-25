@@ -403,7 +403,6 @@
 			</div>
 			
 			
-			<!-- NEED TO COPY TO EDIT PAGE -->
 			<!-- select template -->
 			<div id="fieldSelect-template" class="template">
 				<!-- DESC:  // PLAYER: Enables selection form values  -->
@@ -419,7 +418,38 @@
 					<input class="field-input" type="text" name="fieldSelect">
 				</span>
 			</div>
-			<!-- END OF NEED TO COPY TO EDIT PAGE -->
+			
+			<!-- reach target template -->
+			<div id="reachTarget-template" class="template">
+				<!-- DESC:  // PLAYER:  -->
+				<span class="fieldReachTargetRange-container">
+					<br>
+					<span class="question-mark" name="fieldReachTargetRange">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldReachTargetRange">
+						The ranges of target points, and their value. write like [target:value], separate ranges by a space
+					</span> 
+					<label name="fieldReachTargetRange">Reach target ranges:</label> 
+					<input class="field-input" type="text" name="fieldReachTargetRange">
+				</span>
+				<!-- DESC:  // PLAYER:  -->
+				<span class="fieldReachTargetMethod-container">
+					<br>
+					<span class="question-mark" name="fieldReachTargetMethod">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldReachTargetMethod">
+						The method of checking the target
+					</span> 
+					<label name="fieldReachTargetMethod">Method:</label> 
+					<select class="field-input reachTargetMethod" name="fieldReachTargetMethod">
+						<% reachTargetMethods.forEach(function(method){ %>
+							<option value="<%= method %>"><%= method %></option>
+						<% }) %>
+					</select>
+				</span>
+			</div>
 			
 			
 			<div id="fields-container" class="fields-container ui grid initialize">

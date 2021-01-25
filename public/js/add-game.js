@@ -9,6 +9,7 @@ var fieldsContainer 			= $(".fields-container"),
 	multipleFieldsTemplate		= $("#multipleFields-template"),
 	multipleFieldsSetsTemplate	= $("#fieldMultipleFieldsSets-template"),
 	selectTemplate				= $("#fieldSelect-template"),
+	reachTargetTemplate			=$("#reachTarget-template"),
 	mainContainer				= $(".container"),
 	popupImagePrev				= $(".popup-container.image-preview");
 
@@ -38,6 +39,9 @@ function removeSpecialCalcFields(element){
 	element.parent().siblings(".fieldMultipleFieldsMethod-container").remove();
 	element.parent().siblings(".fieldMultipleFieldsRelevantFields-container").remove();
 	element.parent().siblings(".fieldSelect-container").remove();
+	element.parent().siblings(".fieldSelect-container").remove();
+	element.parent().siblings(".fieldReachTargetRange-container").remove();
+	element.parent().siblings(".fieldReachTargetMethod-container").remove();
 }
 
 // Adding setsValue
@@ -124,6 +128,13 @@ mainContainer.on("change", ".fieldCalcMethod", function(){
 		});
 	} else if($(this).val() === "general-select"){
 		valueContainer.after(selectTemplate.html());
+		valueContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
+	} else if($(this).val() === "reach-target"){
+		valueContainer.after(reachTargetTemplate.html());
 		valueContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
 			$(this).attr("name", function(i, val){
 				return val + fieldNum;

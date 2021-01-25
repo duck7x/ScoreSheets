@@ -13,7 +13,8 @@ var minPlayers		= Number($("#minPlayers").html()),
 	maxPlayers		= Number($("#maxPlayers").html()),
 	winCondition	= $("#winCondition").html(),
 	tieBreaker		= $("#tieBreaker").html(),
-	autoCalc		= true;
+	autoCalc		= true,
+	targetsRanges	= {};
 
 minPlayers = minPlayers <= 0 ? 1 : minPlayers;
 maxPlayers = maxPlayers < minPlayers ? minPlayers : maxPlayers;
@@ -222,12 +223,39 @@ function toggleCalculate(){
 	}
 }
 
+// splits a string into a key-value dict
+function splitIntoDict(string){
+	let firstSplit	= string.split(" "),
+		finalSplit	= {};
+	
+	firstSplit = firstSplit.sort(function(a, b){return b.split(":")[0] - a.split(":")[0]});
+	firstSplit.forEach(function(currentString){
+		let secondSplit = currentString.split(":");
+		finalSplit[secondSplit[0]] = secondSplit[1];
+	});
+	
+	return finalSplit;
+}
+
+// Collects all reach-target cells and makes a dictionary of the ranges
+function setReachTargetDict(){
+	$(".field-cell.reach-target").each(function(){
+		let currTargetsRange = $(this).attr("targetsRange");
+		targetsRanges[currTargetsRange] = targetsRanges[currTargetsRange] ? targetsRanges[currTargetsRange] : splitIntoDict(currTargetsRange);
+	});
+}
+// $(".field-cell.reach-target").each(function(){console.log($(this).attr("targetsRange"))})
+
 // ==================================
 // PAGE STARTUP EXECUTIONS
 
+// adds the minimum amount of required players
 for(i = 0; i < minPlayers; i++){
 	addPlayer();
 }
+
+// creates inital dict of reach-targets for calculation usage
+setReachTargetDict();
 
 // ==================================
 // EVENTS
