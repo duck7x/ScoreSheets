@@ -1,17 +1,18 @@
 var test	= "Timon's in the kalax - CUTE",
 	count	= $("#fields-count").val(),
 	skip	= "";
-var fieldsContainer 			= $(".fields-container"),
-	fieldTemplate				= $("#field-template"),
-	setsValueTemplate			= $("#sets-template"),
-	generalCheckboxTemplate		= $("#generalCheckbox-template"),
-	AddClassTemplate			= $("#addClass-template"),
-	multipleFieldsTemplate		= $("#multipleFields-template"),
-	multipleFieldsSetsTemplate	= $("#fieldMultipleFieldsSets-template"),
-	selectTemplate				= $("#fieldSelect-template"),
-	reachTargetTemplate			=$("#reachTarget-template"),
-	mainContainer				= $(".container"),
-	popupImagePrev				= $(".popup-container.image-preview");
+var fieldsContainer 				= $(".fields-container"),
+	fieldTemplate					= $("#field-template"),
+	setsValueTemplate				= $("#sets-template"),
+	generalCheckboxTemplate			= $("#generalCheckbox-template"),
+	AddClassTemplate				= $("#addClass-template"),
+	multipleFieldsTemplate			= $("#multipleFields-template"),
+	multipleFieldsSetsTemplate		= $("#fieldMultipleFieldsSets-template"),
+	selectTemplate					= $("#fieldSelect-template"),
+	reachTargetTemplate				= $("#reachTarget-template"),
+	reachTargetOtherFieldTemplate	= $("#fieldReachTargetOtherField-template"),
+	mainContainer					= $(".container"),
+	popupImagePrev					= $(".popup-container.image-preview");
 
 // ==================================
 // FUNCTIONS
@@ -42,6 +43,7 @@ function removeSpecialCalcFields(element){
 	element.parent().siblings(".fieldSelect-container").remove();
 	element.parent().siblings(".fieldReachTargetRange-container").remove();
 	element.parent().siblings(".fieldReachTargetMethod-container").remove();
+	element.parent().siblings(".fieldReachTargetOtherField-container").remove();
 }
 
 // Adding setsValue
@@ -156,6 +158,27 @@ mainContainer.on("change", ".fieldMultipleFieldsMethod", function(){
 		});
 	} else {
 		$(this).parent().siblings(".fieldMultipleFieldsSets-container").remove();
+	}
+});
+
+// Changing the reach-target calcMethod to otherFieldTemplate
+mainContainer.on("change", ".fieldReachTargetMethod", function(){
+	console.log(`Current reach target method is ${$(this).val()}`);
+	// let methodContainer = $(this).parent().siblings(".fieldReachTargetMethod-container");
+	let methodContainer		= $(this).parent(),
+		disabledCheckbox	= $(this).parent().siblings(".fieldDisabled-container").children("[type=checkbox]");
+	let fieldNum = $(this).attr("name").substr(-1);
+	if($(this).val() === "other-field"){
+		methodContainer.after(reachTargetOtherFieldTemplate.html());
+		methodContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		disabledCheckbox.prop("checked", true);
+		});
+	} else {
+		$(this).parent().siblings(".fieldReachTargetOtherField-container").remove();
+		disabledCheckbox.prop("checked", false);
 	}
 });
 

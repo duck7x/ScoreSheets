@@ -117,19 +117,6 @@
 						</span>
 						<br>
 						
-						<!-- DESC: alt // PLAYER: value -->
-						<span class="fieldValue-container">
-							<span class="question-mark" name="fieldValue">
-								<i class="question icon"></i>
-							</span>
-							<span class="explanation" name="fieldValue">
-								For calculation, this will be multiplied by the input
-							</span> 
-							<label name="fieldValue">Value:</label> 
-							<input class="field-input" type="number" name="fieldValue">
-						</span>
-						<br>
-						
 						<!-- DESC: actual text -->
 						<span class="fieldTitle-container">
 							<span class="question-mark" name="fieldTitle">
@@ -140,6 +127,19 @@
 							</span> 
 							<label name="fieldTitle">Title:</label> 
 							<input class="field-input" type="text" name="fieldTitle" placeholder="field title">
+						</span>
+						<br>
+						
+						<!-- DESC: alt // PLAYER: value -->
+						<span class="fieldValue-container">
+							<span class="question-mark" name="fieldValue">
+								<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldValue">
+								For calculation, this will be multiplied by the input
+							</span> 
+							<label name="fieldValue">Value:</label> 
+							<input class="field-input" type="number" name="fieldValue">
 						</span>
 						<br>
 						
@@ -443,11 +443,27 @@
 						The method of checking the target
 					</span> 
 					<label name="fieldReachTargetMethod">Method:</label> 
-					<select class="field-input reachTargetMethod" name="fieldReachTargetMethod">
+					<select class="field-input fieldReachTargetMethod" name="fieldReachTargetMethod">
 						<% reachTargetMethods.forEach(function(method){ %>
 							<option value="<%= method %>"><%= method %></option>
 						<% }) %>
 					</select>
+				</span>
+			</div>
+			
+			<!-- other-field reach-target template -->
+			<div id="fieldReachTargetOtherField-template" class="template">
+				<!-- DESC:  // PLAYER: Enables selection form values  -->
+				<span class="fieldReachTargetOtherField-container">
+					<br>
+					<span class="question-mark" name="fieldReachTargetOtherField">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldReachTargetOtherField">
+						Will calculate reach-taget by this field
+					</span> 
+					<label name="fieldReachTargetOtherField">Other field:</label> 
+					<input class="field-input" type="text" name="fieldReachTargetOtherField">
 				</span>
 			</div>
 
@@ -472,6 +488,19 @@
 							</span>
 							<label name="fieldName<%= count %>">Name:</label> 
 							<input class="field-input" type="text" name="fieldName<%= count %>" placeholder="field name" <% if(field.name){ %> value="<%= field.name %>" <% } %> >
+						</span>
+						<br>
+						
+						<!-- DESC: actual text // field.title -->
+						<span class="fieldTitle-container">
+						<span class="question-mark" name="fieldTitle<%= count %>">
+							<i class="question icon"></i>
+							</span>
+							<span class="explanation" name="fieldTitle<%= count %>">
+								Will appear in desc cell
+							</span> 
+							<label name="fieldTitle<%= count %>">Title:</label> 
+							<input class="field-input" type="text" name="fieldTitle<%= count %>" placeholder="field title" <% if(field.title){ %> value="<%= field.title %>" <% } %> >
 						</span>
 						<br>
 						
@@ -595,7 +624,6 @@
 						
 							<!-- Fields relevant to calculation -->
 							<span class="fieldMultipleFieldsRelevantFields-container">
-								<br>
 								<span class="question-mark" name="fieldMultipleFieldsRelevantFields<%= count %>">
 									<i class="question icon"></i>
 								</span>
@@ -605,10 +633,10 @@
 								<label name="fieldMultipleFieldsRelevantFields<%= count %>">Fields to add:</label> 
 								<input class="field-input" type="text" name="fieldMultipleFieldsRelevantFields<%= count %>" <% if(field.multipleFieldsRelevantFields){ %> value="<%= field.multipleFieldsRelevantFields %>" <% } %>>
 							</span>
+							<br>
 						<% } else if(field.calcMethod && field.calcMethod === "general-select"){ %>
 							<!-- DESC:  // PLAYER: Enables selection form values  -->
 							<span class="fieldSelect-container">
-								<br>
 								<span class="question-mark" name="fieldSelect<%= count %>">
 									<i class="question icon"></i>
 								</span>
@@ -618,10 +646,10 @@
 								<label name="fieldSelect<%= count %>">Select options:</label> 
 								<input class="field-input" type="text" name="fieldSelect<%= count %>" <% if(field.selectOptions){ %> value="<%= field.selectOptions %>" <% } %> >
 							</span>
+							<br>
 						<% } else if(field.calcMethod && field.calcMethod === "reach-target"){ %>
 								<!-- DESC:  // PLAYER:  -->
 								<span class="fieldReachTargetRange-container">
-									<br>
 									<span class="question-mark" name="fieldReachTargetRange<%= count %>">
 										<i class="question icon"></i>
 									</span>
@@ -631,9 +659,9 @@
 									<label name="fieldReachTargetRange<%= count %>">Reach target ranges:</label> 
 									<input class="field-input" type="text" name="fieldReachTargetRange<%= count %>" <% if(field.reachTargetRange){ %> value="<%= field.reachTargetRange %>" <% } %>>
 								</span>
+								<br>
 								<!-- DESC:  // PLAYER:  -->
 								<span class="fieldReachTargetMethod-container">
-									<br>
 									<span class="question-mark" name="fieldReachTargetMethod<%= count %>">
 										<i class="question icon"></i>
 									</span>
@@ -641,26 +669,28 @@
 										The method of checking the target
 									</span> 
 									<label name="fieldReachTargetMethod<%= count %>">Method:</label> 
-									<select class="field-input reachTargetMethod" name="fieldReachTargetMethod<%= count %>">
+									<select class="field-input fieldReachTargetMethod" name="fieldReachTargetMethod<%= count %>">
 										<% reachTargetMethods.forEach(function(method){ %>
 											<option value="<%= method %>"<% if(field.reachTargetMethod === method){ %> selected="selected"<% } %>><%= method %></option>
 										<% }) %>
 									</select>
 								</span>
+								<br>
+								<% if(field.reachTargetMethod === "other-field"){ %>
+									<!-- DESC:  // PLAYER: Enables selection form values  -->
+									<span class="fieldReachTargetOtherField-container">
+										<span class="question-mark" name="fieldReachTargetOtherField<%= count %>">
+											<i class="question icon"></i>
+										</span>
+										<span class="explanation" name="fieldReachTargetOtherField<%= count %>">
+											Will calculate reach-taget by this field
+										</span> 
+										<label name="fieldReachTargetOtherField<%= count %>">Other field:</label> 
+										<input class="field-input" type="text" name="fieldReachTargetOtherField<%= count %>"<% if(field.reachTargetOtherField){ %> value="<%= field.reachTargetOtherField %>"<% } %>>
+									</span>
+									<br>
+								<% } %>
 						<% } %>
-						
-						<!-- DESC: actual text // field.title -->
-						<span class="fieldTitle-container">
-						<span class="question-mark" name="fieldTitle<%= count %>">
-							<i class="question icon"></i>
-							</span>
-							<span class="explanation" name="fieldTitle<%= count %>">
-								Will appear in desc cell
-							</span> 
-							<label name="fieldTitle<%= count %>">Title:</label> 
-							<input class="field-input" type="text" name="fieldTitle<%= count %>" placeholder="field title" <% if(field.title){ %> value="<%= field.title %>" <% } %> >
-						</span>
-						<br>
 						
 						<!-- DESC: displayed icon // field.icon -->
 						<span class="fieldIcon-container">
@@ -791,7 +821,7 @@
 								If checked, this cell will be disabled
 							</span> 
 							<label name="fieldDisabled<%= count %>">Disabled?</label> 
-							<input class="field-input" type="checkbox" name="fieldDisabled<%= count %>" <% if(field.disabled){ %> checked <% } %> >
+							<input class="field-input" type="checkbox" name="fieldDisabled<%= count %>" <% if(field.disabled ){ %> checked <% } %> >
 						</span>
 					</div>
 				</div>

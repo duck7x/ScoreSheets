@@ -22,6 +22,7 @@ maxPlayers = maxPlayers < minPlayers ? minPlayers : maxPlayers;
 // ==================================
 // FUNCTIONS
 
+
 // Adding new player to the page when clicking on the plus-person icon
 function addPlayer(){
 	// pure JS 
@@ -31,17 +32,32 @@ function addPlayer(){
 	var newPlayer = gamesContainer.append($("#template").html());
 }
 
+function reachTargetCalculation(target, reached){
+	let score = 0;
+	targetsRanges[target].every(function(range){
+		let splitRange = range.split(":");
+		if(reached >= Number(splitRange[0])){
+			score = Number(splitRange[1]);
+			return false;
+		}
+		return true;
+	});
+	return score;
+}
+
 // Calculating the score of a specific player (element is the table of a player)
 function scoreCalculator(element, calcField){
-	var column 						= calcField ? calcField.parent().parent() : $(this).parent().parent(),
-		totalScore 					= 0,
-		totalHtml 					= column.children(".total").last(),
-		regScoreTotal 				= column.children(".scoreTotal.reg"),
-		setsScoreTotal 				= column.children(".scoreTotal.sets"),
-		squareScoreTotal 			= column.children(".scoreTotal.square"),
-		singleCheckboxScoreTotal	= column.children(".scoreTotal.single-checkbox"),
-		multipleFieldsScoreTotal	= column.children(".multiple-fields"),
-		multiplyFieldsScoreTotal	= column.children(".scoreTotal.multiply");
+	var column 								= calcField ? calcField.parent().parent() : $(this).parent().parent(),
+		totalScore 							= 0,
+		totalHtml 							= column.children(".total").last(),
+		regScoreTotal 						= column.children(".scoreTotal.reg"),
+		setsScoreTotal 						= column.children(".scoreTotal.sets"),
+		squareScoreTotal 					= column.children(".scoreTotal.square"),
+		singleCheckboxScoreTotal			= column.children(".scoreTotal.single-checkbox"),
+		multipleFieldsScoreTotal			= column.children(".multiple-fields"),
+		multiplyFieldsScoreTotal			= column.children(".scoreTotal.multiply"),
+		reachTargetsSelfScoreTotal			= column.children(".scoreTotal.reach-target.self"),
+		reachTargetsOtherFieldScoreTotal	= column.children(".scoreTotal.reach-target.other-field");
 		// multipleFieldsScoreTotal	= column.children(".scoreTotal.multiple-fields");
 	
 	multipleFieldsScoreTotal.each(function(){
@@ -80,6 +96,36 @@ function scoreCalculator(element, calcField){
 	multiplyFieldsScoreTotal.each(function(){
 		totalScore += Number($(this).children().val());
 	});
+	
+	reachTargetsSelfScoreTotal.each(function(){
+		let reached = Number($(this).children().val()),
+			target	= $(this).children().attr("targetsrange");
+		totalScore += reachTargetCalculation(target, reached);
+		// // targetsRanges[target].forEach(function(range){
+		// targetsRanges[target].every(function(range){
+		// 	let splitRange = range.split(":");
+		// 	if(reached >= Number(splitRange[0])){
+		// 		totalScore += Number(splitRange[1]);
+		// 		return false;
+		// 	}
+		// 	return true;
+		// });
+	});
+	
+	reachTargetsOtherFieldScoreTotal.each(function(){
+		let currValue,
+			reached,
+			target		= $(this).children().attr("targetsrange"),
+			otherField	= $(this).children().attr("otherfield");
+		
+		reached = $(this).siblings(`[name=${otherField}]`).children().val();
+		currValue = reachTargetCalculation(target, reached);
+		totalScore += currValue;
+		if(currValue){
+			$(this).children().val(currValue);
+		}
+	});
+	
 	
 	totalHtml.text(totalScore);
 	checkWinner();
@@ -229,12 +275,13 @@ function splitIntoDict(string){
 		finalSplit	= {};
 	
 	firstSplit = firstSplit.sort(function(a, b){return b.split(":")[0] - a.split(":")[0]});
-	firstSplit.forEach(function(currentString){
-		let secondSplit = currentString.split(":");
-		finalSplit[secondSplit[0]] = secondSplit[1];
-	});
+	// firstSplit.forEach(function(currentString){
+	// 	let secondSplit = currentString.split(":");
+	// 	finalSplit[secondSplit[0]] = secondSplit[1];
+	// });
 	
-	return finalSplit;
+	// return finalSplit;
+	return firstSplit;
 }
 
 // Collects all reach-target cells and makes a dictionary of the ranges
@@ -244,7 +291,6 @@ function setReachTargetDict(){
 		targetsRanges[currTargetsRange] = targetsRanges[currTargetsRange] ? targetsRanges[currTargetsRange] : splitIntoDict(currTargetsRange);
 	});
 }
-// $(".field-cell.reach-target").each(function(){console.log($(this).attr("targetsRange"))})
 
 // ==================================
 // PAGE STARTUP EXECUTIONS

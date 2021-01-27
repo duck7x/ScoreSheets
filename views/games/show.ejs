@@ -84,7 +84,7 @@
 							<li class="center" name="playerName"><input type="text" name=""></li>
 							<% game.fields.forEach(function(field){ %>
 								<% if(field.calcMethod === "general-checkbox" || field.calcMethod === "general-select" ){ return; } %>
-								<li class="scoreParameter <%= field.calcMethod %> <%= field.multipleFieldsMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %> <% if(field.hidden){ %> hidden <% } %>" name="<%= field.name %>" value="<%= field.value %>" setsValue="<%= field.setsValue %>"><input type="<%= field.type %>" name=""<% if(field.disabled){ %> disabled <% } %><% if(field.calcMethod === "multiple-fields"){ %> disabled relevant-fields="<%= field.multipleFieldsRelevantFields %>"<% } %><% if(field.calcMethod === "reach-target"){ %> targetsRange="<%= field.reachTargetRange %>" <% } %>>
+								<li class="scoreParameter <%= field.calcMethod %> <%= field.multipleFieldsMethod %> <%= field.reachTargetMethod %> <% if(field.scoreTotal){ %> scoreTotal <% } %> <%= field.classesPlayer %> <% if(field.hidden){ %> hidden <% } %>" name="<%= field.name %>" value="<%= field.value %>" setsValue="<%= field.setsValue %>"><input type="<%= field.type %>" name=""<% if(field.disabled){ %> disabled <% } %><% if(field.calcMethod === "multiple-fields"){ %> disabled relevant-fields="<%= field.multipleFieldsRelevantFields %>"<% } %><% if(field.calcMethod === "reach-target"){ %> targetsRange="<%= field.reachTargetRange %>" <% if(field.reachTargetMethod === "other-field"){ %> otherField="<%= field.reachTargetOtherField %>" <% } %><% } %>>
 									
 							<% }); %>
 							<li class="total center" name="total"></li>
