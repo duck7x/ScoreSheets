@@ -11,6 +11,7 @@ var fieldsContainer 				= $(".fields-container"),
 	selectTemplate					= $("#fieldSelect-template"),
 	reachTargetTemplate				= $("#reachTarget-template"),
 	reachTargetOtherFieldTemplate	= $("#fieldReachTargetOtherField-template"),
+	reachTargetOtherFieldGlobalTemplate	= $("#fieldReachTargetDynamicOtherFieldGlobal-template"),
 	mainContainer					= $(".container"),
 	popupImagePrev					= $(".popup-container.image-preview");
 
@@ -20,9 +21,11 @@ var fieldsContainer 				= $(".fields-container"),
 function addField(){
 	count++;
 	$("#fields-count").val(count);
-	var newField = fieldsContainer.append(fieldTemplate.html());
+	fieldsContainer.append(fieldTemplate.html());
+	let newField = $(".field").last();
+	newField.attr("count", count);
 	// FIX NAME CHANGING DUE TO NEW SPAN CONTAINER THINGIE
-	$(".field").last().children().children(".field-input, label, .question-mark, .explanation").each(function(){
+	newField.children().children(".field-input, label, .question-mark, .explanation").each(function(){
 		$(this).attr("name", function(i, val){
 			return val + String(count);
 		});
@@ -44,6 +47,7 @@ function removeSpecialCalcFields(element){
 	element.parent().siblings(".fieldReachTargetRange-container").remove();
 	element.parent().siblings(".fieldReachTargetMethod-container").remove();
 	element.parent().siblings(".fieldReachTargetOtherField-container").remove();
+	element.parent().siblings(".fieldReachTargetOtherFieldGlobal-container").remove();
 }
 
 // Adding setsValue
@@ -103,7 +107,8 @@ $(".open-popup").on("click", function(){
 // Changing to sets, general-checkbox, multiple-fields or general-select calcMethod
 mainContainer.on("change", ".fieldCalcMethod", function(){
 	let valueContainer = $(this).parent().siblings(".fieldValue-container");
-	let fieldNum = $(this).attr("name").substr(-1);
+	// let fieldNum = $(this).attr("name").substr(-1);
+	let fieldNum = $(this).parent().parent().attr("count");
 	removeSpecialCalcFields($(this));
 	if($(this).val() === "sets"){
 		valueContainer.after(setsValueTemplate.html());
@@ -148,7 +153,8 @@ mainContainer.on("change", ".fieldCalcMethod", function(){
 // Changing the multiple-fields calcMethod to setsValueTemplate
 mainContainer.on("change", ".fieldMultipleFieldsMethod", function(){
 	let valueContainer = $(this).parent().siblings(".fieldValue-container");
-	let fieldNum = $(this).attr("name").substr(-1);
+	// let fieldNum = $(this).attr("name").substr(-1);
+	let fieldNum = $(this).parent().parent().attr("count");
 	if($(this).val() === "sets"){
 		valueContainer.after(multipleFieldsSetsTemplate.html());
 		valueContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
@@ -161,21 +167,33 @@ mainContainer.on("change", ".fieldMultipleFieldsMethod", function(){
 	}
 });
 
-// Changing the reach-target calcMethod to otherFieldTemplate
+// Changing the reach-target calcMethod to otherFieldTemplate or dynamic other field
 mainContainer.on("change", ".fieldReachTargetMethod", function(){
-	console.log(`Current reach target method is ${$(this).val()}`);
 	// let methodContainer = $(this).parent().siblings(".fieldReachTargetMethod-container");
 	let methodContainer		= $(this).parent(),
 		disabledCheckbox	= $(this).parent().siblings(".fieldDisabled-container").children("[type=checkbox]");
-	let fieldNum = $(this).attr("name").substr(-1);
-	if($(this).val() === "other-field"){
+	// let fieldNum = $(this).attr("name").substr(-1);
+	let fieldNum = $(this).parent().parent().attr("count");
+	if($(this).val() === "other-field" || $(this).val() === "dynamic-other-field"){
+// 		$(".fieldReachTargetMethod-container").last().siblings(".fieldReachTargetOtherField-container").children(".field-input").val(test)
+		let otherFieldVal = $(this).parent().siblings(".fieldReachTargetOtherField-container").children(".field-input").val();
+		$(this).parent().siblings(".fieldReachTargetOtherField-container").remove();
 		methodContainer.after(reachTargetOtherFieldTemplate.html());
 		methodContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
 			$(this).attr("name", function(i, val){
 				return val + fieldNum;
 			});
+		$(this).parent().siblings(".fieldReachTargetOtherField-container").val(otherFieldVal);
 		disabledCheckbox.prop("checked", true);
 		});
+		if($(this).val() === "dynamic-other-field"){
+			methodContainer.next().after(reachTargetOtherFieldGlobalTemplate.html());
+			methodContainer.next().next().children(".field-input, label, .question-mark, .explanation").each(function(){
+				$(this).attr("name", function(i, val){
+					return val + fieldNum;
+				});
+			});
+		}
 	} else {
 		$(this).parent().siblings(".fieldReachTargetOtherField-container").remove();
 		disabledCheckbox.prop("checked", false);

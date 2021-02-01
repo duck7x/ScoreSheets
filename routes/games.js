@@ -9,7 +9,7 @@ var calcMethods 					= ["reg", "sets", "square", "single-checkbox", "general-che
 	// formTypes	= ["text", "checkbox", "number"];
 	formTypes						= ["number", "checkbox", "select"],
 	generalCheckboxFunctionalities	= ["add-class"],
-	reachTargetMethods				= ["self", "other-field"],
+	reachTargetMethods				= ["self", "other-field", "dynamic-other-field"],
 	winConditions 					= ["highest-score"];
 
 // INDEX - show all games

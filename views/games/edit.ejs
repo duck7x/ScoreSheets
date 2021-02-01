@@ -466,6 +466,22 @@
 					<input class="field-input" type="text" name="fieldReachTargetOtherField">
 				</span>
 			</div>
+			
+			<!-- dynamic other-field reach-target template -->
+			<div id="fieldReachTargetDynamicOtherFieldGlobal-template" class="template">
+				<!-- DESC:  // PLAYER:  -->
+				<span class="fieldReachTargetDynamicOtherFieldGlobal-container">
+					<br>
+					<span class="question-mark" name="fieldReachTargetDynamicOtherFieldGlobal">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldReachTargetDynamicOtherFieldGlobal">
+						For dynamic other field - wether the other field is a global or personal field (check if refering to a global field)
+					</span> 
+					<label name="fieldReachTargetDynamicOtherFieldGlobal">Global field:</label> 
+					<input class="field-input" type="checkbox" name="fieldReachTargetDynamicOtherFieldGlobal">
+				</span>
+			</div>
 
 			<div id="fields-container" class="fields-container ui grid">
 				<% var count = 0; %>
@@ -676,7 +692,7 @@
 									</select>
 								</span>
 								<br>
-								<% if(field.reachTargetMethod === "other-field"){ %>
+								<% if(field.reachTargetMethod === "other-field" || field.reachTargetMethod === "dynamic-other-field"){ %>
 									<!-- DESC:  // PLAYER: Enables selection form values  -->
 									<span class="fieldReachTargetOtherField-container">
 										<span class="question-mark" name="fieldReachTargetOtherField<%= count %>">
@@ -689,6 +705,20 @@
 										<input class="field-input" type="text" name="fieldReachTargetOtherField<%= count %>"<% if(field.reachTargetOtherField){ %> value="<%= field.reachTargetOtherField %>"<% } %>>
 									</span>
 									<br>
+									<% if(field.reachTargetMethod === "dynamic-other-field"){ %>
+										<!-- DESC:  // PLAYER:  -->
+										<span class="fieldReachTargetDynamicOtherFieldGlobal-container">
+											<br>
+											<span class="question-mark" name="fieldReachTargetDynamicOtherFieldGlobal<%= count %>">
+												<i class="question icon"></i>
+											</span>
+											<span class="explanation" name="fieldReachTargetDynamicOtherFieldGlobal<%= count %>">
+												For dynamic other field - wether the other field is a global or personal field (check if refering to a global field)
+											</span> 
+											<label name="fieldReachTargetDynamicOtherFieldGlobal<%= count %>"<% if(field.reachTargetOtherFieldGlobal){ %> checked<% } %>>Global field:</label> 
+											<input class="field-input" type="checkbox" name="fieldReachTargetDynamicOtherFieldGlobal<%= count %>">
+										</span>
+									<% } %>
 								<% } %>
 						<% } %>
 						
