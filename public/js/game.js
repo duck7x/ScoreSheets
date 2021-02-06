@@ -138,9 +138,10 @@ function scoreCalculator(element, calcField){
 			reached,
 			target			= $(this).children().attr("targetsrange"),
 			dynamicField	= $(this).children().attr("otherField"),
-			calcByField		= $(`.aboveTable.field-cell[name="${dynamicField}"]`).children().val();
+			calcByField;
 		
-		reached = $(this).siblings(`[name=${calcByField}]`).children().val();
+		calcByField = $(`.aboveTable.field-cell[name="${dynamicField}"]`).children("select,input").val();
+		reached = $(this).siblings(`[name="${calcByField}"]`).children().val();
 		currValue = reachTargetCalculation(target, reached);
 		totalScore += currValue;
 		if(currValue){
@@ -371,10 +372,8 @@ gamesContainer.on("change", ".single-checkbox>input", function(){
 	// console.log($(this).children());
 });
 
-// Calculate score on input change
-gamesContainer.on("change", ".scoreParameter>input", scoreCalculator);
-// Calculate score on select change
-gamesContainer.on("change", ".scoreParameter>select", scoreCalculator);
+// Calculate score on input/select change
+gamesContainer.on("change", ".scoreParameter>input,.scoreParameter>select", scoreCalculator);
 
 // Calculates all score on global fields select changes
 gamesContainer.on("change", ".scoreParameter.aboveTable.field-cell>select", scoreCalculatorAll);
