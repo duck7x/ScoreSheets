@@ -686,6 +686,7 @@
 									</span> 
 									<label name="fieldReachTargetMethod<%= count %>">Method:</label> 
 									<select class="field-input fieldReachTargetMethod" name="fieldReachTargetMethod<%= count %>">
+										<% console.log(`Field ${count} reach target method is ${field.reachTargetMethod}`) %>
 										<% reachTargetMethods.forEach(function(method){ %>
 											<option value="<%= method %>"<% if(field.reachTargetMethod === method){ %> selected="selected"<% } %>><%= method %></option>
 										<% }) %>
@@ -715,8 +716,8 @@
 											<span class="explanation" name="fieldReachTargetDynamicOtherFieldGlobal<%= count %>">
 												For dynamic other field - wether the other field is a global or personal field (check if refering to a global field)
 											</span> 
-											<label name="fieldReachTargetDynamicOtherFieldGlobal<%= count %>"<% if(field.reachTargetOtherFieldGlobal){ %> checked<% } %>>Global field:</label> 
-											<input class="field-input" type="checkbox" name="fieldReachTargetDynamicOtherFieldGlobal<%= count %>">
+											<label name="fieldReachTargetDynamicOtherFieldGlobal<%= count %>">Global field:</label> 
+											<input class="field-input" type="checkbox" name="fieldReachTargetDynamicOtherFieldGlobal<%= count %>" <% if(field.reachTargetOtherFieldGlobal){ %> checked<% } %>>
 										</span>
 									<% } %>
 								<% } %>

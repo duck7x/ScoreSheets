@@ -47,17 +47,19 @@ function reachTargetCalculation(target, reached){
 
 // Calculating the score of a specific player (element is the table of a player)
 function scoreCalculator(element, calcField){
-	var column 								= calcField ? calcField.parent().parent() : $(this).parent().parent(),
-		totalScore 							= 0,
-		totalHtml 							= column.children(".total").last(),
-		regScoreTotal 						= column.children(".scoreTotal.reg"),
-		setsScoreTotal 						= column.children(".scoreTotal.sets"),
-		squareScoreTotal 					= column.children(".scoreTotal.square"),
-		singleCheckboxScoreTotal			= column.children(".scoreTotal.single-checkbox"),
-		multipleFieldsScoreTotal			= column.children(".multiple-fields"),
-		multiplyFieldsScoreTotal			= column.children(".scoreTotal.multiply"),
-		reachTargetsSelfScoreTotal			= column.children(".scoreTotal.reach-target.self"),
-		reachTargetsOtherFieldScoreTotal	= column.children(".scoreTotal.reach-target.other-field");
+	var column 											= calcField ? calcField.parent().parent() : $(this).parent().parent(),
+		totalScore 										= 0,
+		totalHtml 										= column.children(".total").last(),
+		regScoreTotal 									= column.children(".scoreTotal.reg"),
+		setsScoreTotal 									= column.children(".scoreTotal.sets"),
+		squareScoreTotal 								= column.children(".scoreTotal.square"),
+		singleCheckboxScoreTotal						= column.children(".scoreTotal.single-checkbox"),
+		multipleFieldsScoreTotal						= column.children(".multiple-fields"),
+		multiplyFieldsScoreTotal						= column.children(".scoreTotal.multiply"),
+		reachTargetsSelfScoreTotal						= column.children(".scoreTotal.reach-target.self"),
+		reachTargetsOtherFieldScoreTotal				= column.children(".scoreTotal.reach-target.other-field"),
+		reachTargetsDynamicLocalOtherFieldScoreTotal	= column.children(".scoreTotal.reach-target.dynamic-other-field.local"),
+		reachTargetsDynamicGlobalOtherFieldScoreTotal	= column.children(".scoreTotal.reach-target.dynamic-other-field.global");
 		// multipleFieldsScoreTotal	= column.children(".scoreTotal.multiple-fields");
 	
 	multipleFieldsScoreTotal.each(function(){
@@ -119,6 +121,26 @@ function scoreCalculator(element, calcField){
 			otherField	= $(this).children().attr("otherfield");
 		
 		reached = $(this).siblings(`[name=${otherField}]`).children().val();
+		currValue = reachTargetCalculation(target, reached);
+		totalScore += currValue;
+		if(currValue){
+			$(this).children().val(currValue);
+		}
+	});
+	
+	// need to add (after adding select option)
+	reachTargetsDynamicLocalOtherFieldScoreTotal.each(function(){
+		
+	});
+	
+	reachTargetsDynamicGlobalOtherFieldScoreTotal.each(function(){
+		let currValue,
+			reached,
+			target			= $(this).children().attr("targetsrange"),
+			dynamicField	= $(this).children().attr("otherField"),
+			calcByField		= $(`.aboveTable.field-cell[name="${dynamicField}"]`).children().val();
+		
+		reached = $(this).siblings(`[name=${calcByField}]`).children().val();
 		currValue = reachTargetCalculation(target, reached);
 		totalScore += currValue;
 		if(currValue){
@@ -351,6 +373,11 @@ gamesContainer.on("change", ".single-checkbox>input", function(){
 
 // Calculate score on input change
 gamesContainer.on("change", ".scoreParameter>input", scoreCalculator);
+// Calculate score on select change
+gamesContainer.on("change", ".scoreParameter>select", scoreCalculator);
+
+// Calculates all score on global fields select changes
+gamesContainer.on("change", ".scoreParameter.aboveTable.field-cell>select", scoreCalculatorAll);
 
 // Displays explanation when hovering a field
 gamesContainer.on("mouseenter", ".field-cell", function(){

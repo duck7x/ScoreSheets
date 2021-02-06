@@ -47,7 +47,7 @@ function removeSpecialCalcFields(element){
 	element.parent().siblings(".fieldReachTargetRange-container").remove();
 	element.parent().siblings(".fieldReachTargetMethod-container").remove();
 	element.parent().siblings(".fieldReachTargetOtherField-container").remove();
-	element.parent().siblings(".fieldReachTargetOtherFieldGlobal-container").remove();
+	element.parent().siblings(".fieldReachTargetDynamicOtherFieldGlobal-container").remove();
 }
 
 // Adding setsValue
@@ -147,6 +147,11 @@ mainContainer.on("change", ".fieldCalcMethod", function(){
 				return val + fieldNum;
 			});
 		});
+		valueContainer.next().next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
 	}
 });
 
@@ -177,15 +182,16 @@ mainContainer.on("change", ".fieldReachTargetMethod", function(){
 	if($(this).val() === "other-field" || $(this).val() === "dynamic-other-field"){
 // 		$(".fieldReachTargetMethod-container").last().siblings(".fieldReachTargetOtherField-container").children(".field-input").val(test)
 		let otherFieldVal = $(this).parent().siblings(".fieldReachTargetOtherField-container").children(".field-input").val();
+		$(this).parent().siblings(".fieldReachTargetDynamicOtherFieldGlobal-container").remove();
 		$(this).parent().siblings(".fieldReachTargetOtherField-container").remove();
 		methodContainer.after(reachTargetOtherFieldTemplate.html());
 		methodContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
 			$(this).attr("name", function(i, val){
 				return val + fieldNum;
 			});
-		$(this).parent().siblings(".fieldReachTargetOtherField-container").val(otherFieldVal);
 		disabledCheckbox.prop("checked", true);
 		});
+		$(this).parent().siblings(".fieldReachTargetOtherField-container").children(".field-input").val(otherFieldVal);
 		if($(this).val() === "dynamic-other-field"){
 			methodContainer.next().after(reachTargetOtherFieldGlobalTemplate.html());
 			methodContainer.next().next().children(".field-input, label, .question-mark, .explanation").each(function(){
@@ -196,6 +202,7 @@ mainContainer.on("change", ".fieldReachTargetMethod", function(){
 		}
 	} else {
 		$(this).parent().siblings(".fieldReachTargetOtherField-container").remove();
+		$(this).parent().siblings(".fieldReachTargetDynamicOtherFieldGlobal-container").remove();
 		disabledCheckbox.prop("checked", false);
 	}
 });
