@@ -52,6 +52,8 @@ module.exports = {
 			field.reachTargetMethod = eval("req.body.fieldReachTargetMethod" + String(i)) ? eval("req.body.fieldReachTargetMethod" + String(i)) : "";
 			field.reachTargetOtherField = eval("req.body.fieldReachTargetOtherField" + String(i)) ? eval("req.body.fieldReachTargetOtherField" + String(i)) : "";
 			field.reachTargetOtherFieldGlobal = eval("req.body.fieldReachTargetDynamicOtherFieldGlobal" + String(i)) === "on";
+			field.uniqueSetsValue = eval("req.body.fieldUiqueSetsValue" + String(i)) ? eval("req.body.fieldUiqueSetsValue" + String(i)) : "";
+			field.uniqueSetsFields = eval("req.body.fieldUniqueSetsFields" + String(i)) ? eval("req.body.fieldUniqueSetsFields" + String(i)) : "";
 			// field.reachTargetOtherFieldGlobal = eval("req.body.fieldReachTargetDynamicOtherFieldGlobal" + String(i)) ? eval("req.body.fieldReachTargetDynamicOtherFieldGlobal" + String(i)) : "";
 			field.title = eval("req.body.fieldTitle" + String(i)) ? eval("req.body.fieldTitle" + String(i)) : "";
 			field.icon = eval("req.body.fieldIcon" + String(i)) ? eval("req.body.fieldIcon" + String(i)) : "";

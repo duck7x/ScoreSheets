@@ -53,6 +53,7 @@ function scoreCalculator(element, calcField){
 		regScoreTotal 									= column.children(".scoreTotal.reg"),
 		setsScoreTotal 									= column.children(".scoreTotal.sets"),
 		squareScoreTotal 								= column.children(".scoreTotal.square"),
+		uniqueSetsScoreTotal							= column.children(".scoreTotal.unique-sets"),
 		singleCheckboxScoreTotal						= column.children(".scoreTotal.single-checkbox"),
 		multipleFieldsScoreTotal						= column.children(".multiple-fields"),
 		multiplyFieldsScoreTotal						= column.children(".scoreTotal.multiply"),
@@ -146,6 +147,30 @@ function scoreCalculator(element, calcField){
 		totalScore += currValue;
 		if(currValue){
 			$(this).children().val(currValue);
+		}
+	});
+	
+	uniqueSetsScoreTotal.each(function(){
+		let values		= [],
+			cellScore,
+			fields 		= $(this).children().attr("uniquesetsfields").split(" "),
+			setsValue	= $(this).children().attr("uniquesetsvalue"),
+			thisField	= $(this);
+		
+		fields.forEach(function(field){
+			values.push(Number(thisField.siblings(`[name="${field}"]`).children().val()));
+		});
+		values.sort()
+		setsValue = splitIntoDict(setsValue);
+		
+		console.log(`values is ${values} and setsValue is ${setsValue}`)
+		
+		if(values.length === setsValue.length){
+			console.log("Calculating!");
+			cellScore = uniqueSetsValueCalculator(values, setsValue);
+			totalScore += cellScore;
+			$(this).children().val(cellScore);
+			console.log(`cellScore is ${cellScore}`);
 		}
 	});
 	
@@ -313,6 +338,24 @@ function setReachTargetDict(){
 		let currTargetsRange = $(this).attr("targetsRange");
 		targetsRanges[currTargetsRange] = targetsRanges[currTargetsRange] ? targetsRanges[currTargetsRange] : splitIntoDict(currTargetsRange);
 	});
+}
+
+// Calculates sets and their value if amount of values is equal to amount of sets values
+function uniqueSetsValueCalculator(values, setsValues){
+	let currSet, currValue,
+		sum		= 0,
+		used	= 0;
+	while(values.length){
+		currSet = Number(setsValues[0].split(":")[0]);
+		currValue = Number(setsValues[0].split(":")[1]);
+		if(values.length === currSet && values[0] > used){
+			sum += (values[0] - used) * currValue;
+			used += (values[0] - used);
+		}
+		values.shift();
+		setsValues.shift();
+	}
+	return sum;
 }
 
 // ==================================

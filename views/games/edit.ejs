@@ -482,6 +482,34 @@
 					<input class="field-input" type="checkbox" name="fieldReachTargetDynamicOtherFieldGlobal">
 				</span>
 			</div>
+			
+			<!-- unique sets template -->
+			<div id="fieldUniqueSets-template" class="template">
+				<!-- DESC:  // PLAYER: Enables selection form values  -->
+				<span class="fieldUiqueSetsValue-container">
+					<br>
+					<span class="question-mark" name="fieldUiqueSetsValue">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldUiqueSetsValue">
+						Will calculate unique sets by these values (separated by a space), write like this: [amount:points]
+					</span> 
+					<label name="fieldUiqueSetsValue">Sets Values:</label> 
+					<input class="field-input" type="text" name="fieldUiqueSetsValue">
+				</span>
+				<!-- DESC:  // PLAYER:  -->
+				<span class="fieldUniqueSetsFields-container">
+					<br>
+					<span class="question-mark" name="fieldUniqueSetsFields">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldUniqueSetsFields">
+						Will calculate unique sets by these fields (separated by a space)
+					</span> 
+					<label name="fieldUniqueSetsFields">Fields:</label> 
+					<input class="field-input" type="text" name="fieldUniqueSetsFields">
+				</span>
+			</div>
 
 			<div id="fields-container" class="fields-container ui grid">
 				<% var count = 0; %>
@@ -493,7 +521,7 @@
 						<span class="clear-field clickable white">CLEAR</span>
 					</div>
 
-					<div class="field">
+					<div class="field" count="<%= count %>">
 						<!-- DESC: ID // PLAYER: NAME // field.name -->
 						<span class="fieldName-container">
 							<span class="question-mark" name="fieldName<%= count %>">
@@ -721,7 +749,32 @@
 										</span>
 									<% } %>
 								<% } %>
-						<% } %>
+						<% } else if(field.calcMethod && field.calcMethod === "unique-sets"){ %>
+							<!-- DESC:  // PLAYER: Enables selection form values  -->
+							<span class="fieldUiqueSetsValue-container">
+								<br>
+								<span class="question-mark" name="fieldUiqueSetsValue<%= count %>">
+									<i class="question icon"></i>
+								</span>
+								<span class="explanation" name="fieldUiqueSetsValue<%= count %>">
+									Will calculate unique sets by these values (separated by a space), write like this: [amount:points]
+								</span> 
+								<label name="fieldUiqueSetsValue<%= count %>">Sets Values:</label> 
+								<input class="field-input" type="text" name="fieldUiqueSetsValue<%= count %>"<% if(field.uniqueSetsValue){ %> value="<%= field.uniqueSetsValue %>"<% } %>>
+							</span>
+							<!-- DESC:  // PLAYER:  -->
+							<span class="fieldUniqueSetsFields-container">
+								<br>
+								<span class="question-mark" name="fieldUniqueSetsFields<%= count %>">
+									<i class="question icon"></i>
+								</span>
+								<span class="explanation" name="fieldUniqueSetsFields<%= count %>">
+									Will calculate unique sets by these fields (separated by a space)
+								</span> 
+								<label name="fieldUniqueSetsFields<%= count %>">Fields:</label> 
+								<input class="field-input" type="text" name="fieldUniqueSetsFields<%= count %>"<% if(field.uniqueSetsFields){ %> value="<%= field.uniqueSetsFields %>"<% } %>>
+							</span>
+						<% }%>
 						
 						<!-- DESC: displayed icon // field.icon -->
 						<span class="fieldIcon-container">

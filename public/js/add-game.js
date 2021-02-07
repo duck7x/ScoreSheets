@@ -1,19 +1,20 @@
 var test	= "Timon's in the kalax - CUTE",
 	count	= $("#fields-count").val(),
 	skip	= "";
-var fieldsContainer 				= $(".fields-container"),
-	fieldTemplate					= $("#field-template"),
-	setsValueTemplate				= $("#sets-template"),
-	generalCheckboxTemplate			= $("#generalCheckbox-template"),
-	AddClassTemplate				= $("#addClass-template"),
-	multipleFieldsTemplate			= $("#multipleFields-template"),
-	multipleFieldsSetsTemplate		= $("#fieldMultipleFieldsSets-template"),
-	selectTemplate					= $("#fieldSelect-template"),
-	reachTargetTemplate				= $("#reachTarget-template"),
-	reachTargetOtherFieldTemplate	= $("#fieldReachTargetOtherField-template"),
+var fieldsContainer 					= $(".fields-container"),
+	fieldTemplate						= $("#field-template"),
+	setsValueTemplate					= $("#sets-template"),
+	generalCheckboxTemplate				= $("#generalCheckbox-template"),
+	AddClassTemplate					= $("#addClass-template"),
+	multipleFieldsTemplate				= $("#multipleFields-template"),
+	multipleFieldsSetsTemplate			= $("#fieldMultipleFieldsSets-template"),
+	selectTemplate						= $("#fieldSelect-template"),
+	reachTargetTemplate					= $("#reachTarget-template"),
+	reachTargetOtherFieldTemplate		= $("#fieldReachTargetOtherField-template"),
 	reachTargetOtherFieldGlobalTemplate	= $("#fieldReachTargetDynamicOtherFieldGlobal-template"),
-	mainContainer					= $(".container"),
-	popupImagePrev					= $(".popup-container.image-preview");
+	uniqueSetsValueTemplate				= $("#fieldUniqueSets-template"),
+	mainContainer						= $(".container"),
+	popupImagePrev						= $(".popup-container.image-preview");
 
 // ==================================
 // FUNCTIONS
@@ -48,6 +49,8 @@ function removeSpecialCalcFields(element){
 	element.parent().siblings(".fieldReachTargetMethod-container").remove();
 	element.parent().siblings(".fieldReachTargetOtherField-container").remove();
 	element.parent().siblings(".fieldReachTargetDynamicOtherFieldGlobal-container").remove();
+	element.parent().siblings(".fieldUiqueSetsValue-container").remove();
+	element.parent().siblings(".fieldUniqueSetsFields-container").remove();
 }
 
 // Adding setsValue
@@ -106,7 +109,8 @@ $(".open-popup").on("click", function(){
 
 // Changing to sets, general-checkbox, multiple-fields or general-select calcMethod
 mainContainer.on("change", ".fieldCalcMethod", function(){
-	let valueContainer = $(this).parent().siblings(".fieldValue-container");
+	let valueContainer 		= $(this).parent().siblings(".fieldValue-container"),
+		disabledCheckbox	= $(this).parent().siblings(".fieldDisabled-container").children("[type=checkbox]");
 	// let fieldNum = $(this).attr("name").substr(-1);
 	let fieldNum = $(this).parent().parent().attr("count");
 	removeSpecialCalcFields($(this));
@@ -152,6 +156,19 @@ mainContainer.on("change", ".fieldCalcMethod", function(){
 				return val + fieldNum;
 			});
 		});
+	} else if($(this).val() === "unique-sets"){
+		valueContainer.after(uniqueSetsValueTemplate.html());
+		valueContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
+		valueContainer.next().next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
+		disabledCheckbox.prop("checked", true);
 	}
 });
 

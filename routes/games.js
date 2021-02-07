@@ -5,7 +5,8 @@ var express			= require("express"),
 	middleware		= require("../functions/users"),
 	gameFunctions	= require("../functions/games");
 
-var calcMethods 					= ["reg", "sets", "square", "single-checkbox", "general-checkbox", "multiple-fields", "general-select", "reach-target"],
+var calcMethods 					= ["reg", "sets", "square", "single-checkbox", "general-checkbox", "multiple-fields", "general-select", "reach-target", "ranking",
+									   "unique-sets"],
 	// formTypes	= ["text", "checkbox", "number"];
 	formTypes						= ["number", "checkbox", "select"],
 	generalCheckboxFunctionalities	= ["add-class"],
