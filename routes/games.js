@@ -11,6 +11,7 @@ var calcMethods 					= ["reg", "sets", "square", "single-checkbox", "general-che
 	formTypes						= ["number", "checkbox", "select"],
 	generalCheckboxFunctionalities	= ["add-class"],
 	reachTargetMethods				= ["self", "other-field", "dynamic-other-field"],
+	rankingTiesMethods				= ["split-rounded-down", "split-rounded-up", "friendly"],
 	winConditions 					= ["highest-score"];
 
 // INDEX - show all games
@@ -29,7 +30,7 @@ router.get("/", function(req, res){
 // NEW - form to add a new game
 router.get("/new", middleware.isAdmin, function(req, res){
 // router.get("/new", function(req, res){
-	res.render("games/new", {calcMethods: calcMethods, formTypes: formTypes, generalCheckboxFunctionalities: generalCheckboxFunctionalities, reachTargetMethods: reachTargetMethods, winConditions: winConditions});
+	res.render("games/new", {calcMethods: calcMethods, formTypes: formTypes, generalCheckboxFunctionalities: generalCheckboxFunctionalities, reachTargetMethods: reachTargetMethods, rankingTiesMethods: rankingTiesMethods, winConditions: winConditions});
 });
 
 // CREATE - actually add a new game
@@ -93,7 +94,7 @@ router.get("/:game/edit", middleware.isAdmin, function(req, res){
 			req.flash("error", "Couldn't find the game");
 			res.redirect("/games");
 		} else {
-			res.render("games/edit", {game: game, calcMethods: calcMethods, formTypes: formTypes, generalCheckboxFunctionalities: generalCheckboxFunctionalities, reachTargetMethods: reachTargetMethods, winConditions: winConditions});
+			res.render("games/edit", {game: game, calcMethods: calcMethods, formTypes: formTypes, generalCheckboxFunctionalities: generalCheckboxFunctionalities, reachTargetMethods: reachTargetMethods, rankingTiesMethods: rankingTiesMethods, winConditions: winConditions});
 		}
 	});
 });

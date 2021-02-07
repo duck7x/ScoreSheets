@@ -54,6 +54,9 @@ module.exports = {
 			field.reachTargetOtherFieldGlobal = eval("req.body.fieldReachTargetDynamicOtherFieldGlobal" + String(i)) === "on";
 			field.uniqueSetsValue = eval("req.body.fieldUiqueSetsValue" + String(i)) ? eval("req.body.fieldUiqueSetsValue" + String(i)) : "";
 			field.uniqueSetsFields = eval("req.body.fieldUniqueSetsFields" + String(i)) ? eval("req.body.fieldUniqueSetsFields" + String(i)) : "";
+			field.rankingValues = eval("req.body.fieldRankingValues" + String(i)) ? eval("req.body.fieldRankingValues" + String(i)) : "";
+			field.rankingFields = eval("req.body.fieldRankingFields" + String(i)) ? eval("req.body.fieldRankingFields" + String(i)) : "";
+			field.rankingTieMethod = eval("req.body.fieldRankingTieMethod" + String(i)) ? eval("req.body.fieldRankingTieMethod" + String(i)) : "";
 			// field.reachTargetOtherFieldGlobal = eval("req.body.fieldReachTargetDynamicOtherFieldGlobal" + String(i)) ? eval("req.body.fieldReachTargetDynamicOtherFieldGlobal" + String(i)) : "";
 			field.title = eval("req.body.fieldTitle" + String(i)) ? eval("req.body.fieldTitle" + String(i)) : "";
 			field.icon = eval("req.body.fieldIcon" + String(i)) ? eval("req.body.fieldIcon" + String(i)) : "";

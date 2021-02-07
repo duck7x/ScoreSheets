@@ -53,6 +53,7 @@ function scoreCalculator(element, calcField){
 		regScoreTotal 									= column.children(".scoreTotal.reg"),
 		setsScoreTotal 									= column.children(".scoreTotal.sets"),
 		squareScoreTotal 								= column.children(".scoreTotal.square"),
+		rankingScoreTotal 								= column.children(".scoreTotal.ranking"),
 		uniqueSetsScoreTotal							= column.children(".scoreTotal.unique-sets"),
 		singleCheckboxScoreTotal						= column.children(".scoreTotal.single-checkbox"),
 		multipleFieldsScoreTotal						= column.children(".multiple-fields"),
@@ -163,17 +164,17 @@ function scoreCalculator(element, calcField){
 		values.sort()
 		setsValue = splitIntoDict(setsValue);
 		
-		console.log(`values is ${values} and setsValue is ${setsValue}`)
 		
 		if(values.length === setsValue.length){
-			console.log("Calculating!");
 			cellScore = uniqueSetsValueCalculator(values, setsValue);
 			totalScore += cellScore;
 			$(this).children().val(cellScore);
-			console.log(`cellScore is ${cellScore}`);
 		}
 	});
 	
+	rankingScoreTotal.each(function(){
+		totalScore += $(this).val();
+	});
 	
 	totalHtml.text(totalScore);
 	checkWinner();
@@ -210,8 +211,95 @@ function checkWinner(){
 	});
 }
 
+function calculateRankings(){
+	let rankingCells 	= $(".player.table").last().children().children(".ranking");
+	
+	rankingCells.each(function(){
+		let playersSum		= [],
+			sortedSum		= [],
+			currIndex		= [],
+			count			= 0,
+			currValue,
+			currHighest,
+			values			= $(this).children().attr("rankingvalues").split(" "),
+			fields			= $(this).children().attr("rankingFields").split(" "),
+			tieMethod		= $(this).children().attr("rankingtiemethod"),
+			rankingName		= $(this).attr("name"),
+			playersTables	= $(".player.table:not(:first)"),
+			playersNum		= playersTables.length;
+		
+		playersTables.each(function(){
+			playersSum.push(calcSum($(this), fields));
+		});
+		console.log(`players sum is ${playersSum}`);
+		sortedSum = sortLargeToSmall(playersSum);
+				
+		values.forEach(function(val, i){
+			if(val.includes("?") && val.split("?")[0] >= playersNum){
+				values.splice(i, 1);
+			} else {
+				values[i] = val.includes("?") ? val.split("?")[1] : val;
+			}
+		});
+		currHighest = sortedSum[0];	
+		while(values.length && currHighest > 0){
+			console.log("In the while, wooho!");
+			console.log(`values is ${values}`);
+			console.log("checkpoint -0-");
+			while(playersSum.indexOf(currHighest) >= 0){
+				console.log(`players sum is ${playersSum}`);
+				console.log(`currHighest is ${currHighest}`);
+				count ++;
+				currIndex.push(playersSum.indexOf(currHighest));
+				console.log(`testing ${playersSum.indexOf(currHighest)}`);
+				playersSum.splice(currIndex[-1], 1);
+			}
+			console.log("checkpoint -1-");
+			console.log(`sorted sum is ${sortedSum}`);
+			
+			sortedSum = sortedSum.splice(0, count);
+			console.log(`sorted sum spliced is ${sortedSum}`);
+			
+			if(tieMethod === "friendly"){
+				currValue = values[0];
+				values.shift();
+			} else {
+				if(values.length > count){
+					currValue = values.splice(0, count).reduce((a,b) => Number(a) + Number(b));
+				} else {
+					currValue = values.reduce((a,b) => Number(a) + Number(b));
+				}
+				if(tieMethod === "split-rounded-down"){
+					currValue = Math.floor(currValue / count);
+				} else {
+					currValue = Math.ceil(currValue / count);
+				}
+			}
+			console.log("checkpoint -2-");
+			
+			currIndex.forEach(function(i){
+				console.log(`i is ${i}`);
+				console.log(`This player should get ${currValue}`);
+				console.log(playersTables[i]);
+				$(playersTables[i]).children(`[name=${rankingName}]`).children().val(currValue);
+			});
+			currIndex = [];
+			currHighest = sortedSum[0];
+			console.log("checkpoint -3-");
+		}
+			// get all players
+			// calc the sum of fields for each player
+			// get sorted array with first being highest
+			// get players num
+			// handle ties
+			// ["split-rounded-down", "split-rounded-up", "friendly"]
+			// add to score by order, taking into acount players num
+	});
+}
+
 function scoreCalculatorAll(){
 	let players = $(".player.table").slice(1);
+	calculateRankings();
 	players.each(function(){
 		scoreCalculator($(this), $(this).children().children().children());
 	});
@@ -317,6 +405,11 @@ function toggleCalculate(){
 	}
 }
 
+function sortLargeToSmall(array){
+	let tempArray = [...array];
+	return tempArray.sort(function(a, b){return b - a});
+}
+
 // splits a string into a key-value dict
 function splitIntoDict(string){
 	let firstSplit	= string.split(" "),
@@ -358,6 +451,16 @@ function uniqueSetsValueCalculator(values, setsValues){
 	return sum;
 }
 
+function calcSum(column, fields){
+	let sum = 0;
+	fields.forEach(function(field){
+		sum += Number(column.children().children(`[name=${field}]`).children().val());
+		// console.log(column);
+		// console.log(column.children().children(`[name=${field}]`).children().val());
+	});
+	return sum;
+}
+
 // ==================================
 // PAGE STARTUP EXECUTIONS
 
@@ -378,6 +481,7 @@ setReachTargetDict();
 $(".addPlayer").on("click", function(){
 	if($(".player.table").length - 1 < maxPlayers){
 		addPlayer();
+		scoreCalculatorAll();
 	} else {
 		popupWindowDisplay();
 		popupWindowEdit(`This game cannot be played with more than ${maxPlayers} players`);
@@ -393,6 +497,7 @@ $(".clearScore").on("click", clearScore);
 gamesContainer.on("click", ".deletePlayer", function(){
 	if($(".player.table").length - 1 > minPlayers){
 		$(this).parent().parent().remove();
+		scoreCalculatorAll();
 	} else {
 		popupWindowDisplay();
 		popupWindowEdit(`This game requires at least ${minPlayers} players`);
@@ -416,7 +521,8 @@ gamesContainer.on("change", ".single-checkbox>input", function(){
 });
 
 // Calculate score on input/select change
-gamesContainer.on("change", ".scoreParameter>input,.scoreParameter>select", scoreCalculator);
+// gamesContainer.on("change", ".scoreParameter>input,.scoreParameter>select", scoreCalculator);
+gamesContainer.on("change", ".scoreParameter>input,.scoreParameter>select", scoreCalculatorAll);
 
 // Calculates all score on global fields select changes
 gamesContainer.on("change", ".scoreParameter.aboveTable.field-cell>select", scoreCalculatorAll);

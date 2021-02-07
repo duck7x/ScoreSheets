@@ -13,6 +13,7 @@ var fieldsContainer 					= $(".fields-container"),
 	reachTargetOtherFieldTemplate		= $("#fieldReachTargetOtherField-template"),
 	reachTargetOtherFieldGlobalTemplate	= $("#fieldReachTargetDynamicOtherFieldGlobal-template"),
 	uniqueSetsValueTemplate				= $("#fieldUniqueSets-template"),
+	rankingTemplate						= $("#fieldRanking-template"),
 	mainContainer						= $(".container"),
 	popupImagePrev						= $(".popup-container.image-preview");
 
@@ -51,6 +52,9 @@ function removeSpecialCalcFields(element){
 	element.parent().siblings(".fieldReachTargetDynamicOtherFieldGlobal-container").remove();
 	element.parent().siblings(".fieldUiqueSetsValue-container").remove();
 	element.parent().siblings(".fieldUniqueSetsFields-container").remove();
+	element.parent().siblings(".fieldRankingValues-container").remove();
+	element.parent().siblings(".fieldRankingFields-container").remove();
+	element.parent().siblings(".fieldRankingTieMethod-container").remove();
 }
 
 // Adding setsValue
@@ -169,6 +173,23 @@ mainContainer.on("change", ".fieldCalcMethod", function(){
 			});
 		});
 		disabledCheckbox.prop("checked", true);
+	} else if($(this).val() === "ranking"){
+		valueContainer.after(rankingTemplate.html());
+		valueContainer.next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
+		valueContainer.next().next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
+		valueContainer.next().next().next().children(".field-input, label, .question-mark, .explanation").each(function(){
+			$(this).attr("name", function(i, val){
+				return val + fieldNum;
+			});
+		});
 	}
 });
 

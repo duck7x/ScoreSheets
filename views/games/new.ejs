@@ -511,6 +511,50 @@
 				</span>
 			</div>
 			
+			<!-- ranking template -->
+			<div id="fieldRanking-template" class="template">
+				<!-- DESC:  // PLAYER: Enables selection form values  -->
+				<span class="fieldRankingValues-container">
+					<br>
+					<span class="question-mark" name="fieldRankingValues">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldRankingValues">
+						Will calculate rankings within all players. If minimum players required, write like this [min?value]. Separate values by space. Start from first place.
+					</span> 
+					<label name="fieldRankingValues">Ranking:</label> 
+					<input class="field-input" type="text" name="fieldRankingValues">
+				</span>
+				<!-- DESC:  // PLAYER: Enables selection form values  -->
+				<span class="fieldRankingFields-container">
+					<br>
+					<span class="question-mark" name="fieldRankingFields">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldRankingFields">
+						Will calculate the ranking by these fields. Separate fields by space.
+					</span> 
+					<label name="fieldRankingFields">Ranking fields:</label> 
+					<input class="field-input" type="text" name="fieldRankingFields">
+				</span>
+				<!-- DESC:  // PLAYER:  -->
+				<span class="fieldRankingTieMethod-container">
+					<br>
+					<span class="question-mark" name="fieldRankingTieMethod">
+						<i class="question icon"></i>
+					</span>
+					<span class="explanation" name="fieldRankingTieMethod">
+						The method of handling ties
+					</span> 
+					<label name="fieldRankingTieMethod">Ties method:</label> 
+					<select class="field-input fieldRankingTieMethod" name="fieldRankingTieMethod">
+						<% rankingTiesMethods.forEach(function(method){ %>
+							<option value="<%= method %>"><%= method %></option>
+						<% }) %>
+					</select>
+				</span>
+			</div>
+			
 			
 			<div id="fields-container" class="fields-container ui grid initialize">
 
