@@ -211,101 +211,81 @@ function checkWinner(){
 	});
 }
 
-function calculateRankings(){
+function RankingCalculator(rankingCell){
+	let playersSum		= [],
+		sortedSum		= [],
+		currIndex		= [],
+		count			= 1,
+		currValue,
+		currHighest,
+		values			= rankingCell.children().attr("rankingvalues").split(" "),
+		fields			= rankingCell.children().attr("rankingFields").split(" "),
+		tieMethod		= rankingCell.children().attr("rankingtiemethod"),
+		rankingName		= rankingCell.attr("name"),
+		playersTables	= $(".player.table:not(:first)"),
+		playersNum		= playersTables.length;
+
+	playersTables.each(function(){
+		$($(this)).children().children(`[name=${rankingName}]`).children().val(0);
+		playersSum.push(calcSum($(this), fields));
+	});
+	
+	sortedSum = sortLargeToSmall(playersSum);
+	values = eliminateMinimumByRequirement(values, playersNum);
+	currHighest = sortedSum[0];	
+	
+	while(values.length && currHighest > 0){
+		currIndex.push(playersSum.indexOf(currHighest));
+		while(playersSum.indexOf(currHighest, currIndex[currIndex.length - 1] + 1) >= 0){
+			count ++;
+			currIndex.push(playersSum.indexOf(currHighest, currIndex[currIndex.length - 1] + 1));
+		}
+		
+		sortedSum.splice(0, count);
+
+		if(tieMethod === "friendly"){
+			currValue = values[0];
+			values.shift();
+		} else {
+			if(values.length > count){
+				currValue = values.splice(0, count).reduce((a,b) => Number(a) + Number(b));
+			} else {
+				currValue = values.reduce((a,b) => Number(a) + Number(b));
+				values = [];
+			}
+			if(tieMethod === "split-rounded-down"){
+				currValue = Math.floor(currValue / count);
+			} else {
+				currValue = Math.ceil(currValue / count);
+			}
+		}
+
+		currIndex.forEach(function(i){
+			$(playersTables[i]).children().children(`[name=${rankingName}]`).children().val(currValue);
+		});
+		
+		currIndex = [];
+		currHighest = sortedSum[0];
+		count = 1;
+	}
+
+}
+
+function calculateAllRankings(){
 	let rankingCells 	= $(".player.table").last().children().children(".ranking");
 	
 	rankingCells.each(function(){
-		let playersSum		= [],
-			sortedSum		= [],
-			currIndex		= [],
-			count			= 0,
-			currValue,
-			currHighest,
-			values			= $(this).children().attr("rankingvalues").split(" "),
-			fields			= $(this).children().attr("rankingFields").split(" "),
-			tieMethod		= $(this).children().attr("rankingtiemethod"),
-			rankingName		= $(this).attr("name"),
-			playersTables	= $(".player.table:not(:first)"),
-			playersNum		= playersTables.length;
-		
-		playersTables.each(function(){
-			playersSum.push(calcSum($(this), fields));
-		});
-		console.log(`players sum is ${playersSum}`);
-		sortedSum = sortLargeToSmall(playersSum);
-				
-		values.forEach(function(val, i){
-			if(val.includes("?") && val.split("?")[0] >= playersNum){
-				values.splice(i, 1);
-			} else {
-				values[i] = val.includes("?") ? val.split("?")[1] : val;
-			}
-		});
-		currHighest = sortedSum[0];	
-		while(values.length && currHighest > 0){
-			console.log("In the while, wooho!");
-			console.log(`values is ${values}`);
-			console.log("checkpoint -0-");
-			while(playersSum.indexOf(currHighest) >= 0){
-				console.log(`players sum is ${playersSum}`);
-				console.log(`currHighest is ${currHighest}`);
-				count ++;
-				currIndex.push(playersSum.indexOf(currHighest));
-				console.log(`testing ${playersSum.indexOf(currHighest)}`);
-				playersSum.splice(currIndex[-1], 1);
-			}
-			console.log("checkpoint -1-");
-			console.log(`sorted sum is ${sortedSum}`);
-			
-			sortedSum = sortedSum.splice(0, count);
-			console.log(`sorted sum spliced is ${sortedSum}`);
-			
-			if(tieMethod === "friendly"){
-				currValue = values[0];
-				values.shift();
-			} else {
-				if(values.length > count){
-					currValue = values.splice(0, count).reduce((a,b) => Number(a) + Number(b));
-				} else {
-					currValue = values.reduce((a,b) => Number(a) + Number(b));
-				}
-				if(tieMethod === "split-rounded-down"){
-					currValue = Math.floor(currValue / count);
-				} else {
-					currValue = Math.ceil(currValue / count);
-				}
-			}
-			console.log("checkpoint -2-");
-			
-			currIndex.forEach(function(i){
-				console.log(`i is ${i}`);
-				console.log(`This player should get ${currValue}`);
-				console.log(playersTables[i]);
-				$(playersTables[i]).children(`[name=${rankingName}]`).children().val(currValue);
-			});
-			currIndex = [];
-			currHighest = sortedSum[0];
-			console.log("checkpoint -3-");
-		}
-			// get all players
-			// calc the sum of fields for each player
-			// get sorted array with first being highest
-			// get players num
-			// handle ties
-			// ["split-rounded-down", "split-rounded-up", "friendly"]
-			// add to score by order, taking into acount players num
+		RankingCalculator($(this));
 	});
 }
 
 function scoreCalculatorAll(){
 	let players = $(".player.table").slice(1);
-	calculateRankings();
+	calculateAllRankings();
 	players.each(function(){
 		scoreCalculator($(this), $(this).children().children().children());
 	});
 }
-
-// 
 
 // Clear score
 function clearScore(){
@@ -410,6 +390,17 @@ function sortLargeToSmall(array){
 	return tempArray.sort(function(a, b){return b - a});
 }
 
+function eliminateMinimumByRequirement(array, amount){
+	array.forEach(function(val, i){
+		if(val.includes("?") && Number(val.split("?")[0]) > amount){
+			array.splice(i, 1);
+		} else {
+			array[i] = val.includes("?") ? val.split("?")[1] : val;
+		}
+	});
+	return array;
+}
+
 // splits a string into a key-value dict
 function splitIntoDict(string){
 	let firstSplit	= string.split(" "),
@@ -455,8 +446,6 @@ function calcSum(column, fields){
 	let sum = 0;
 	fields.forEach(function(field){
 		sum += Number(column.children().children(`[name=${field}]`).children().val());
-		// console.log(column);
-		// console.log(column.children().children(`[name=${field}]`).children().val());
 	});
 	return sum;
 }
