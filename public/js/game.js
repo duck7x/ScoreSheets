@@ -271,17 +271,16 @@ function RankingCalculator(rankingCell){
 
 }
 
-function calculateAllRankings(){
+async function calculateAllRankings(){
 	let rankingCells 	= $(".player.table").last().children().children(".ranking");
-	
 	rankingCells.each(function(){
 		RankingCalculator($(this));
 	});
 }
 
-function scoreCalculatorAll(){
+async function scoreCalculatorAll(){
 	let players = $(".player.table").slice(1);
-	calculateAllRankings();
+	await calculateAllRankings();
 	players.each(function(){
 		scoreCalculator($(this), $(this).children().children().children());
 	});
